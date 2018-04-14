@@ -1,0 +1,17 @@
+<!--
+  Get related posts based on tags
+  https://themes.ghost.org/docs/recent-featured-sidebar#extra-special-sauce-related-posts
+ -->
+
+{{#get 'posts' limit='3' include='tags, author' filter='tags:[{{post.tags}}]+id:-{{post.id}}' as |related-posts|}}
+  {{#if related-posts}}
+    <div class='c-related'>
+      <div class='o-grid'>
+        <div class='o-grid__col o-grid__col--full'>
+          <h3 class='c-related__title'>More in this category</h3>
+        </div>
+        {{> loop }}
+      </div>
+    </div>
+  {{/if}}
+{{/get}}

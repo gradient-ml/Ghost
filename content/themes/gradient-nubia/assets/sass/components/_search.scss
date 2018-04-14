@@ -1,0 +1,132 @@
+/*------------------------------------*\
+  Components > Search
+\*------------------------------------*/
+
+.c-search {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: double($base-spacing-unit);
+  background: $bg-white;
+
+  z-index: -1;
+  opacity: 0;
+  transform: scale(.96);
+  transition: transform half($global-transition) cubic-bezier(.694, 0, .335,  1),
+              opacity   half($global-transition) cubic-bezier(.8,   0, .55, .94),
+              z-index   half($global-transition) step-end;
+
+
+  @include mq($from: tablet) {
+    padding-top: quadruple($base-spacing-unit);
+  }
+
+  &.is-active {
+    z-index: 10;
+    opacity: 1;
+    transform: scale(1);
+    transition: transform half($global-transition) cubic-bezier(.8, 0, .55, .94),
+                opacity   half($global-transition) cubic-bezier(.8, 0, .55, .94),
+                z-index   half($global-transition) step-start;
+  }
+
+  &__form {
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    left: - half($base-spacing-unit);
+    fill: $color-gray;
+
+    @include mq($until: tablet) {
+      width: double($base-spacing-unit);
+    }
+
+    @include mq($from: tablet) {
+      top: half($base-spacing-unit);
+    }
+  }
+
+  &__input[type='search'] {
+    padding: 0;
+    width: 100%;
+    outline: none;
+    padding-left: double($base-spacing-unit);
+    margin-bottom: $base-spacing-unit;
+
+    font-weight: $font-weight-light;
+    font-size: double($font-size-small);
+    line-height: double($line-height-small);
+
+    border: 0;
+    border-bottom: 1px solid $color-border;
+
+    &:focus {
+      border-bottom-color: $color-border;
+    }
+
+    @include mq($from: tablet) {
+      font-size: double($font-size-base);
+      line-height: double($line-height-base);
+      padding-left: triple($base-spacing-unit);
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: $base-spacing-unit;
+    right: $base-spacing-unit;
+
+    cursor: pointer;
+    fill: $color-text;
+    transition: $global-transition;
+
+    @include mq($from: tablet) {
+      top: double($base-spacing-unit);
+      right: double($base-spacing-unit);
+    }
+
+    &:hover {
+      fill: $color-gray;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.c-search-result {
+  display: none;
+  height: 80vh;
+  overflow: auto;
+  white-space: normal;
+  padding-right: double($base-spacing-unit);
+
+  &__head {
+    padding-bottom: $base-spacing-unit;
+    margin-bottom: $base-spacing-unit;
+    color: $color-gray;
+    font-size: $font-size-base;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__item {
+    padding-bottom: $base-spacing-unit;
+    margin-bottom: $base-spacing-unit;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__title {
+    display: block;
+    line-height: $line-height-medium;
+  }
+
+  &__date {
+    color: $color-gray;
+    font-size: $font-size-tiny;
+    text-transform: uppercase;
+    line-height: $line-height-small;
+    letter-spacing: $global-letter-spacing;
+  }
+}
