@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>The Gradient</title>
+  <title>Software that writes software: the state of program induction</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -11,45 +11,66 @@ html{-webkit-box-sizing:border-box;box-sizing:border-box}*,:after,:before{-webki
 </style>
   <script>
     var pagination_next_page_number       = '',
-        pagination_available_pages_number = '1';
+        pagination_available_pages_number = '';
   </script>
 
-  <meta name="description" content="Democratizing AI Through Discussion and Distillation">
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <link rel="shortcut icon" href="../favicon.png" type="image/png">
     <link rel="canonical" href="index.html">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
     
     <meta property="og:site_name" content="The Gradient">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="The Gradient">
-    <meta property="og:description" content="Democratizing AI Through Discussion and Distillation">
-    <meta property="og:url" content="http://localhost:2368/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Software that writes software: the state of program induction">
+    <meta property="og:description" content="Writing correct software is surprisingly hard. This collection of prominent software post-mortems by Dan Luu is a humbling reminder of this harrowing truth.  It features Knight Capital's $459 million loss in 45 minutes due to conflicting deployed software versions, and a Linux kernel bug related to leap-second handling taking down">
+    <meta property="og:url" content="http://localhost:2368/software-that-writes-software-on-program-learning-2/">
+    <meta property="og:image" content="http://localhost:2368/content/images/2018/03/th--1-.jpeg">
+    <meta property="article:published_time" content="2018-03-09T08:44:00.000Z">
+    <meta property="article:modified_time" content="2018-04-06T04:21:45.000Z">
+    <meta property="article:tag" content="Overviews">
+    
     <meta property="article:publisher" content="https://www.facebook.com/gradientml/">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="The Gradient">
-    <meta name="twitter:description" content="Democratizing AI Through Discussion and Distillation">
-    <meta name="twitter:url" content="http://localhost:2368/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Software that writes software: the state of program induction">
+    <meta name="twitter:description" content="Writing correct software is surprisingly hard. This collection of prominent software post-mortems by Dan Luu is a humbling reminder of this harrowing truth.  It features Knight Capital's $459 million loss in 45 minutes due to conflicting deployed software versions, and a Linux kernel bug related to leap-second handling taking down">
+    <meta name="twitter:url" content="http://localhost:2368/software-that-writes-software-on-program-learning-2/">
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2018/03/th--1-.jpeg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Gary Gradient">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Overviews">
     <meta name="twitter:site" content="@gradientml">
     
     <script type="application/ld+json">
 {
     "@context": "https://schema.org",
-    "@type": "WebSite",
+    "@type": "Article",
     "publisher": {
         "@type": "Organization",
         "name": "The Gradient",
         "logo": "http://localhost:2368/content/images/2018/04/logo3.png"
     },
-    "url": "http://localhost:2368/",
+    "author": {
+        "@type": "Person",
+        "name": "Gary Gradient",
+        "url": "http://localhost:2368/author/gary/",
+        "sameAs": []
+    },
+    "headline": "Software that writes software: the state of program induction",
+    "url": "http://localhost:2368/software-that-writes-software-on-program-learning-2/",
+    "datePublished": "2018-03-09T08:44:00.000Z",
+    "dateModified": "2018-04-06T04:21:45.000Z",
+    "image": "http://localhost:2368/content/images/2018/03/th--1-.jpeg",
+    "keywords": "Overviews",
+    "description": "Writing correct software is surprisingly hard. This collection of prominent software post-mortems by Dan Luu is a humbling reminder of this harrowing truth.  It features Knight Capital&#x27;s $459 million loss in 45 minutes due to conflicting deployed software versions, and a Linux kernel bug related to leap-second handling taking down",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://localhost:2368/"
-    },
-    "description": "Democratizing AI Through Discussion and Distillation"
+    }
 }
     </script>
 
-    <script type="text/javascript" src="public/ghost-sdk.js?v=5c22314c9a"></script>
+    <script type="text/javascript" src="../public/ghost-sdk.js?v=5c22314c9a"></script>
 <script type="text/javascript">
 ghost.init({
 	clientId: "ghost-frontend",
@@ -57,7 +78,7 @@ ghost.init({
 });
 </script>
     <meta name="generator" content="Ghost 1.22">
-    <link rel="alternate" type="application/rss+xml" title="The Gradient" href="rss/index.html">
+    <link rel="alternate" type="application/rss+xml" title="The Gradient" href="../rss/index.html">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115283063-1"></script>
 <script>
@@ -68,7 +89,7 @@ ghost.init({
   gtag('config', 'UA-115283063-1');
 </script>
 </head>
-<body class="home-template">
+<body class="post-template tag-overviews">
 
   <div class="js-off-canvas-container c-off-canvas-container">
     <header class="c-header">
@@ -77,8 +98,8 @@ ghost.init({
 
     <div class="o-grid__col o-grid__col--3-4-s o-grid__col--4-4-m">
       <div class="c-logo">
-          <a href="index.html">
-            <img class="c-logo__img" src="content/images/2018/04/logo3.png" alt="The Gradient">
+          <a href="../">
+            <img class="c-logo__img" src="../content/images/2018/04/logo3.png" alt="The Gradient">
           </a>
       </div>
     </div>
@@ -94,16 +115,16 @@ ghost.init({
             <nav class="c-nav-wrap">
               <ul class="c-nav o-plain-list">
                   <li class="c-nav__item">
-    <a href="index.html" class="c-nav__link  c-nav__link--current ">Home</a>
+    <a href="../" class="c-nav__link ">Home</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/perspectives.1" class="c-nav__link ">Perspectives</a>
+    <a href="../tag/perspectives.1" class="c-nav__link ">Perspectives</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/overviews.1" class="c-nav__link ">Overviews</a>
+    <a href="../tag/overviews.1" class="c-nav__link ">Overviews</a>
   </li>
   <li class="c-nav__item">
-    <a href="about/" class="c-nav__link ">About</a>
+    <a href="../about/" class="c-nav__link ">About</a>
   </li>
 
                 <li class="c-nav__item">
@@ -146,65 +167,264 @@ ghost.init({
   <div data-icon="ei-close" data-size="s" class="c-search__close js-search-close"></div>
 </div>
     
-<div class="o-wrapper">
-  <div class="o-grid js-grid">
-    
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
 
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="does-reinforcement-learning-actually-make-sense/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/human-priors.png)" aria-label="Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!" aria-hidden="true" role="presentation" tabindex="-1">
-          <span title="Featured Post">
-            <span class="c-post-card--featured__icon" data-icon="ei-star" data-size="s"></span>
-          </span>
-      </a>
+<div class="c-post-hero">
+  <div class="o-grid _o-grid--full">
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--4-4-m o-grid__col--2-3-l">
+      <div class="c-post-hero__media">
+        <div class="c-post-hero__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/th--1-.jpeg)"></div>
+      </div>
     </div>
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--1-3-m">
+      <div class="c-post-hero__content">
+        <h1 class="c-post-hero__title">Software that writes software: the state of program induction</h1>
+          <time class="c-post-hero__date" datetime="2018-03-09">09.Mar.2018</time>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="o-wrapper">
+  <div class="o-grid">
+    <div class="o-grid__col o-grid__col--2-3-m">
+      <article class="c-post tag-overviews">
 
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/perspectives.1">Perspectives</a>
+        <div class="c-content">
+          <div class="kg-card-markdown"><p>Writing correct software is surprisingly hard.</p>
+<p>This collection of <a href="https://github.com/danluu/post-mortems">prominent software post-mortems</a> by Dan Luu is a humbling reminder of this harrowing truth.  It features Knight Capital's $459 million loss in 45 minutes due to conflicting deployed software versions, and a Linux kernel bug related to leap-second handling taking down much of the Internet - Amazon Web Services, Reddit, and Mozilla included.</p>
+<p>This alone motivates a question - is it possible to write software that writes software?  By one definition, we already have; compilers, which programmers use every day, are ubiquitous.  While it is theoretically possible to write optimized x86 assembly code, the magnificent GNU Compiler Collection (gcc) allows us to program in C, a higher level programming language.</p>
+<p>Still, this is an unsatisfying example.  While compilers let us program with greater levels of abstraction, at the end of the day, humans still need to write code.  A better question to ask might be: is it possible to generate useful programs directly from a list of requirements, without human intervention?  Recent research efforts have contended with this problem, with early but promising results.</p>
+<p>Perhaps the most compelling motivation to consider this problem is program complexity.  Software that writes software might produce more sophisticated, flexible systems than humans are capable of designing.  A recent research paper by Google Brain applied this idea to designing neural network architectures; the algorithmically designed tf.contrib.rnn.NASCell was even merged into TensorFlow.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/NAS.png" alt="NAS"></p>
+<p>As Smolensky <a href="https://link.springer.com/content/pdf/10.1007/BF00130011.pdf">asserted in 1987</a>, there have been two broad paradigms in AI: symbolic and connectionist. Symbolic systems operate on entities (“symbols”) that are representations of data.  The classic example is expert systems, in which human experts hard code knowledge.  For instance, a stock trader might encode the rule “if GOOGL stock falls below $900, sell 1000 shares.”</p>
+<p>Connectionist systems can be described as “large networks of extremely simple processors, massively interconnected and running in parallel” (Smolensky).  Neural networks, of course, fall into this camp.  These systems tend to apply statistical inference techniques, and operate on numeric features.   These statistical systems tend to be less interpretable, but often perform better, given more training data.</p>
+<p>Programs that write programs are interesting because it fuses the symbolic and the connectionist in a unique way.</p>
+<p>They are symbolic in that programming languages provide a syntactic, human interpretable language for computation.  They are connectionist in that the final output code is often computed with the assistance of neural networks, gradient descent, and other statistical tools.</p>
+<p>It seems that the field of program induction has been less noticed than more conventional supervised approaches in deep learning.  This might be because the learned programs are relatively simple.  For example, DeepCoder (Balog et al. 2017) is able to construct programs of only up to 5-10 lines.  While the practical applications of these programs are limited, being able to synthesize them at all over a large search space is a significant research milestone.</p>
+<h2 id="machinelearningassearchingtheprogramspace">Machine learning as searching the program space</h2>
+<p>Supervised machine learning can be thought of as “searching a program space.”  In particular, we have some <em>target behavior</em>, for instance “identify vehicles in images,” that we do not know how to encode procedurally.  We encode priors about this particular in a <em>model choice</em>; we might opt to choose convolutional neural networks to learn features on image data.  And the training algorithm searches the <em>program space</em> for the best neural network weights that solve our problem.</p>
+<p>One might liken this to a version of test driven development.  In this case, our "tests" are each training example in our dataset, and gradient descent enables us to identify the weights that satisfy our "test suite."</p>
+<p>What is a more appropriate space, weights or code?  In a certain sense, searching over symbolic programs is substantially more difficult.  A neural network that has its weights perturbed by some small epsilon $\epsilon$ may only yield a small difference in the overall prediction output.  However, a single character discrepancy in a program will result in code that may not compile at all.</p>
+<p>Source code might be able to produce algorithmic complexity that is hard for current deep learning architectures to encode.  Training an RNN to sort a sequence of numbers is very hard (and possibly intractable, see <a href="https://arxiv.org/pdf/1511.06279.pdf">Reed and de Freitas 2015</a>).  Whereas implementing sorting in a high level programming language is nearly trivial.</p>
+<p>Source code also provides a unique level of interpretability.  At least for small programs encoded in a suitably high level programming language, it is straightforward to read through the code to get a sense of what it is computing.  Whereas for even small neural networks, investigating the weights of a model trained on MNIST is fairly difficult without more specialized tools.</p>
+<h2 id="definingtheproblem">Defining the problem</h2>
+<p>We can broadly divide current approaches to program learning into three categories: a) rule based program synthesis, b) statistical program synthesis, and c) statistical program induction.</p>
+<p><em>Rule based program synthesis</em> was the predominant classical approach two decades ago.  In this setting, “a formal grammar is used to derive a program from a specification” (<a href="https://arxiv.org/pdf/1703.07469">Devlin 2017</a>).  You begin with a mathematical spec of the program you want to derive.  For example, a sorting algorithm might be defined as follows.  Then, you use theorem proving techniques to iterate towards a program satisfying the specification.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/sorting.png" alt="sorting"></p>
+<p>(for example: a spec to sort a list of numbers.  From Zohar Manna (add reference)).</p>
+<p><em>Statistical program synthesis</em> refers to using a statistical or machine learning algorithm to synthesize a literal program.  A common paradigm is to feed a neural network a training set of input-output pairs, which learns to output program source code.  This code can then be executed to compute outputs given a general input not in the training set.</p>
+<p><em>Statistical program induction</em> refers to abstractly learning to compute the output using a latent program representation.  Importantly, in this setting, the output is not code.  Instead, the algorithm learns to compute the output using an internal “architecture” that simulates computation.  A concrete example is the Neural Turing Machine, which couples a differentiable neural network architecture with external memory (Graves et al. 2014).</p>
+<h2 id="neuralprogramsynthesis">Neural Program Synthesis</h2>
+<p>Balog et al. 2017 presented <em>DeepCoder</em>, a neural program synthesis method to learn solutions to programming contest problems.  This is a natural test-case to study, because we can find thousands of problems of highly variable levels of difficulty.  Being able to generate solutions to these problems could open the door to program learning more generally.</p>
+<p>The core of the method is a neural network that accepts a dataset of input-output pairs $(X_1, Y_1), (X_2, Y_2), \dots, (X_N, Y_N)$ and outputs an <em>attribute vector</em> a, whose elements indicate the probability of various programming keywords appearing the resulting source code.  This prediction is combined with a depth-first search algorithm that searches over programs that satisfy the conditions of the attributes.</p>
+<p>An attribute is useful for the program synthesis task if it a) is predictable from input-output examples, and b) conditioning on its value reduces the size of the program search space.  An example attribute prediction is shown below, reproduced from Balog et al. 2017.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/deepcoder_kw.png" alt="deepcoder_kw"></p>
+<p>A key component here is the choice of sufficiently expressive programming keywords, in the choice of a domain-specific language (DSL).  The choice of DSL determines the “building blocks” of the program language, and has a direct correlation with the difficulty of the program synthesis task.  A desirable DSL is both expressive – with a single keyword, one should be able to encode a sophisticated computational process – and specific  – it should be possible to achieve sufficient customization to solve the types of the problems appearing in programming contests.</p>
+<p>The DSL chosen includes functional operators like <a href="http://hackage.haskell.org/package/base-4.10.1.0/docs/Prelude.html#v:scanl1">scanl1</a>, which successively applies a reduce operation to elements in a list; for instance <code>scanl1 (+) [1, 2, 3, 4] -&gt; [1, 3, 6, 10]</code>.  It also includes higher order functions like <code>map</code>, <code>filter</code>, and <code>zipWith</code>.  This functional style of programming often makes it possible to describe algorithms with less code than an equivalent imperative program.</p>
+<p>The neural network is trained using a data generation strategy.  Programs are enumerated in the DSL, applying a heuristic pruning strategy to remove programs that are redundant (for example, ones for which there is a shorter equivalent program).  Input-output pairs are generated by executing the programs over predetermined bounded ranges of integers.  Binary attribute vectors are computed directly from the source code in the DSL.</p>
+<p>The network architecture consists of an <code>encoder</code> and a <code>decoder</code>.  For the encoder, a feed-forward architecture was used.  The input and output types (singleton or array) are featurized using a one-hot-encoding, and the inputs and outputs are padded to a maximum length.  Each integer in the inputs and the outputs are mapped to a learned embedding vector of size E = 20.  The authors use average pooling to combine learned representations for each input-output examples in a set generated from the same program.  It was found empirically that this feedforward encoded architecture performs at least as well as an RNN baseline.</p>
+<p>The decoder simply multiples the encoding of input-output examples by a learned $C \times K$ matrix, where $C = 34$ is the number of functions in in the DSL, and $K = 256$ is the number of sigmoid units in each of the three hidden layers of the encoder.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/deepcoder_arch.png" alt="deepcoder_arch"></p>
+<p>The central idea in this paper is to use a neural network’s attribute predictions to condition the program search.  There are a number of search strategies.  The authors experiment with an optimized DFS, “sort and add” enumeration, Sketch, and $\lambda^2$, which can incorporate the attribution prediction as a prior to condition the search space.  Many of these search algorithms are based on SMT solver approaches.</p>
+<p>Remarkably, the authors report an order of magnitude speedup over baselines without the attribute predictions.  DeepCoder is able to solve problems at the level of the easiest problems on programming competition databases:</p>
+<p><img src="http://localhost:2368/content/images/2018/03/deepcoder_prog.png" alt="deepcoder_prog"></p>
+<p>Given the search space of programs of this size, this is a compelling research achievement.<br>
+DeepCoder combines both the symbolic and the connectionist paradigms in a pipeline that is able to learn interpretable programs.  However, it remains to be seen whether input-output examples have sufficient information to permit useful attribute prediction for larger programs.  Will this scale?  We will probably need more attributes, as the authors note in their <a href="https://openreview.net/forum?id=ByldLrqlx">OpenReview thread</a>.</p>
+<h2 id="differentiableinterpreters">Differentiable Interpreters</h2>
+<p>How do we incorporate prior knowledge into a machine learning model?  Bosnjak et al. 2017 consider this fundamental problem from a unique angle -- suppose the prior knowledge we have is <em>procedural</em>.  They present an end-to-end approach to program learning, where a programmer can provide a program sketches with slots that need to be filled in.  Gradient descent is then applied to “fill in” learned behavior from program input-output data.</p>
+<p>The authors use the programming language Forth to conduct their work.  They choose Forth in part because of its expressivity, but most importantly because its abstract machine is simple enough to implement a continuous approximation.</p>
+<p>Forth’s abstract machine is represented by a state $S = (D, R, H, c)$, which contains two stacks.  $D$ is a data evaluation pushdown stack, and $R$ is a return address pushdown stack.  $H$ stores the heap, and $c$ is a program counter.  A Forth program $P$ can be represented as a sequence of words $P = w_1 w_2 \dots w_n$, which can be regarded as a sequence of state transition functions.  To make gradient based learning possible, the machine output must be differentiable with respect to these functions $w_i$.  The author’s implementation, which they call $\delta 4$, models the Forth abstract machine as a recurrent neural network, parametrized by the transition functions at each time step.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/D4_sketch.png" alt="D4_sketch"></p>
+<p>In the above figure, there are two ways to provide a sketch for the sorting algorithm.  In blue, the authors present the <code>PERMUTE</code> sketch, which specifies that the top two elements of the stack and the top of the return stack must be permuted based on the values of the former.  In this setting, functionality to compare values and perform the permutation must be learned.  In yellow, the authors write the <code>COMPARE</code> sketch, which provides additional procedural knowledge to the model.  In this context, only the comparison between the top two elements in the stack must be learned.</p>
+<p>Let $M$ represent a memory buffer corresponding to the data stack, return stack, or the heap.  Then, differentiable read and write operations can be implemented as</p>
+<p>$$\text{read}_\mathbf{M}(\mathbf{a}) = \mathbf{a}^T \mathbf{M}$$<br>
+$$\text{write}_\mathbf{M}(\mathbf{x}, \mathbf{a}) : \mathbf{M} \leftarrow \mathbf{M} - (\mathbf{a1}^T \odot \mathbf{M} + \mathbf{xa}^T)$$</p>
+<p>Here, $\mathbf{a}$ represents an <em>address pointer</em>, and $\odot$ is elementwise multiplication.  These operations are modeled after the way a Neural Turing Machine's memory functions (Graves et al. 2014).</p>
+<p>A slot $w$ can be encoded by specifying a state encoder and a decoder.  Users can choose from many operations for encoders and decoders, listed below.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/D4_encdec.png" alt="D4_encdec"></p>
+<p>Finally, a recurrent neural network is used to model execution.  The RNN computes a state $S_{n+1}$ conditioned on a previous state $S_n$.  We have:</p>
+<p>$$ \mathbf{S}_{n+1} = \text{RNN}(\mathbf{S}_{n}, \mathbf{P}_{\theta}) = \sum_{i=1}^{|P|} \mathbf{c}_{i} \mathbf{w}_{i} (\mathbf{S}_n). $$</p>
+<p>This is quite computationally expensive.  At every time step, a new machine state is calculated by executing all words in the program and then weighting the result states by the program counter.  Thus, the authors use a number of optimizations to avoid full RNN steps.  First, they use symbolic execution to “collapse” transition functions.  For example, <code>R &gt; SWAP &gt; R</code> can be collapsed into a single transition.  Second, they execute if branches in parallel and weigh their output states by the value of the condition.</p>
+<p>This work is similar to probabilistic programming languages such as Church.  In this setting, users can incorporate probabilities densities into programs to specify distributions over possible execution traces.  While traditional probabilistic programming languages typically use a form of Bayesian inference to compute the posterior, $\delta 4$ updates parameters using gradient descent.  The authors note that this style is similar to the TerpreT FMGD algorithm (Gaunt et al. 2016).</p>
+<p><img src="http://localhost:2368/content/images/2018/03/D4_diag.png" alt="D4_diag"></p>
+<p>The authors are able to learn a sorting procedure using only a few hundred training examples!  Experimentally, they show that their D4 implementation vastly outperforms a Seq2Seq baseline.  The seq2seq implementation fails to generalize at all to lengths longer than the training lengths. By contrast, the sketch highlighted earlier defines the outer loop which repeatedly calls the BUBBLE function; this guarantees that the functionality of the network is invariant to the input sequence length.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/D4_results.png" alt="D4_results"></p>
+<h2 id="unsupervisedlearningbyprogramsynthesis">Unsupervised Learning By Program Synthesis</h2>
+<p>Given a dataset, how can we capture latent structure using a program?  Ellis et al. 2017 applied program synthesis techniques uniquely to unsupervised learning.   Examples include include visual concepts, linguistic rules, and multitask regression:</p>
+<p><img src="http://localhost:2368/content/images/2018/03/USL_ex.png" alt="USL_ex"></p>
+<p>More concretely stated, we would like to explain an observed dataset as the output of a program run on unknown inputs.  We can formulate this joint inference over the program and the program inputs, optimizing for the smallest solution.  The loss function is constructed as follows, with the objective of minimizing program length, data reconstruction error, and data encoding length.</p>
+<p>$$\underbrace{- \log P_f(f)}_{\text{program length}} + \sum_{i=1}^{N} \left ( \underbrace{- \log P_{x|z} (x_i | f(I_i))}_{\text{data reconstruction error}} - \underbrace{\log P_I (I_i)}_{\text{data encoding length}} \right )$$</p>
+<p>The authors again use the idea of a <em>sketch</em>, which they combine with symbolic search (namely, SMT solving), to produce a program.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/USL_pipeline.png" alt="USL_pipeline"></p>
+<p>The authors work with visual training examples from the Synthetic Visual Reasoning Test (SVRT), a test consisting of classification problems parsed into distinct shapes.  They define a space of simple graphics programs referred to as “turtle programs” that can control the rendering of different shapes.  The following context free grammar is used to construct “sentences” that can be mapped to different semantic models over visual concepts:</p>
+<p><img src="http://localhost:2368/content/images/2018/03/USL_grammar.png" alt="USL_grammar"></p>
+<p>A parser first analyzes each image and outputs structured information:</p>
+<p><img src="http://localhost:2368/content/images/2018/03/USL_parser.png" alt="USL_parser"></p>
+<p>Then their learning algorithm constructs a program from this parsed data:</p>
+<p><img src="http://localhost:2368/content/images/2018/03/USL_prog.png" alt="USL_prog"></p>
+<p>The authors use 23 SVRT problems and evaluate the accuracy of their parser relative to several baselines.  Unsupervised program synthesis outperforms a decision stump, convolutional network, and other discriminative baselines.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/USL_results.png" alt="USL_results"></p>
+<h2 id="theroadahead">The road ahead</h2>
+<p>While the programs learned by both of these systems are rather simple, the fact that this process is possible at all is encouraging.  As hardware and methods improve, there is a plausible path towards scaling many of these approaches.</p>
+<p>A debate remains.  Is it more promising to build program synthesis or program induction systems?  By training a neural network to generate human-readable source code, we benefit from transparent model interpretability.  End to end models might achieve greater performance, but often at the cost of interpretability.</p>
+<p>Programs that generate programs could one day enable us to develop systems that are more sophisticated than human-engineered ones.  Neural networks are known to be powerful function approximators that can learn arbitrary mappings.  Combining the powerful expressivity of neural networks with the symbolic logic of programming languages could yield uniquely powerful systems, that neither paradigm on its own could produce.</p>
+<p>As we have seen, there is a broad spectrum of approaches to perform this merging between the two approaches to computation.  Identifying the specifics of this symbiosis remains a unique question for the field to consider.</p>
+</div>
         </div>
 
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Reinforcement%20Learning%20is%20Dead%2C%20Long%20Live%20Meta-Reinforcement%20Learning!&amp;url=http://localhost:2368/does-reinforcement-learning-actually-make-sense/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
+        <div class="o-grid">
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--3-4-l">
+            <div class="c-tags">
+              <a href="../tag/overviews.1">Overviews</a>
+            </div>
           </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/does-reinforcement-learning-actually-make-sense/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--1-4-m o-grid__col--1-4-l">
+            <ul class="c-share o-plain-list">
+  <li class="c-share__item">
+    <a class="c-share__link c-share__link--twitter" title="Share on Twitter" aria-label="Share on Twitter" href="https://twitter.com/share?text=Software%20that%20writes%20software%3A%20the%20state%20of%20program%20induction&amp;url=http://localhost:2368/software-that-writes-software-on-program-learning-2/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
+      <div data-icon="ei-sc-twitter" data-size="s" class="c-share__icon c-share__icon--twitter"></div>
+    </a>
+  </li>
+
+  <li class="c-share__item">
+    <a class="c-share__link c-share__link--facebook" title="Share on Facebook" aria-label="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/software-that-writes-software-on-program-learning-2/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
+      <div data-icon="ei-sc-facebook" data-size="s" class="c-share__icon c-share__icon--facebook"></div>
+    </a>
+  </li>
+</ul>          </div>
+        </div>
+
+        <hr>
+
+        <div class="o-grid__col o-grid__col--center o-grid__col--4-4-s o-grid__col--1-3-l">
+  <button class="c-btn c-btn--full js-load-disqus">Comments</button>
+</div>
+
+<hr>
+
+<div class="disqus u-hidden js-disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'www-gradientml-org'; // required: replace example with your forum shortname
+    var disqus_identifier = 'ghost-5a8d314eac93e900227dbfca';
+
+    // DON'T EDIT BELOW THIS LINE
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+      </article>
+
+    </div>
+
+
+    <div class="o-grid__col o-grid__col--1-3-m">
+      <div class="c-sidebar">
+
+      <div class="c-widget c-widget-author">
+
+
+      <div class="c-widget-author__content">
+        <h3 class="c-widget-author__title">
+          <a href="../author/gary/">Gary Gradient</a>
+        </h3>
+          <p class="c-widget-author__bio">Gradient Institute of Differentiable Technology</p>
       </div>
 
-      <h2 class="c-post-card__title">
-        <a href="does-reinforcement-learning-actually-make-sense/" class="c-post-card__title-link">
-          Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!
-        </a>
-      </h2>
+    </div>
 
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-03-16" title="16 March 2018">16.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/andrey/">Andrey Kurenkov</a></div>
-      </div>
+      <div class="c-widget">
+      <h3 class="c-widget__title">Recent Stories</h3>
+
+        <a href="../does-reinforcement-learning-actually-make-sense/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/human-priors.png)" aria-label="Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!"></div>
+            </div>
+        </a>
+
+        <a href="../learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Learning From Humans: Inverse RL &amp; Apprenticeship Learning</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/DSC_0709.jpg)" aria-label="Learning From Humans: Inverse RL &amp; Apprenticeship Learning"></div>
+            </div>
+        </a>
+
+        <a href="../what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">What does it actually mean for AI to be racist?</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg)" aria-label="What does it actually mean for AI to be racist?"></div>
+            </div>
+        </a>
+
+        <a href="../exploiting-structured-data-with-neural-networks/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Exploiting Structured Data with Neural Networks</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=c7f31a8c5fd0fea1620b5595ce12eb73)" aria-label="Exploiting Structured Data with Neural Networks"></div>
+            </div>
+        </a>
+
+        <a href="../can-machine-learning-algorithms-be-used-to-create-art/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Is deep art real art?</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/1.png)" aria-label="Is deep art real art?"></div>
+            </div>
+        </a>
+
+    </div>
+
+  <div class="c-widget">
+  <h3 class="c-widget__title">Tags</h3>
+
+  <div class="c-tags">
+        <a href="../tag/getting-started">Getting Started</a>
+        <a href="../tag/perspectives.1">Perspectives</a>
+        <a href="../tag/overviews.1">Overviews</a>
+  </div>
+</div>
+</div>
     </div>
   </div>
 
 </div>
 
+<!--
+  Get related posts based on tags
+  https://themes.ghost.org/docs/recent-featured-sidebar#extra-special-sauce-related-posts
+ -->
 
+    <div class="c-related">
+      <div class="o-grid">
+        <div class="o-grid__col o-grid__col--full">
+          <h3 class="c-related__title">More in this category</h3>
+        </div>
+        
   <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
 
   <div class="c-post-card">
     <div class="c-post-card__media">
-      <a href="learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/DSC_0709.jpg)" aria-label="Learning From Humans: Inverse RL &amp; Apprenticeship Learning" aria-hidden="true" role="presentation" tabindex="-1">
+      <a href="../learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/DSC_0709.jpg)" aria-label="Learning From Humans: Inverse RL &amp; Apprenticeship Learning" aria-hidden="true" role="presentation" tabindex="-1">
       </a>
     </div>
 
     <div class="c-post-card__content">
         <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
+          <a href="../tag/overviews.1">Overviews</a>
         </div>
 
       <div class="c-post-card__share">
@@ -221,14 +441,14 @@ ghost.init({
       </div>
 
       <h2 class="c-post-card__title">
-        <a href="learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-post-card__title-link">
+        <a href="../learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-post-card__title-link">
           Learning From Humans: Inverse RL &amp; Apprenticeship Learning
         </a>
       </h2>
 
       <div class="c-post-card__meta">
         <time class="c-post-card__date" datetime="2018-03-16" title="16 March 2018">16.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
+        <div class="c-post-card__author"><a href="../author/gary/">Gary Gradient</a></div>
       </div>
     </div>
   </div>
@@ -240,55 +460,13 @@ ghost.init({
 
   <div class="c-post-card">
     <div class="c-post-card__media">
-      <a href="what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg)" aria-label="What does it actually mean for AI to be racist?" aria-hidden="true" role="presentation" tabindex="-1">
+      <a href="../exploiting-structured-data-with-neural-networks/" class="c-post-card__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=c7f31a8c5fd0fea1620b5595ce12eb73)" aria-label="Exploiting Structured Data with Neural Networks" aria-hidden="true" role="presentation" tabindex="-1">
       </a>
     </div>
 
     <div class="c-post-card__content">
         <div class="c-post-card__tags">
-          <a href="tag/perspectives.1">Perspectives</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=What%20does%20it%20actually%20mean%20for%20AI%20to%20be%20racist%3F&amp;url=http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-post-card__title-link">
-          What does it actually mean for AI to be racist?
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-03-09" title="09 March 2018">09.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="exploiting-structured-data-with-neural-networks/" class="c-post-card__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=c7f31a8c5fd0fea1620b5595ce12eb73)" aria-label="Exploiting Structured Data with Neural Networks" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
+          <a href="../tag/overviews.1">Overviews</a>
         </div>
 
       <div class="c-post-card__share">
@@ -305,14 +483,14 @@ ghost.init({
       </div>
 
       <h2 class="c-post-card__title">
-        <a href="exploiting-structured-data-with-neural-networks/" class="c-post-card__title-link">
+        <a href="../exploiting-structured-data-with-neural-networks/" class="c-post-card__title-link">
           Exploiting Structured Data with Neural Networks
         </a>
       </h2>
 
       <div class="c-post-card__meta">
         <time class="c-post-card__date" datetime="2018-03-09" title="09 March 2018">09.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
+        <div class="c-post-card__author"><a href="../author/gary/">Gary Gradient</a></div>
       </div>
     </div>
   </div>
@@ -324,97 +502,13 @@ ghost.init({
 
   <div class="c-post-card">
     <div class="c-post-card__media">
-      <a href="software-that-writes-software-on-program-learning-2/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/th--1-.jpeg)" aria-label="Software that writes software: the state of program induction" aria-hidden="true" role="presentation" tabindex="-1">
+      <a href="../on-the-success-of-libratus-superhuman-poker-ai/" class="c-post-card__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1503482618211-c70b46ede8b0?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=a342e88a2f791f025c6a391ceb011472)" aria-label="Inside Libratus, the algorithm that beats world-class poker players" aria-hidden="true" role="presentation" tabindex="-1">
       </a>
     </div>
 
     <div class="c-post-card__content">
         <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Software%20that%20writes%20software%3A%20the%20state%20of%20program%20induction&amp;url=http://localhost:2368/software-that-writes-software-on-program-learning-2/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/software-that-writes-software-on-program-learning-2/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="software-that-writes-software-on-program-learning-2/" class="c-post-card__title-link">
-          Software that writes software: the state of program induction
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-03-09" title="09 March 2018">09.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="can-machine-learning-algorithms-be-used-to-create-art/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/1.png)" aria-label="Is deep art real art?" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/perspectives.1">Perspectives</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Is%20deep%20art%20real%20art%3F&amp;url=http://localhost:2368/can-machine-learning-algorithms-be-used-to-create-art/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/can-machine-learning-algorithms-be-used-to-create-art/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="can-machine-learning-algorithms-be-used-to-create-art/" class="c-post-card__title-link">
-          Is deep art real art?
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-02-24" title="24 February 2018">24.Feb.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="on-the-success-of-libratus-superhuman-poker-ai/" class="c-post-card__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1503482618211-c70b46ede8b0?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=a342e88a2f791f025c6a391ceb011472)" aria-label="Inside Libratus, the algorithm that beats world-class poker players" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
+          <a href="../tag/overviews.1">Overviews</a>
         </div>
 
       <div class="c-post-card__share">
@@ -431,107 +525,23 @@ ghost.init({
       </div>
 
       <h2 class="c-post-card__title">
-        <a href="on-the-success-of-libratus-superhuman-poker-ai/" class="c-post-card__title-link">
+        <a href="../on-the-success-of-libratus-superhuman-poker-ai/" class="c-post-card__title-link">
           Inside Libratus, the algorithm that beats world-class poker players
         </a>
       </h2>
 
       <div class="c-post-card__meta">
         <time class="c-post-card__date" datetime="2018-02-21" title="21 February 2018">21.Feb.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
+        <div class="c-post-card__author"><a href="../author/gary/">Gary Gradient</a></div>
       </div>
     </div>
   </div>
 
 </div>
 
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="deep-learning-for-semantic-segmentation/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/semseg.png)" aria-label="Deep Learning for Semantic Segmentation" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Deep%20Learning%20for%20Semantic%20Segmentation&amp;url=http://localhost:2368/deep-learning-for-semantic-segmentation/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/deep-learning-for-semantic-segmentation/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="deep-learning-for-semantic-segmentation/" class="c-post-card__title-link">
-          Deep Learning for Semantic Segmentation
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-02-21" title="21 February 2018">21.Feb.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
       </div>
     </div>
-  </div>
 
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="editorsnote/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/fb-profile.png)" aria-label="Editor's Note" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Editor" s onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/editorsnote/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="editorsnote/" class="c-post-card__title-link">
-          Editor's Note
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-01-01" title="01 January 2018">01.Jan.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-  </div>
-
-  <div class="o-grid">
-    
-  </div>
-</div>
 
     <footer class="c-footer">
   <div class="o-grid">
@@ -540,9 +550,9 @@ ghost.init({
       <p class="u-font-medium">Tags</p>
 
         <ul class="c-footer-list o-plain-list">
-            <li><a href="tag/getting-started">Getting Started</a></li>
-            <li><a href="tag/perspectives.1">Perspectives</a></li>
-            <li><a href="tag/overviews.1">Overviews</a></li>
+            <li><a href="../tag/getting-started">Getting Started</a></li>
+            <li><a href="../tag/perspectives.1">Perspectives</a></li>
+            <li><a href="../tag/overviews.1">Overviews</a></li>
         </ul>
     </div>
 
@@ -551,16 +561,16 @@ ghost.init({
 
       <ul class="c-footer-list o-plain-list">
           <li class="c-nav__item">
-    <a href="index.html" class="c-nav__link  c-nav__link--current ">Home</a>
+    <a href="../" class="c-nav__link ">Home</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/perspectives.1" class="c-nav__link ">Perspectives</a>
+    <a href="../tag/perspectives.1" class="c-nav__link ">Perspectives</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/overviews.1" class="c-nav__link ">Overviews</a>
+    <a href="../tag/overviews.1" class="c-nav__link ">Overviews</a>
   </li>
   <li class="c-nav__item">
-    <a href="about/" class="c-nav__link ">About</a>
+    <a href="../about/" class="c-nav__link ">About</a>
   </li>
 
       </ul>
@@ -615,6 +625,6 @@ MathJax.Hub.Config({
 </script>
   </div>
 
-  <script src="assets/js/app.min.js?v=5c22314c9a"></script>
-  
+  <script src="../assets/js/app.min.js?v=5c22314c9a"></script>
+  <script src="../assets/js/instagram.js?v=5c22314c9a"></script>
 </body>

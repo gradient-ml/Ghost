@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>The Gradient</title>
+  <title>Learning From Humans: Inverse RL &amp; Apprenticeship Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -11,45 +11,66 @@ html{-webkit-box-sizing:border-box;box-sizing:border-box}*,:after,:before{-webki
 </style>
   <script>
     var pagination_next_page_number       = '',
-        pagination_available_pages_number = '1';
+        pagination_available_pages_number = '';
   </script>
 
-  <meta name="description" content="Democratizing AI Through Discussion and Distillation">
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <link rel="shortcut icon" href="../favicon.png" type="image/png">
     <link rel="canonical" href="index.html">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
     
     <meta property="og:site_name" content="The Gradient">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="The Gradient">
-    <meta property="og:description" content="Democratizing AI Through Discussion and Distillation">
-    <meta property="og:url" content="http://localhost:2368/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Learning From Humans: Inverse RL &amp; Apprenticeship Learning">
+    <meta property="og:description" content="One of the goals of AI research is to teach machines how to do the same things people do, but better. In the early 2000s, this meant focusing on problems like flying helicopters and walking up flights of stairs. Now, these problems have been solved, and we’ve achieved near-human">
+    <meta property="og:url" content="http://localhost:2368/learning-from-humans-part-1-inverse-rl-apprenticeship-learning/">
+    <meta property="og:image" content="http://localhost:2368/content/images/2018/03/DSC_0709.jpg">
+    <meta property="article:published_time" content="2018-03-17T01:14:54.000Z">
+    <meta property="article:modified_time" content="2018-04-06T04:19:51.000Z">
+    <meta property="article:tag" content="Overviews">
+    
     <meta property="article:publisher" content="https://www.facebook.com/gradientml/">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="The Gradient">
-    <meta name="twitter:description" content="Democratizing AI Through Discussion and Distillation">
-    <meta name="twitter:url" content="http://localhost:2368/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Learning From Humans: Inverse RL &amp; Apprenticeship Learning">
+    <meta name="twitter:description" content="One of the goals of AI research is to teach machines how to do the same things people do, but better. In the early 2000s, this meant focusing on problems like flying helicopters and walking up flights of stairs. Now, these problems have been solved, and we’ve achieved near-human">
+    <meta name="twitter:url" content="http://localhost:2368/learning-from-humans-part-1-inverse-rl-apprenticeship-learning/">
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2018/03/DSC_0709.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Gary Gradient">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Overviews">
     <meta name="twitter:site" content="@gradientml">
     
     <script type="application/ld+json">
 {
     "@context": "https://schema.org",
-    "@type": "WebSite",
+    "@type": "Article",
     "publisher": {
         "@type": "Organization",
         "name": "The Gradient",
         "logo": "http://localhost:2368/content/images/2018/04/logo3.png"
     },
-    "url": "http://localhost:2368/",
+    "author": {
+        "@type": "Person",
+        "name": "Gary Gradient",
+        "url": "http://localhost:2368/author/gary/",
+        "sameAs": []
+    },
+    "headline": "Learning From Humans: Inverse RL &amp; Apprenticeship Learning",
+    "url": "http://localhost:2368/learning-from-humans-part-1-inverse-rl-apprenticeship-learning/",
+    "datePublished": "2018-03-17T01:14:54.000Z",
+    "dateModified": "2018-04-06T04:19:51.000Z",
+    "image": "http://localhost:2368/content/images/2018/03/DSC_0709.jpg",
+    "keywords": "Overviews",
+    "description": "One of the goals of AI research is to teach machines how to do the same things people do, but better. In the early 2000s, this meant focusing on problems like flying helicopters and walking up flights of stairs. Now, these problems have been solved, and we’ve achieved near-human",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://localhost:2368/"
-    },
-    "description": "Democratizing AI Through Discussion and Distillation"
+    }
 }
     </script>
 
-    <script type="text/javascript" src="public/ghost-sdk.js?v=5c22314c9a"></script>
+    <script type="text/javascript" src="../public/ghost-sdk.js?v=5c22314c9a"></script>
 <script type="text/javascript">
 ghost.init({
 	clientId: "ghost-frontend",
@@ -57,7 +78,7 @@ ghost.init({
 });
 </script>
     <meta name="generator" content="Ghost 1.22">
-    <link rel="alternate" type="application/rss+xml" title="The Gradient" href="rss/index.html">
+    <link rel="alternate" type="application/rss+xml" title="The Gradient" href="../rss/index.html">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115283063-1"></script>
 <script>
@@ -68,7 +89,7 @@ ghost.init({
   gtag('config', 'UA-115283063-1');
 </script>
 </head>
-<body class="home-template">
+<body class="post-template tag-overviews">
 
   <div class="js-off-canvas-container c-off-canvas-container">
     <header class="c-header">
@@ -77,8 +98,8 @@ ghost.init({
 
     <div class="o-grid__col o-grid__col--3-4-s o-grid__col--4-4-m">
       <div class="c-logo">
-          <a href="index.html">
-            <img class="c-logo__img" src="content/images/2018/04/logo3.png" alt="The Gradient">
+          <a href="../">
+            <img class="c-logo__img" src="../content/images/2018/04/logo3.png" alt="The Gradient">
           </a>
       </div>
     </div>
@@ -94,16 +115,16 @@ ghost.init({
             <nav class="c-nav-wrap">
               <ul class="c-nav o-plain-list">
                   <li class="c-nav__item">
-    <a href="index.html" class="c-nav__link  c-nav__link--current ">Home</a>
+    <a href="../" class="c-nav__link ">Home</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/perspectives.1" class="c-nav__link ">Perspectives</a>
+    <a href="../tag/perspectives.1" class="c-nav__link ">Perspectives</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/overviews.1" class="c-nav__link ">Overviews</a>
+    <a href="../tag/overviews.1" class="c-nav__link ">Overviews</a>
   </li>
   <li class="c-nav__item">
-    <a href="about/" class="c-nav__link ">About</a>
+    <a href="../about/" class="c-nav__link ">About</a>
   </li>
 
                 <li class="c-nav__item">
@@ -146,149 +167,293 @@ ghost.init({
   <div data-icon="ei-close" data-size="s" class="c-search__close js-search-close"></div>
 </div>
     
+
+<div class="c-post-hero">
+  <div class="o-grid _o-grid--full">
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--4-4-m o-grid__col--2-3-l">
+      <div class="c-post-hero__media">
+        <div class="c-post-hero__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/DSC_0709.jpg)"></div>
+      </div>
+    </div>
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--1-3-m">
+      <div class="c-post-hero__content">
+        <h1 class="c-post-hero__title">Learning From Humans: Inverse RL &amp; Apprenticeship Learning</h1>
+          <time class="c-post-hero__date" datetime="2018-03-16">16.Mar.2018</time>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="o-wrapper">
-  <div class="o-grid js-grid">
-    
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
+  <div class="o-grid">
+    <div class="o-grid__col o-grid__col--2-3-m">
+      <article class="c-post tag-overviews">
 
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="does-reinforcement-learning-actually-make-sense/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/human-priors.png)" aria-label="Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!" aria-hidden="true" role="presentation" tabindex="-1">
-          <span title="Featured Post">
-            <span class="c-post-card--featured__icon" data-icon="ei-star" data-size="s"></span>
-          </span>
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/perspectives.1">Perspectives</a>
+        <div class="c-content">
+          <div class="kg-card-markdown"><p>One of the goals of AI research is to teach machines how to do the same things people do, but better.</p>
+<p>In the early 2000s, this meant focusing on problems like <a href="http://www.youtube.com/watch?v=M-QUkgk3HyE">flying helicopters</a> and <a href="http://www.youtube.com/watch?v=aqCmX5dMYHg">walking up flights of stairs</a>. Now, these problems have been solved, and we’ve achieved near-human performance on harder problems like recognizing images and playing simple Atari games.</p>
+<p>However, there’s still a massive list of problems where humans outperform machines. Our advantage lies in solving problems that aren’t as well defined, like judging a well-executed backflip, cleaning a room while minimizing side effects, and perhaps the most human problem of them all, “reasoning about people’s values.” To solve these problems, machines need information about the world as well as a way to learn about the people within it.</p>
+<p><strong>How can machines learn from humans?</strong> We’ll be splitting this big question into three sub-questions:</p>
+<ol>
+<li>How can an agent learn a policy that performs as well as an expert policy?</li>
+<li>How can we scale the rate at which agents are able to learn from people?</li>
+<li>How do we deal with the obvious fact that people do not behave optimally?</li>
+</ol>
+<p>To answer our first question, we’ll start this series off with an overview of some of the foundational work on inverse reinforcement learning, apprenticeship learning, and imitation learning. The unifying thread between these techniques is that they all provide a way of integrating information from human experts into reinforcement learning methods, achieving impressive performance in driving simulators and autonomous helicopter flight tests, and gesturing at some of the key problems that later work will attempt to solve.</p>
+<h1 id="inversereinforcementlearning">Inverse Reinforcement Learning</h1>
+<br>
+<h2 id="problem">Problem</h2>
+<p>In a traditional RL setting, the goal is to learn a decision process which maximizes some predefined reward function. Inverse reinforcement learning (IRL), as described by Andrew Ng and Stuart Russell in 2000, flips the problem and instead attempts to extract the reward function from the observed behavior of an agent.</p>
+<p>Consider the task of autonomous driving. A naive approach would be to create a reward function that captures the desired behavior of a driver, like stopping at red lights, staying off the sidewalk, avoiding pedestrians, etc. Unfortunately, this would require both an exhaustive list of every feature we’d want to consider as well as a list of weights describing how important each feature is (imagine having to decide exactly how much more important pedestrians are than stop signs).</p>
+<p>Instead, IRL takes a set of human-generated driving data and extracts an approximation of the reward function that the person is operating under. In doing this, all of the information necessary for solving a problem is essentially encoded within the reward function. As Ng and Russell put it, <strong>“the reward function, rather than the policy, is the most succinct, robust, and transferable definition of the task,”</strong> since the problem of finding the right policy is already solvable with traditional RL methods.</p>
+<p>For our self-driving car example, we’d be using human driving data to directly learn what the right feature weights are for the reward. Since the task is described by the reward function, we do not even need to know what the specifics of the human policy are, so long as we have the right reward function to optimize for. In the general case, IRL can be seen as a method for leveraging expert knowledge to convert a task description into a compact reward function.</p>
+<p>The main problem when converting a complex task into a simple reward function is that a given policy may be optimal for many different reward functions. That is, even though we have the actions from an expert, there exist many different reward functions (some of them degenerate) that the expert might be attempting to maximize. For example, all policies are optimal for the reward function that is zero everywhere, so this reward function is always a possible solution to the IRL problem. Ideally, we would want a reward function that captures meaningful information about the task and is able to clearly differentiate between desired and undesired policies.</p>
+<p>To solve this, Ng and Russell formulate inverse reinforcement learning as an optimization problem where we seek to maximize certain properties of the reward function, under the constraint that the given expert policy is still the optimal solution for any reward function we consider.</p>
+<br>
+<h2 id="algorithms">Algorithms</h2>
+<br>
+<h3 id="inversereinforcementlearninginfinitestatespaces">Inverse Reinforcement Learning in Finite State Spaces</h3>
+<p>First, consider the set of optimal policies for a Markov Decision Process (MDP) with a finite state space $S$, set of actions $A$, and transition probability matrices $P_a$ for each action. We say that a policy $\pi$ given by $\pi(s) = a_1$ is optimal if and only if for all other actions $a$, the reward vector $R$ (which lists the rewards for each possible state) satisfies:</p>
+<p>$$ (P_{a1}−P_a)(I − \gamma P_{a_1})^{−1} R \succeq 0$$</p>
+<p>The proof from Ng’s paper is given in the Appendix, but the importance of the theorem is that <strong>it allows us to use linear programming to find a feasible point of the constraints in this equation</strong>. Ng and Russell then formulate IRL as an optimization problem using the following heuristics for what makes a reward function “fit” the expert data well:</p>
+<p>Maximize “the difference between the quality of the optimal action and the quality of the next best action” (subject to a bound on the magnitude of the reward, to prevent arbitrarily large differences). The intuition here is that we want a reward function that clearly distinguishes the optimal policy from other possible policies.<br>
+Minimize the size of the rewards in the reward function/vector. The intuition is that using small rewards corresponds to some kind of “simplicity” prior. Ng and Russell choose the L1 norm with an adjustable penalty coefficient, which comes with the nice property of the reward vector being non-zero in only a few states.</p>
+<p>While these constraints are intuitive, the authors note that other useful constraints may exist. In particular, later work, such as Maximum Entropy Inverse Reinforcement Learning (Ziebart et. al.), and Bayesian Inverse Reinforcement Learning (Ramachandran et. al.), are two examples of different criteria that have been used to achieve impressive results.</p>
+<br>
+<h3 id="inversereinforcementlearningfromsampledtrajectories">Inverse Reinforcement Learning from Sampled Trajectories</h3>
+<p>Ng and Russell also describe IRL algorithms for cases where, instead of a full optimal policy, we can only sample trajectories from an optimal policy. In applied cases, especially those dealing with human expert data, this situation is a bit more common.</p>
+<p>In this formulation of the problem, we replace the reward vector that we used for finite state spaces with a linear approximation of the reward function which uses basis functions $\phi_i$ from $\mathbb{R}^n \rightarrow \mathbb{R}$ to obtain real-valued features $\phi_i(s)$. These features are a way to capture important information from a high-dimensional state space (for instance, instead of storing the location of a car during every time-step, we can store its average speed as a feature). For each feature $\phi_i(s)$ and weight $\alpha_i$ we have:</p>
+<p>$$ R(s) = \alpha_1\phi_1(s) + \alpha_2\phi_2(s) + . . . + \alpha_d\phi_d(s) $$</p>
+<p>and <strong>our objective is to find the best-fitting values for each feature-weight</strong> $\alpha_i$.</p>
+<p>The general idea behind IRL with sampled trajectories is to <strong>iteratively improve a reward function by comparing the value of the assumed optimal policy with a set of k generated policies</strong>. We initialize the algorithm by randomly generating weights for the estimated reward function and initialize our set of candidate policies with a randomly generated policy. Then, the key steps are algorithm are to:</p>
+<ol>
+<li>Estimate the value of our optimal policy for the initial state $\hat{V}^\pi(s_0)$, as well as the value of every generated policy $\hat{V}^{\pi_i}(s_0)$ by taking the average cumulative reward of many randomly sampled trials.</li>
+<li>Generate an estimate of the reward function $R$ by solving a linear programming problem. Specifically, set $\alpha_i$ to maximize the difference between our optimal policy and each of the other $k$ generated policies:</li>
+</ol>
+<p>$$ \mathrm{maximize~} \sum_{i=1}^k f(\hat{V}^{\pi^*}(s_0) − \hat{V}^{\pi_i}(s_0))$$<br>
+$$ \mathrm{with~} f(x)=2x \mathrm{~if~} x &lt; 0 \mathrm{~else~} f(x)=x \mathrm{~to~penalize~valuing~a~policy~higher~than~the~expert}$$<br>
+$$ \mathrm{s.t.~} |\alpha_i| \leq 1, ~ i=1, . . ., d $$</p>
+<ol start="4">
+<li>After a large number of iterations, end the algorithm at this step.</li>
+<li>Otherwise, use a standard RL algorithm to find the optimal policy for $R$. This policy may be different from the given optimal policy, since our estimated reward function is not necessarily identical to the reward function we are searching for.</li>
+<li>Add the newly generated policy to the set of $k$ candidate policies, and repeat the procedure.</li>
+</ol>
+<br>
+<h2 id="results">Results</h2>
+<p>When tested on grid-worlds and the mountain car problem, and executed with the correct penalty terms, IRL is able to achieve high levels of similarity with the desired reward function. Remarkably, there was <strong>no statistically significant difference between the reward for the true optimal policy and the reward for the policy generated using IRL’s estimation of the reward function</strong> when testing on the actual MDP.</p>
+<p>On the practical side, Pieter Abbeel and Andrew Ng combine inverse reinforcement learning with apprenticeship learning to <a href="http://ai.stanford.edu/~pabbeel//irl/">mimic various driving styles in these self-driving car simulators</a>.</p>
+<h1 id="apprenticeshiplearning">Apprenticeship Learning</h1>
+<br>
+<h2 id="problem">Problem</h2>
+<p>One interesting alternative to learning a reward function from an expert is to directly learn a policy that is guaranteed to have comparable performance to the expert policy. This is particularly useful if we have an expert policy that, while not truly optimal, is a satisfactory approximation to optimal behavior. Here, an apprenticeship learning algorithm formulated by Pieter Abbeel and Andrew Ng in 2005, gives us a solution. This algorithm takes an MDP and an approximately optimal “teacher” policy, and then <strong>learns a policy with comparable or better performance to the teacher’s policy using minimal exploration</strong>.</p>
+<p>This minimal exploration property turns out to be very useful in fragile tasks like autonomous helicopter flight. A traditional reinforcement learning algorithm might start out exploring at random, which would almost certainly lead to a helicopter crash in the first trial. Ideally, we’d be able to use expert data to start with a baseline policy that can be safely improved over time. We would also expect this baseline policy to be significantly better than a randomly initialized policy, which speeds up convergence.</p>
+<br>
+<h2 id="algorithm">Algorithm</h2>
+<p>The main idea behind Abbeel and Ng’s algorithm is to use trials from the expert policy to obtain information about the underlying MDP, then iteratively execute a best estimate of the optimal policy for the actual MDP. Executing a policy also gives us data about the transitions in the environment, which we can then use to improve the accuracy of the estimated MDP. The key steps of the algorithm for a discrete environment are:</p>
+<p>Learning about the MPD with the expert policy:</p>
+<ol>
+<li>Run a fixed amount of trials using the expert policy, recording every state-action trajectory.</li>
+<li>Estimate the transition probabilities for every state-action pair using the recorded data via maximum likelihood estimation.</li>
+<li>Estimate the value of the expert policy by averaging the total reward in each trial.</li>
+</ol>
+<p>Learning a new policy:</p>
+<ol start="4">
+<li>Learn an optimal policy for the estimated MDP using any standard reinforcement learning algorithm.</li>
+<li>Test the learning policy on the actual environment.</li>
+<li>If performance is not close enough to the value of the expert policy, add the state-action trajectories from this trial to the training set and repeat the procedure to learn a new policy.</li>
+</ol>
+<p>The benefit of this method is that <strong>at each stage, the policy being tested is the best estimate for the optimal policy of the system</strong>. There is diminished exploration, but the core idea of apprenticeship learning is that we can assume the expert policy is already near-optimal.</p>
+<br>
+<h2 id="results">Results</h2>
+<br>
+<h3 id="theoreticalresults">Theoretical Results</h3>
+<p>One of the key results in apprenticeship learning is that <strong>the reward of the learned policy, evaluated in the true MDP, is near-optimal compared to the teacher’s policy</strong>.</p>
+<p>The main idea in the proof is that the estimated model remains accurate for evaluating the teacher’s policy, even after data from the estimated policy has been added. Another important point is that when estimating any state-action pair in the dynamics of the system, either:</p>
+<ol>
+<li>A state-action pair will be visited a “small” number of times, and therefore will not contribute significantly to the overall estimated reward.</li>
+<li>A state-action pair will be frequently visited by the learned policy, and of these visits, only a “small” number of these must occur until the state-action pair is accurately modeled.</li>
+</ol>
+<p>Abbeel and Ng formalize these notions and produce an interesting theoretical proof of the near-optimality of the estimated policy relative to the teacher’s policy, which we will not cover, but that can be seen in the original paper.</p>
+<br>
+<h3 id="practicalresults">Practical Results</h3>
+<p>Coates, Abbeel, and Ng have a particularly amazing application of apprenticeship learning in successfully <a href="https://youtu.be/VCdxqn0fcnE">teaching a helicopter to autonomously fly a complete aerobatic airshow</a>.</p>
+<br>
+<h1 id="furtherwork">Further Work</h1>
+<p>The foundational methods of inverse reinforcement learning and apprenticeship learning, as well as the similar method of imitation learning are able to achieve their results by leveraging information gleaned from a policy executed by a human expert. However, in the long run, the goal is for machine learning systems to <strong>learn from a wide range of human data and perform tasks that are beyond the abilities of human experts</strong>.</p>
+<p>In particular, when discussing potential avenues for further research in inverse reinforcement learning, Andrew Ng and Stuart Russell highlight <strong>suboptimality in the agent’s actions</strong> as an important problem. In the context of human experts, it’s clear that while experts may be able to provide a baseline level of performance that RL algorithms could learn from, it will rarely be the case that the expert policy given is actually the optimal one for the environment. The next problem to solve in inverse reinforcement learning would be to extract a reward function without the assumption that the human policy is optimal. In part 3 of this series, when we consider approaches to learning the reward functions of even more complex tasks, we’ll be examining a few methods of factoring uncertainty into the estimation of the true reward function as a way of solving this problem of suboptimality.</p>
+<p>Another remarkable extension to inverse reinforcement learning is one that does not require an optimal policy, and instead considers <strong>learning behaviors that agents can identify, but not necessarily demonstrate</strong>, meaning that only a classifier is needed. For instance, it’s easy for people to identify whether an agent in a physics simulator is running correctly, but almost impossible to manually specify the right control sequence given the degrees of freedom in a robotics simulator. This extension would allow reinforcement learning systems to achieve human-approved performance without the need for an expert policy to imitate.</p>
+<p>Finally, while the authors also describe the use of linear function approximation to apply IRL to large state spaces, the challenge in going from 2000 to 2018 is to <strong>scale up these methods to work with deep learning</strong>. We’ll be covering a few novel methods of doing just this in the next entry in this series: Deep learning from humans.</p>
+<br>
+<h1 id="appendix">Appendix</h1>
+<p>Proof of Ng’s IRL Theorem:<br>
+<img src="http://localhost:2368/content/images/2018/03/Screenshot-2018-03-16-17.02.38.png" alt="Proof of Ng’s IRL Theorem" style="width: 400px;"></p>
+<br>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://ai.stanford.edu/~ang/papers/icml04-apprentice.pdf">Abbeel, Pieter and Ng, Andrew Y. (2004) Apprenticeship learning via inverse reinforcement learning.</a></li>
+<li><a href="https://dl.acm.org/citation.cfm?id=1102352">Abbeel, Pieter and Ng, Andrew Y. (2005) Exploration and apprenticeship learning in reinforcement learning.</a></li>
+<li><a href="https://arxiv.org/pdf/1606.06565.pdf">Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman, Dan Mané. (2016) Concrete Problems in AI Safety.</a></li>
+<li><a href="https://dl.acm.org/citation.cfm?id=1538812">Coates, Adam and Abbeel, Pieter and Ng, Andrew (2009). Apprenticeship learning for helicopter control.</a></li>
+<li><a href="http://ai.stanford.edu/~ang/papers/icml00-irl.pdf">Ng, Andrew and Russell, Stuart. (2000) Algorithms for inverse reinforcement learning.</a></li>
+<li><a href="https://www.aaai.org/Papers/IJCAI/2007/IJCAI07-416.pdf">Ramachandran, Deepak and Amir, Eyal. (2007) Bayesian inverse reinforcement learning.</a></li>
+<li><a href="https://www.aaai.org/Papers/AAAI/2008/AAAI08-227.pdf">Brian D. Ziebart, Andrew Maas, J.Andrew Bagnell, and Anind K. Dey. (2008) Maximum Entropy Inverse Reinforcement Learning.</a></li>
+</ul>
+</div>
         </div>
 
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Reinforcement%20Learning%20is%20Dead%2C%20Long%20Live%20Meta-Reinforcement%20Learning!&amp;url=http://localhost:2368/does-reinforcement-learning-actually-make-sense/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
+        <div class="o-grid">
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--3-4-l">
+            <div class="c-tags">
+              <a href="../tag/overviews.1">Overviews</a>
+            </div>
           </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/does-reinforcement-learning-actually-make-sense/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--1-4-m o-grid__col--1-4-l">
+            <ul class="c-share o-plain-list">
+  <li class="c-share__item">
+    <a class="c-share__link c-share__link--twitter" title="Share on Twitter" aria-label="Share on Twitter" href="https://twitter.com/share?text=Learning%20From%20Humans%3A%20Inverse%20RL%20%26%20Apprenticeship%20Learning&amp;url=http://localhost:2368/learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
+      <div data-icon="ei-sc-twitter" data-size="s" class="c-share__icon c-share__icon--twitter"></div>
+    </a>
+  </li>
+
+  <li class="c-share__item">
+    <a class="c-share__link c-share__link--facebook" title="Share on Facebook" aria-label="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
+      <div data-icon="ei-sc-facebook" data-size="s" class="c-share__icon c-share__icon--facebook"></div>
+    </a>
+  </li>
+</ul>          </div>
+        </div>
+
+        <hr>
+
+        <div class="o-grid__col o-grid__col--center o-grid__col--4-4-s o-grid__col--1-3-l">
+  <button class="c-btn c-btn--full js-load-disqus">Comments</button>
+</div>
+
+<hr>
+
+<div class="disqus u-hidden js-disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'www-gradientml-org'; // required: replace example with your forum shortname
+    var disqus_identifier = 'ghost-5aac39fb47a3aa00227552cd';
+
+    // DON'T EDIT BELOW THIS LINE
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+      </article>
+
+    </div>
+
+
+    <div class="o-grid__col o-grid__col--1-3-m">
+      <div class="c-sidebar">
+
+      <div class="c-widget c-widget-author">
+
+
+      <div class="c-widget-author__content">
+        <h3 class="c-widget-author__title">
+          <a href="../author/gary/">Gary Gradient</a>
+        </h3>
+          <p class="c-widget-author__bio">Gradient Institute of Differentiable Technology</p>
       </div>
 
-      <h2 class="c-post-card__title">
-        <a href="does-reinforcement-learning-actually-make-sense/" class="c-post-card__title-link">
-          Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!
-        </a>
-      </h2>
+    </div>
 
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-03-16" title="16 March 2018">16.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/andrey/">Andrey Kurenkov</a></div>
-      </div>
+      <div class="c-widget">
+      <h3 class="c-widget__title">Recent Stories</h3>
+
+        <a href="../does-reinforcement-learning-actually-make-sense/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/human-priors.png)" aria-label="Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!"></div>
+            </div>
+        </a>
+
+        <a href="../what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">What does it actually mean for AI to be racist?</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg)" aria-label="What does it actually mean for AI to be racist?"></div>
+            </div>
+        </a>
+
+        <a href="../exploiting-structured-data-with-neural-networks/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Exploiting Structured Data with Neural Networks</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=c7f31a8c5fd0fea1620b5595ce12eb73)" aria-label="Exploiting Structured Data with Neural Networks"></div>
+            </div>
+        </a>
+
+        <a href="../software-that-writes-software-on-program-learning-2/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Software that writes software: the state of program induction</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/th--1-.jpeg)" aria-label="Software that writes software: the state of program induction"></div>
+            </div>
+        </a>
+
+        <a href="../can-machine-learning-algorithms-be-used-to-create-art/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Is deep art real art?</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/1.png)" aria-label="Is deep art real art?"></div>
+            </div>
+        </a>
+
+    </div>
+
+  <div class="c-widget">
+  <h3 class="c-widget__title">Tags</h3>
+
+  <div class="c-tags">
+        <a href="../tag/getting-started">Getting Started</a>
+        <a href="../tag/perspectives.1">Perspectives</a>
+        <a href="../tag/overviews.1">Overviews</a>
+  </div>
+</div>
+</div>
     </div>
   </div>
 
 </div>
 
+<!--
+  Get related posts based on tags
+  https://themes.ghost.org/docs/recent-featured-sidebar#extra-special-sauce-related-posts
+ -->
 
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/DSC_0709.jpg)" aria-label="Learning From Humans: Inverse RL &amp; Apprenticeship Learning" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
+    <div class="c-related">
+      <div class="o-grid">
+        <div class="o-grid__col o-grid__col--full">
+          <h3 class="c-related__title">More in this category</h3>
         </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Learning%20From%20Humans%3A%20Inverse%20RL%20%26%20Apprenticeship%20Learning&amp;url=http://localhost:2368/learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-post-card__title-link">
-          Learning From Humans: Inverse RL &amp; Apprenticeship Learning
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-03-16" title="16 March 2018">16.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
+        
   <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
 
   <div class="c-post-card">
     <div class="c-post-card__media">
-      <a href="what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg)" aria-label="What does it actually mean for AI to be racist?" aria-hidden="true" role="presentation" tabindex="-1">
+      <a href="../exploiting-structured-data-with-neural-networks/" class="c-post-card__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=c7f31a8c5fd0fea1620b5595ce12eb73)" aria-label="Exploiting Structured Data with Neural Networks" aria-hidden="true" role="presentation" tabindex="-1">
       </a>
     </div>
 
     <div class="c-post-card__content">
         <div class="c-post-card__tags">
-          <a href="tag/perspectives.1">Perspectives</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=What%20does%20it%20actually%20mean%20for%20AI%20to%20be%20racist%3F&amp;url=http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-post-card__title-link">
-          What does it actually mean for AI to be racist?
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-03-09" title="09 March 2018">09.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="exploiting-structured-data-with-neural-networks/" class="c-post-card__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=c7f31a8c5fd0fea1620b5595ce12eb73)" aria-label="Exploiting Structured Data with Neural Networks" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
+          <a href="../tag/overviews.1">Overviews</a>
         </div>
 
       <div class="c-post-card__share">
@@ -305,14 +470,14 @@ ghost.init({
       </div>
 
       <h2 class="c-post-card__title">
-        <a href="exploiting-structured-data-with-neural-networks/" class="c-post-card__title-link">
+        <a href="../exploiting-structured-data-with-neural-networks/" class="c-post-card__title-link">
           Exploiting Structured Data with Neural Networks
         </a>
       </h2>
 
       <div class="c-post-card__meta">
         <time class="c-post-card__date" datetime="2018-03-09" title="09 March 2018">09.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
+        <div class="c-post-card__author"><a href="../author/gary/">Gary Gradient</a></div>
       </div>
     </div>
   </div>
@@ -324,13 +489,13 @@ ghost.init({
 
   <div class="c-post-card">
     <div class="c-post-card__media">
-      <a href="software-that-writes-software-on-program-learning-2/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/th--1-.jpeg)" aria-label="Software that writes software: the state of program induction" aria-hidden="true" role="presentation" tabindex="-1">
+      <a href="../software-that-writes-software-on-program-learning-2/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/th--1-.jpeg)" aria-label="Software that writes software: the state of program induction" aria-hidden="true" role="presentation" tabindex="-1">
       </a>
     </div>
 
     <div class="c-post-card__content">
         <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
+          <a href="../tag/overviews.1">Overviews</a>
         </div>
 
       <div class="c-post-card__share">
@@ -347,14 +512,14 @@ ghost.init({
       </div>
 
       <h2 class="c-post-card__title">
-        <a href="software-that-writes-software-on-program-learning-2/" class="c-post-card__title-link">
+        <a href="../software-that-writes-software-on-program-learning-2/" class="c-post-card__title-link">
           Software that writes software: the state of program induction
         </a>
       </h2>
 
       <div class="c-post-card__meta">
         <time class="c-post-card__date" datetime="2018-03-09" title="09 March 2018">09.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
+        <div class="c-post-card__author"><a href="../author/gary/">Gary Gradient</a></div>
       </div>
     </div>
   </div>
@@ -366,55 +531,13 @@ ghost.init({
 
   <div class="c-post-card">
     <div class="c-post-card__media">
-      <a href="can-machine-learning-algorithms-be-used-to-create-art/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/1.png)" aria-label="Is deep art real art?" aria-hidden="true" role="presentation" tabindex="-1">
+      <a href="../on-the-success-of-libratus-superhuman-poker-ai/" class="c-post-card__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1503482618211-c70b46ede8b0?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=a342e88a2f791f025c6a391ceb011472)" aria-label="Inside Libratus, the algorithm that beats world-class poker players" aria-hidden="true" role="presentation" tabindex="-1">
       </a>
     </div>
 
     <div class="c-post-card__content">
         <div class="c-post-card__tags">
-          <a href="tag/perspectives.1">Perspectives</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Is%20deep%20art%20real%20art%3F&amp;url=http://localhost:2368/can-machine-learning-algorithms-be-used-to-create-art/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/can-machine-learning-algorithms-be-used-to-create-art/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="can-machine-learning-algorithms-be-used-to-create-art/" class="c-post-card__title-link">
-          Is deep art real art?
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-02-24" title="24 February 2018">24.Feb.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="on-the-success-of-libratus-superhuman-poker-ai/" class="c-post-card__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1503482618211-c70b46ede8b0?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=a342e88a2f791f025c6a391ceb011472)" aria-label="Inside Libratus, the algorithm that beats world-class poker players" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
+          <a href="../tag/overviews.1">Overviews</a>
         </div>
 
       <div class="c-post-card__share">
@@ -431,107 +554,23 @@ ghost.init({
       </div>
 
       <h2 class="c-post-card__title">
-        <a href="on-the-success-of-libratus-superhuman-poker-ai/" class="c-post-card__title-link">
+        <a href="../on-the-success-of-libratus-superhuman-poker-ai/" class="c-post-card__title-link">
           Inside Libratus, the algorithm that beats world-class poker players
         </a>
       </h2>
 
       <div class="c-post-card__meta">
         <time class="c-post-card__date" datetime="2018-02-21" title="21 February 2018">21.Feb.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
+        <div class="c-post-card__author"><a href="../author/gary/">Gary Gradient</a></div>
       </div>
     </div>
   </div>
 
 </div>
 
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="deep-learning-for-semantic-segmentation/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/semseg.png)" aria-label="Deep Learning for Semantic Segmentation" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Deep%20Learning%20for%20Semantic%20Segmentation&amp;url=http://localhost:2368/deep-learning-for-semantic-segmentation/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/deep-learning-for-semantic-segmentation/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="deep-learning-for-semantic-segmentation/" class="c-post-card__title-link">
-          Deep Learning for Semantic Segmentation
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-02-21" title="21 February 2018">21.Feb.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
       </div>
     </div>
-  </div>
 
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="editorsnote/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/fb-profile.png)" aria-label="Editor's Note" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Editor" s onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/editorsnote/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="editorsnote/" class="c-post-card__title-link">
-          Editor's Note
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-01-01" title="01 January 2018">01.Jan.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-  </div>
-
-  <div class="o-grid">
-    
-  </div>
-</div>
 
     <footer class="c-footer">
   <div class="o-grid">
@@ -540,9 +579,9 @@ ghost.init({
       <p class="u-font-medium">Tags</p>
 
         <ul class="c-footer-list o-plain-list">
-            <li><a href="tag/getting-started">Getting Started</a></li>
-            <li><a href="tag/perspectives.1">Perspectives</a></li>
-            <li><a href="tag/overviews.1">Overviews</a></li>
+            <li><a href="../tag/getting-started">Getting Started</a></li>
+            <li><a href="../tag/perspectives.1">Perspectives</a></li>
+            <li><a href="../tag/overviews.1">Overviews</a></li>
         </ul>
     </div>
 
@@ -551,16 +590,16 @@ ghost.init({
 
       <ul class="c-footer-list o-plain-list">
           <li class="c-nav__item">
-    <a href="index.html" class="c-nav__link  c-nav__link--current ">Home</a>
+    <a href="../" class="c-nav__link ">Home</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/perspectives.1" class="c-nav__link ">Perspectives</a>
+    <a href="../tag/perspectives.1" class="c-nav__link ">Perspectives</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/overviews.1" class="c-nav__link ">Overviews</a>
+    <a href="../tag/overviews.1" class="c-nav__link ">Overviews</a>
   </li>
   <li class="c-nav__item">
-    <a href="about/" class="c-nav__link ">About</a>
+    <a href="../about/" class="c-nav__link ">About</a>
   </li>
 
       </ul>
@@ -615,6 +654,6 @@ MathJax.Hub.Config({
 </script>
   </div>
 
-  <script src="assets/js/app.min.js?v=5c22314c9a"></script>
-  
+  <script src="../assets/js/app.min.js?v=5c22314c9a"></script>
+  <script src="../assets/js/instagram.js?v=5c22314c9a"></script>
 </body>

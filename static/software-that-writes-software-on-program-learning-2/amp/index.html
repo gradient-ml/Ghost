@@ -1,0 +1,191 @@
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Software that writes software: the state of program induction</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <link rel="shortcut icon" href="../../favicon.png">
+
+    <link rel="shortcut icon" href="../../favicon.png" type="image/png">
+    <link rel="canonical" href="../index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="The Gradient">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Software that writes software: the state of program induction">
+    <meta property="og:description" content="Writing correct software is surprisingly hard. This collection of prominent software post-mortems by Dan Luu is a humbling reminder of this harrowing truth.  It features Knight Capital's $459 million loss in 45 minutes due to conflicting deployed software versions, and a Linux kernel bug related to leap-second handling taking down">
+    <meta property="og:url" content="http://localhost:2368/software-that-writes-software-on-program-learning-2/">
+    <meta property="og:image" content="http://localhost:2368/content/images/2018/03/th--1-.jpeg">
+    <meta property="article:published_time" content="2018-03-09T08:44:00.000Z">
+    <meta property="article:modified_time" content="2018-04-06T04:21:45.000Z">
+    <meta property="article:tag" content="Overviews">
+    
+    <meta property="article:publisher" content="https://www.facebook.com/gradientml/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Software that writes software: the state of program induction">
+    <meta name="twitter:description" content="Writing correct software is surprisingly hard. This collection of prominent software post-mortems by Dan Luu is a humbling reminder of this harrowing truth.  It features Knight Capital's $459 million loss in 45 minutes due to conflicting deployed software versions, and a Linux kernel bug related to leap-second handling taking down">
+    <meta name="twitter:url" content="http://localhost:2368/software-that-writes-software-on-program-learning-2/">
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2018/03/th--1-.jpeg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Gary Gradient">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Overviews">
+    <meta name="twitter:site" content="@gradientml">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "The Gradient",
+        "logo": "http://localhost:2368/content/images/2018/04/logo3.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Gary Gradient",
+        "url": "http://localhost:2368/author/gary/",
+        "sameAs": []
+    },
+    "headline": "Software that writes software: the state of program induction",
+    "url": "http://localhost:2368/software-that-writes-software-on-program-learning-2/",
+    "datePublished": "2018-03-09T08:44:00.000Z",
+    "dateModified": "2018-04-06T04:21:45.000Z",
+    "image": "http://localhost:2368/content/images/2018/03/th--1-.jpeg",
+    "keywords": "Overviews",
+    "description": "Writing correct software is surprisingly hard. This collection of prominent software post-mortems by Dan Luu is a humbling reminder of this harrowing truth.  It features Knight Capital&#x27;s $459 million loss in 45 minutes due to conflicting deployed software versions, and a Linux kernel bug related to leap-second handling taking down",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 1.22">
+    <link rel="alternate" type="application/rss+xml" title="The Gradient" href="../../rss/index.html">
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
+    <style amp-custom>html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{margin:0.67em 0;font-size:2em}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{position:relative;vertical-align:baseline;font-size:75%;line-height:0}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}amp-img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace, monospace;font-size:1em}button,input,optgroup,select,textarea{margin:0;color:inherit;font:inherit}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{margin:0 2px;padding:0.35em 0.625em 0.75em;border:1px solid #c0c0c0}legend{padding:0;border:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-spacing:0;border-collapse:collapse}td,th{padding:0}html{max-height:100%;height:100%;font-size:62.5%;-webkit-tap-highlight-color:rgba(0, 0, 0, 0)}body{max-height:100%;height:100%;color:#3a4145;background:#f4f8fb;letter-spacing:0.01rem;font-family:"Merriweather", serif;font-size:1.8rem;line-height:1.75em;text-rendering:geometricPrecision;-webkit-font-feature-settings:"kern" 1;-moz-font-feature-settings:"kern" 1;-o-font-feature-settings:"kern" 1}::-moz-selection{background:#d6edff}::selection{background:#d6edff}h1,h2,h3,h4,h5,h6{margin:0 0 0.3em 0;color:#2e2e2e;font-family:"Open Sans", sans-serif;line-height:1.15em;text-rendering:geometricPrecision;-webkit-font-feature-settings:"dlig" 1, "liga" 1, "lnum" 1, "kern" 1;-moz-font-feature-settings:"dlig" 1, "liga" 1, "lnum" 1, "kern" 1;-o-font-feature-settings:"dlig" 1, "liga" 1, "lnum" 1, "kern" 1}h1{text-indent:-2px;letter-spacing:-1px;font-size:2.6rem}h2{letter-spacing:0;font-size:2.4rem}h3{letter-spacing:-0.6px;font-size:2.1rem}h4{font-size:1.9rem}h5{font-size:1.8rem}h6{font-size:1.8rem}a{color:#4a4a4a}a:hover{color:#111}p,ul,ol,dl{margin:0 0 2.5rem 0;font-size:1.5rem;text-rendering:geometricPrecision;-webkit-font-feature-settings:"liga" 1, "onum" 1, "kern" 1;-moz-font-feature-settings:"liga" 1, "onum" 1, "kern" 1;-o-font-feature-settings:"liga" 1, "onum" 1, "kern" 1}ol,ul{padding-left:2em}ol ol,ul ul,ul ol,ol ul{margin:0 0 0.4em 0;padding-left:2em}dl dt{float:left;clear:left;overflow:hidden;margin-bottom:1em;width:180px;text-align:right;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-bottom:1em;margin-left:200px}li{margin:0.4em 0}li li{margin:0}hr{display:block;margin:1.75em 0;padding:0;height:1px;border:0;border-top:#efefef 1px solid}blockquote{box-sizing:border-box;margin:1.75em 0 1.75em 0;padding:0 0 0 1.75em;border-left:#4a4a4a 0.4em solid;-moz-box-sizing:border-box}blockquote p{margin:0.8em 0;font-style:italic}blockquote small{display:inline-block;margin:0.8em 0 0.8em 1.5em;color:#ccc;font-size:0.9em}blockquote small:before{content:"\2014 \00A0"}blockquote cite{font-weight:700}blockquote cite a{font-weight:normal}mark{background-color:#fdffb6}code,tt{padding:1px 3px;border:#e3edf3 1px solid;background:#f7fafb;border-radius:2px;white-space:pre-wrap;font-family:Inconsolata, monospace, sans-serif;font-size:0.85em;font-feature-settings:"liga" 0;-webkit-font-feature-settings:"liga" 0;-moz-font-feature-settings:"liga" 0}pre{overflow:auto;box-sizing:border-box;margin:0 0 1.75em 0;padding:10px;width:100%;border:#e3edf3 1px solid;background:#f7fafb;border-radius:3px;white-space:pre;font-family:Inconsolata, monospace, sans-serif;font-size:0.9em;-moz-box-sizing:border-box}pre code,pre tt{padding:0;border:none;background:transparent;white-space:pre-wrap;font-size:inherit}kbd{display:inline-block;margin-bottom:0.4em;padding:1px 8px;border:#ccc 1px solid;background:#f4f4f4;border-radius:4px;box-shadow:0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 0 #fff inset;color:#666;text-shadow:#fff 0 1px 0;font-size:0.9em;font-weight:700}table{box-sizing:border-box;margin:1.75em 0;max-width:100%;width:100%;background-color:transparent;-moz-box-sizing:border-box}table th,table td{padding:8px;border-top:#efefef 1px solid;vertical-align:top;text-align:left;line-height:20px}table th{color:#000}table caption + thead tr:first-child th,table caption + thead tr:first-child td,table colgroup + thead tr:first-child th,table colgroup + thead tr:first-child td,table thead:first-child tr:first-child th,table thead:first-child tr:first-child td{border-top:0}table tbody + tbody{border-top:#efefef 2px solid}table table table{background-color:#fff}table tbody > tr:nth-child(odd) > td,table tbody > tr:nth-child(odd) > th{background-color:#f6f6f6}table.plain tbody > tr:nth-child(odd) > td,table.plain tbody > tr:nth-child(odd) > th{background:transparent}iframe,amp-iframe,.fluid-width-video-wrapper{display:block;margin:1.75em 0}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper amp-iframe{margin:0}textarea,select,input{margin:0 0 5px 0;padding:6px 9px;width:260px;outline:0;border:#e7eef2 1px solid;background:#fff;border-radius:4px;box-shadow:none;font-family:"Open Sans", sans-serif;font-size:1.6rem;line-height:1.4em;font-weight:100;-webkit-appearance:none}textarea{min-width:250px;min-height:80px;max-width:340px;width:100%;height:auto}input[type="text"]:focus,input[type="email"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="url"]:focus,input[type="password"]:focus,input[type="number"]:focus,input[type="date"]:focus,input[type="month"]:focus,input[type="week"]:focus,input[type="time"]:focus,input[type="datetime"]:focus,input[type="datetime-local"]:focus,textarea:focus{outline:none;outline-width:0;border:#bbc7cc 1px solid;background:#fff}select{width:270px;height:30px;line-height:30px}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.main-header{position:relative;display:table;overflow:hidden;box-sizing:border-box;width:100%;height:50px;background:#5ba4e5 no-repeat center center;background-size:cover;text-align:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box}.content{background:#fff;padding-top:15px}.blog-title,.content{margin:auto;max-width:600px}.blog-title a{display:block;padding-right:16px;padding-left:16px;height:50px;color:#fff;text-decoration:none;font-family:"Open Sans", sans-serif;font-size:16px;line-height:50px;font-weight:600}.post{position:relative;margin-top:0;margin-right:16px;margin-left:16px;padding-bottom:0;max-width:100%;border-bottom:#ebf2f6 1px solid;word-wrap:break-word;font-size:0.95em;line-height:1.65em}.post-header{margin-bottom:1rem}.post-title{margin-bottom:0}.post-title a{text-decoration:none}.post-meta{display:block;margin:3px 0 0 0;color:#9eabb3;font-family:"Open Sans", sans-serif;font-size:1.3rem;line-height:2.2rem}.post-meta a{color:#9eabb3;text-decoration:none}.post-meta a:hover{text-decoration:underline}.post-meta .author{margin:0;font-size:1.3rem;line-height:1.3em}.post-date{display:inline-block;text-transform:uppercase;white-space:nowrap;font-size:1.2rem;line-height:1.2em}.post-image{margin:0;padding-top:3rem;padding-bottom:30px;border-top:1px #E8E8E8 solid}.post-content amp-img,.post-content amp-anim{position:relative;left:50%;display:block;padding:0;min-width:0;max-width:112%;width:calc(100% + 32px);height:auto;transform:translateX(-50%);-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%)}.footnotes{font-size:1.3rem;line-height:1.6em;font-style:italic}.footnotes li{margin:0.6rem 0}.footnotes p{margin:0}.footnotes p a:last-child{text-decoration:none}.site-footer{position:relative;margin:0 auto 20px auto;padding:1rem 15px;max-width:600px;color:rgba(0,0,0,0.5);font-family:"Open Sans", sans-serif;font-size:1.1rem;line-height:1.75em}.site-footer a{color:rgba(0,0,0,0.5);text-decoration:none;font-weight:bold}.site-footer a:hover{border-bottom:#bbc7cc 1px solid}.poweredby{display:block;float:right;width:45%;text-align:right}.copyright{display:block;float:left;width:45%}</style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="main-header">
+        <nav class="blog-title">
+            <a href="../../">The Gradient</a>
+        </nav>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">Software that writes software: the state of program induction</h1>
+                <section class="post-meta">
+                    <p class="author">by <a href="../../author/gary/">Gary Gradient</a></p>
+                    <time class="post-date" datetime="2018-03-09">2018-03-09</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="http://localhost:2368/content/images/2018/03/th--1-.jpeg" width="600" height="400" layout="responsive"></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <div class="kg-card-markdown"><p>Writing correct software is surprisingly hard.</p>
+<p>This collection of <a href="https://github.com/danluu/post-mortems">prominent software post-mortems</a> by Dan Luu is a humbling reminder of this harrowing truth.  It features Knight Capital's $459 million loss in 45 minutes due to conflicting deployed software versions, and a Linux kernel bug related to leap-second handling taking down much of the Internet - Amazon Web Services, Reddit, and Mozilla included.</p>
+<p>This alone motivates a question - is it possible to write software that writes software?  By one definition, we already have; compilers, which programmers use every day, are ubiquitous.  While it is theoretically possible to write optimized x86 assembly code, the magnificent GNU Compiler Collection (gcc) allows us to program in C, a higher level programming language.</p>
+<p>Still, this is an unsatisfying example.  While compilers let us program with greater levels of abstraction, at the end of the day, humans still need to write code.  A better question to ask might be: is it possible to generate useful programs directly from a list of requirements, without human intervention?  Recent research efforts have contended with this problem, with early but promising results.</p>
+<p>Perhaps the most compelling motivation to consider this problem is program complexity.  Software that writes software might produce more sophisticated, flexible systems than humans are capable of designing.  A recent research paper by Google Brain applied this idea to designing neural network architectures; the algorithmically designed tf.contrib.rnn.NASCell was even merged into TensorFlow.</p>
+<p></p>
+<p>As Smolensky <a href="https://link.springer.com/content/pdf/10.1007/BF00130011.pdf">asserted in 1987</a>, there have been two broad paradigms in AI: symbolic and connectionist. Symbolic systems operate on entities (“symbols”) that are representations of data.  The classic example is expert systems, in which human experts hard code knowledge.  For instance, a stock trader might encode the rule “if GOOGL stock falls below $900, sell 1000 shares.”</p>
+<p>Connectionist systems can be described as “large networks of extremely simple processors, massively interconnected and running in parallel” (Smolensky).  Neural networks, of course, fall into this camp.  These systems tend to apply statistical inference techniques, and operate on numeric features.   These statistical systems tend to be less interpretable, but often perform better, given more training data.</p>
+<p>Programs that write programs are interesting because it fuses the symbolic and the connectionist in a unique way.</p>
+<p>They are symbolic in that programming languages provide a syntactic, human interpretable language for computation.  They are connectionist in that the final output code is often computed with the assistance of neural networks, gradient descent, and other statistical tools.</p>
+<p>It seems that the field of program induction has been less noticed than more conventional supervised approaches in deep learning.  This might be because the learned programs are relatively simple.  For example, DeepCoder (Balog et al. 2017) is able to construct programs of only up to 5-10 lines.  While the practical applications of these programs are limited, being able to synthesize them at all over a large search space is a significant research milestone.</p>
+<h2 id="machinelearningassearchingtheprogramspace">Machine learning as searching the program space</h2>
+<p>Supervised machine learning can be thought of as “searching a program space.”  In particular, we have some <em>target behavior</em>, for instance “identify vehicles in images,” that we do not know how to encode procedurally.  We encode priors about this particular in a <em>model choice</em>; we might opt to choose convolutional neural networks to learn features on image data.  And the training algorithm searches the <em>program space</em> for the best neural network weights that solve our problem.</p>
+<p>One might liken this to a version of test driven development.  In this case, our "tests" are each training example in our dataset, and gradient descent enables us to identify the weights that satisfy our "test suite."</p>
+<p>What is a more appropriate space, weights or code?  In a certain sense, searching over symbolic programs is substantially more difficult.  A neural network that has its weights perturbed by some small epsilon $\epsilon$ may only yield a small difference in the overall prediction output.  However, a single character discrepancy in a program will result in code that may not compile at all.</p>
+<p>Source code might be able to produce algorithmic complexity that is hard for current deep learning architectures to encode.  Training an RNN to sort a sequence of numbers is very hard (and possibly intractable, see <a href="https://arxiv.org/pdf/1511.06279.pdf">Reed and de Freitas 2015</a>).  Whereas implementing sorting in a high level programming language is nearly trivial.</p>
+<p>Source code also provides a unique level of interpretability.  At least for small programs encoded in a suitably high level programming language, it is straightforward to read through the code to get a sense of what it is computing.  Whereas for even small neural networks, investigating the weights of a model trained on MNIST is fairly difficult without more specialized tools.</p>
+<h2 id="definingtheproblem">Defining the problem</h2>
+<p>We can broadly divide current approaches to program learning into three categories: a) rule based program synthesis, b) statistical program synthesis, and c) statistical program induction.</p>
+<p><em>Rule based program synthesis</em> was the predominant classical approach two decades ago.  In this setting, “a formal grammar is used to derive a program from a specification” (<a href="https://arxiv.org/pdf/1703.07469">Devlin 2017</a>).  You begin with a mathematical spec of the program you want to derive.  For example, a sorting algorithm might be defined as follows.  Then, you use theorem proving techniques to iterate towards a program satisfying the specification.</p>
+<p></p>
+<p>(for example: a spec to sort a list of numbers.  From Zohar Manna (add reference)).</p>
+<p><em>Statistical program synthesis</em> refers to using a statistical or machine learning algorithm to synthesize a literal program.  A common paradigm is to feed a neural network a training set of input-output pairs, which learns to output program source code.  This code can then be executed to compute outputs given a general input not in the training set.</p>
+<p><em>Statistical program induction</em> refers to abstractly learning to compute the output using a latent program representation.  Importantly, in this setting, the output is not code.  Instead, the algorithm learns to compute the output using an internal “architecture” that simulates computation.  A concrete example is the Neural Turing Machine, which couples a differentiable neural network architecture with external memory (Graves et al. 2014).</p>
+<h2 id="neuralprogramsynthesis">Neural Program Synthesis</h2>
+<p>Balog et al. 2017 presented <em>DeepCoder</em>, a neural program synthesis method to learn solutions to programming contest problems.  This is a natural test-case to study, because we can find thousands of problems of highly variable levels of difficulty.  Being able to generate solutions to these problems could open the door to program learning more generally.</p>
+<p>The core of the method is a neural network that accepts a dataset of input-output pairs $(X_1, Y_1), (X_2, Y_2), \dots, (X_N, Y_N)$ and outputs an <em>attribute vector</em> a, whose elements indicate the probability of various programming keywords appearing the resulting source code.  This prediction is combined with a depth-first search algorithm that searches over programs that satisfy the conditions of the attributes.</p>
+<p>An attribute is useful for the program synthesis task if it a) is predictable from input-output examples, and b) conditioning on its value reduces the size of the program search space.  An example attribute prediction is shown below, reproduced from Balog et al. 2017.</p>
+<p></p>
+<p>A key component here is the choice of sufficiently expressive programming keywords, in the choice of a domain-specific language (DSL).  The choice of DSL determines the “building blocks” of the program language, and has a direct correlation with the difficulty of the program synthesis task.  A desirable DSL is both expressive – with a single keyword, one should be able to encode a sophisticated computational process – and specific  – it should be possible to achieve sufficient customization to solve the types of the problems appearing in programming contests.</p>
+<p>The DSL chosen includes functional operators like <a href="http://hackage.haskell.org/package/base-4.10.1.0/docs/Prelude.html#v:scanl1">scanl1</a>, which successively applies a reduce operation to elements in a list; for instance <code>scanl1 (+) [1, 2, 3, 4] -&gt; [1, 3, 6, 10]</code>.  It also includes higher order functions like <code>map</code>, <code>filter</code>, and <code>zipWith</code>.  This functional style of programming often makes it possible to describe algorithms with less code than an equivalent imperative program.</p>
+<p>The neural network is trained using a data generation strategy.  Programs are enumerated in the DSL, applying a heuristic pruning strategy to remove programs that are redundant (for example, ones for which there is a shorter equivalent program).  Input-output pairs are generated by executing the programs over predetermined bounded ranges of integers.  Binary attribute vectors are computed directly from the source code in the DSL.</p>
+<p>The network architecture consists of an <code>encoder</code> and a <code>decoder</code>.  For the encoder, a feed-forward architecture was used.  The input and output types (singleton or array) are featurized using a one-hot-encoding, and the inputs and outputs are padded to a maximum length.  Each integer in the inputs and the outputs are mapped to a learned embedding vector of size E = 20.  The authors use average pooling to combine learned representations for each input-output examples in a set generated from the same program.  It was found empirically that this feedforward encoded architecture performs at least as well as an RNN baseline.</p>
+<p>The decoder simply multiples the encoding of input-output examples by a learned $C \times K$ matrix, where $C = 34$ is the number of functions in in the DSL, and $K = 256$ is the number of sigmoid units in each of the three hidden layers of the encoder.</p>
+<p></p>
+<p>The central idea in this paper is to use a neural network’s attribute predictions to condition the program search.  There are a number of search strategies.  The authors experiment with an optimized DFS, “sort and add” enumeration, Sketch, and $\lambda^2$, which can incorporate the attribution prediction as a prior to condition the search space.  Many of these search algorithms are based on SMT solver approaches.</p>
+<p>Remarkably, the authors report an order of magnitude speedup over baselines without the attribute predictions.  DeepCoder is able to solve problems at the level of the easiest problems on programming competition databases:</p>
+<p></p>
+<p>Given the search space of programs of this size, this is a compelling research achievement.<br>
+DeepCoder combines both the symbolic and the connectionist paradigms in a pipeline that is able to learn interpretable programs.  However, it remains to be seen whether input-output examples have sufficient information to permit useful attribute prediction for larger programs.  Will this scale?  We will probably need more attributes, as the authors note in their <a href="https://openreview.net/forum?id=ByldLrqlx">OpenReview thread</a>.</p>
+<h2 id="differentiableinterpreters">Differentiable Interpreters</h2>
+<p>How do we incorporate prior knowledge into a machine learning model?  Bosnjak et al. 2017 consider this fundamental problem from a unique angle -- suppose the prior knowledge we have is <em>procedural</em>.  They present an end-to-end approach to program learning, where a programmer can provide a program sketches with slots that need to be filled in.  Gradient descent is then applied to “fill in” learned behavior from program input-output data.</p>
+<p>The authors use the programming language Forth to conduct their work.  They choose Forth in part because of its expressivity, but most importantly because its abstract machine is simple enough to implement a continuous approximation.</p>
+<p>Forth’s abstract machine is represented by a state $S = (D, R, H, c)$, which contains two stacks.  $D$ is a data evaluation pushdown stack, and $R$ is a return address pushdown stack.  $H$ stores the heap, and $c$ is a program counter.  A Forth program $P$ can be represented as a sequence of words $P = w_1 w_2 \dots w_n$, which can be regarded as a sequence of state transition functions.  To make gradient based learning possible, the machine output must be differentiable with respect to these functions $w_i$.  The author’s implementation, which they call $\delta 4$, models the Forth abstract machine as a recurrent neural network, parametrized by the transition functions at each time step.</p>
+<p></p>
+<p>In the above figure, there are two ways to provide a sketch for the sorting algorithm.  In blue, the authors present the <code>PERMUTE</code> sketch, which specifies that the top two elements of the stack and the top of the return stack must be permuted based on the values of the former.  In this setting, functionality to compare values and perform the permutation must be learned.  In yellow, the authors write the <code>COMPARE</code> sketch, which provides additional procedural knowledge to the model.  In this context, only the comparison between the top two elements in the stack must be learned.</p>
+<p>Let $M$ represent a memory buffer corresponding to the data stack, return stack, or the heap.  Then, differentiable read and write operations can be implemented as</p>
+<p>$\text{read}_\mathbf{M}(\mathbf{a}) = \mathbf{a}^T \mathbf{M}$<br>
+$\text{write}_\mathbf{M}(\mathbf{x}, \mathbf{a}) : \mathbf{M} \leftarrow \mathbf{M} - (\mathbf{a1}^T \odot \mathbf{M} + \mathbf{xa}^T)$</p>
+<p>Here, $\mathbf{a}$ represents an <em>address pointer</em>, and $\odot$ is elementwise multiplication.  These operations are modeled after the way a Neural Turing Machine's memory functions (Graves et al. 2014).</p>
+<p>A slot $w$ can be encoded by specifying a state encoder and a decoder.  Users can choose from many operations for encoders and decoders, listed below.</p>
+<p></p>
+<p>Finally, a recurrent neural network is used to model execution.  The RNN computes a state $S_{n+1}$ conditioned on a previous state $S_n$.  We have:</p>
+<p>$ \mathbf{S}_{n+1} = \text{RNN}(\mathbf{S}_{n}, \mathbf{P}_{\theta}) = \sum_{i=1}^{|P|} \mathbf{c}_{i} \mathbf{w}_{i} (\mathbf{S}_n). $</p>
+<p>This is quite computationally expensive.  At every time step, a new machine state is calculated by executing all words in the program and then weighting the result states by the program counter.  Thus, the authors use a number of optimizations to avoid full RNN steps.  First, they use symbolic execution to “collapse” transition functions.  For example, <code>R &gt; SWAP &gt; R</code> can be collapsed into a single transition.  Second, they execute if branches in parallel and weigh their output states by the value of the condition.</p>
+<p>This work is similar to probabilistic programming languages such as Church.  In this setting, users can incorporate probabilities densities into programs to specify distributions over possible execution traces.  While traditional probabilistic programming languages typically use a form of Bayesian inference to compute the posterior, $\delta 4$ updates parameters using gradient descent.  The authors note that this style is similar to the TerpreT FMGD algorithm (Gaunt et al. 2016).</p>
+<p></p>
+<p>The authors are able to learn a sorting procedure using only a few hundred training examples!  Experimentally, they show that their D4 implementation vastly outperforms a Seq2Seq baseline.  The seq2seq implementation fails to generalize at all to lengths longer than the training lengths. By contrast, the sketch highlighted earlier defines the outer loop which repeatedly calls the BUBBLE function; this guarantees that the functionality of the network is invariant to the input sequence length.</p>
+<p></p>
+<h2 id="unsupervisedlearningbyprogramsynthesis">Unsupervised Learning By Program Synthesis</h2>
+<p>Given a dataset, how can we capture latent structure using a program?  Ellis et al. 2017 applied program synthesis techniques uniquely to unsupervised learning.   Examples include include visual concepts, linguistic rules, and multitask regression:</p>
+<p></p>
+<p>More concretely stated, we would like to explain an observed dataset as the output of a program run on unknown inputs.  We can formulate this joint inference over the program and the program inputs, optimizing for the smallest solution.  The loss function is constructed as follows, with the objective of minimizing program length, data reconstruction error, and data encoding length.</p>
+<p>$\underbrace{- \log P_f(f)}_{\text{program length}} + \sum_{i=1}^{N} \left ( \underbrace{- \log P_{x|z} (x_i | f(I_i))}_{\text{data reconstruction error}} - \underbrace{\log P_I (I_i)}_{\text{data encoding length}} \right )$</p>
+<p>The authors again use the idea of a <em>sketch</em>, which they combine with symbolic search (namely, SMT solving), to produce a program.</p>
+<p></p>
+<p>The authors work with visual training examples from the Synthetic Visual Reasoning Test (SVRT), a test consisting of classification problems parsed into distinct shapes.  They define a space of simple graphics programs referred to as “turtle programs” that can control the rendering of different shapes.  The following context free grammar is used to construct “sentences” that can be mapped to different semantic models over visual concepts:</p>
+<p></p>
+<p>A parser first analyzes each image and outputs structured information:</p>
+<p></p>
+<p>Then their learning algorithm constructs a program from this parsed data:</p>
+<p></p>
+<p>The authors use 23 SVRT problems and evaluate the accuracy of their parser relative to several baselines.  Unsupervised program synthesis outperforms a decision stump, convolutional network, and other discriminative baselines.</p>
+<p></p>
+<h2 id="theroadahead">The road ahead</h2>
+<p>While the programs learned by both of these systems are rather simple, the fact that this process is possible at all is encouraging.  As hardware and methods improve, there is a plausible path towards scaling many of these approaches.</p>
+<p>A debate remains.  Is it more promising to build program synthesis or program induction systems?  By training a neural network to generate human-readable source code, we benefit from transparent model interpretability.  End to end models might achieve greater performance, but often at the cost of interpretability.</p>
+<p>Programs that generate programs could one day enable us to develop systems that are more sophisticated than human-engineered ones.  Neural networks are known to be powerful function approximators that can learn arbitrary mappings.  Combining the powerful expressivity of neural networks with the symbolic logic of programming languages could yield uniquely powerful systems, that neither paradigm on its own could produce.</p>
+<p>As we have seen, there is a broad spectrum of approaches to perform this merging between the two approaches to computation.  Identifying the specifics of this symbiosis remains a unique question for the field to consider.</p>
+</div>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="../../">The Gradient</a> © 2018</section>
+        <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+    </footer>
+</body>

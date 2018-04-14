@@ -1,0 +1,876 @@
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Does Reinforcement Learning Actually Make Sense?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+html{-webkit-box-sizing:border-box;box-sizing:border-box}*,:after,:before{-webkit-box-sizing:inherit;box-sizing:inherit}/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */html{font-family:sans-serif;line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{-webkit-box-sizing:content-box;box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{-webkit-box-sizing:border-box;box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{-webkit-box-sizing:border-box;box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}blockquote,body,dd,dl,fieldset,figure,h1,h2,h3,h4,h5,h6,hr,legend,ol,p,pre,ul{margin:0;padding:0}li>ol,li>ul{margin-bottom:0}table{border-collapse:collapse;border-spacing:0}address,blockquote,dl,fieldset,figure,h1,h2,h3,h4,h5,h6,hr,ol,p,pre,table,ul{margin-bottom:16px}dd,ol,ul{margin-left:16px}img[data-action=zoom]{cursor:pointer;cursor:-webkit-zoom-in;cursor:-moz-zoom-in}.zoom-img,.zoom-img-wrap{position:relative;z-index:666;-webkit-transition:all .3s;transition:all .3s}img.zoom-img{cursor:pointer;cursor:-webkit-zoom-out;cursor:-moz-zoom-out}.zoom-overlay{z-index:420;background:#fff;position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;filter:"alpha(opacity=0)";opacity:0;-webkit-transition:opacity .3s;transition:opacity .3s}.zoom-overlay-open .zoom-overlay{filter:"alpha(opacity=100)";opacity:1}.zoom-overlay-open,.zoom-overlay-transitioning{cursor:default}@-webkit-keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.icon{position:relative;display:inline-block;width:25px;height:25px;overflow:hidden;fill:currentColor}.icon__cnt{width:100%;height:100%;background:inherit;fill:inherit;pointer-events:none;-webkit-transform:translateX(0);transform:translateX(0);-ms-transform:translate(.5px,-.3px)}.icon--m{width:50px;height:50px}.icon--l{width:100px;height:100px}.icon--xl{width:150px;height:150px}.icon--xxl{width:200px;height:200px}.icon__spinner{position:absolute;top:0;left:0;width:100%;height:100%}.icon--ei-spinner .icon__spinner,.icon--ei-spinner-2 .icon__spinner{-webkit-animation:spin 1s steps(12) infinite;animation:spin 1s steps(12) infinite}.icon--ei-spinner-3 .icon__spinner{-webkit-animation:spin 1.5s linear infinite;animation:spin 1.5s linear infinite}.icon--ei-sc-facebook{fill:#3b5998}.icon--ei-sc-github{fill:#333}.icon--ei-sc-google-plus{fill:#dd4b39}.icon--ei-sc-instagram{fill:#3f729b}.icon--ei-sc-linkedin{fill:#0976b4}.icon--ei-sc-odnoklassniki{fill:#ed812b}.icon--ei-sc-skype{fill:#00aff0}.icon--ei-sc-soundcloud{fill:#f80}.icon--ei-sc-tumblr{fill:#35465c}.icon--ei-sc-twitter{fill:#55acee}.icon--ei-sc-vimeo{fill:#1ab7ea}.icon--ei-sc-vk{fill:#45668e}.icon--ei-sc-youtube{fill:#e52d27}.icon--ei-sc-pinterest{fill:#bd081c}.icon--ei-sc-telegram{fill:#08c}code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#b3d4fc}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#a67f59;background:rgba(255,255,255,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}body{color:#222;font-size:18px;font-family:Georgia,serif;line-height:32px;background-color:#fff;border:4px solid #f4f6f8;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}@media (min-width:40em){body{border:8px solid #f4f6f8}}::-moz-selection{color:#fff;background-color:#b70038}::selection{color:#fff;background-color:#b70038}@font-face{font-family:Rubik;font-style:normal;font-weight:400;src:local("Rubik"),local("Rubik-Regular"),url(https://fonts.gstatic.com/s/rubik/v7/H-PGIsE3CA76bgvfUI8sM4DGDUGfDkXyfkzVDelzfFk.woff2) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:Rubik;font-style:normal;font-weight:400;src:local("Rubik"),local("Rubik-Regular"),url(https://fonts.gstatic.com/s/rubik/v7/yliIEUJv6vLJBV8IXYupkIDGDUGfDkXyfkzVDelzfFk.woff2) format("woff2");unicode-range:U+0590-05FF,U+20AA,U+25CC,U+FB1D-FB4F}@font-face{font-family:Rubik;font-style:normal;font-weight:400;src:local("Rubik"),local("Rubik-Regular"),url(https://fonts.gstatic.com/s/rubik/v7/Vi2gYeiEKThJHNpaE3cq54DGDUGfDkXyfkzVDelzfFk.woff2) format("woff2");unicode-range:U+0100-024F,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Rubik;font-style:normal;font-weight:400;src:local("Rubik"),local("Rubik-Regular"),url(https://fonts.gstatic.com/s/rubik/v7/p_PvaTv0YzIEJlEVv30xK6CWcynf_cDxXwCLxiixG1c.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2212,U+2215}@font-face{font-family:Rubik;font-style:normal;font-weight:500;src:local("Rubik Medium"),local("Rubik-Medium"),url(https://fonts.gstatic.com/s/rubik/v7/WdwM2J7q9PjwEDtfaHmmmxkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:Rubik;font-style:normal;font-weight:500;src:local("Rubik Medium"),local("Rubik-Medium"),url(https://fonts.gstatic.com/s/rubik/v7/UVNnZWb9UilkxwgKrV-6TBkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");unicode-range:U+0590-05FF,U+20AA,U+25CC,U+FB1D-FB4F}@font-face{font-family:Rubik;font-style:normal;font-weight:500;src:local("Rubik Medium"),local("Rubik-Medium"),url(https://fonts.gstatic.com/s/rubik/v7/XwD9N0jIpRr71ymtU2S41BkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");unicode-range:U+0100-024F,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Rubik;font-style:normal;font-weight:500;src:local("Rubik Medium"),local("Rubik-Medium"),url(https://fonts.gstatic.com/s/rubik/v7/IUSlgBbgyuDQpy87mBOAc3YhjbSpvc47ee6xR_80Hnw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2212,U+2215}@font-face{font-family:Rubik;font-style:normal;font-weight:700;src:local("Rubik Bold"),local("Rubik-Bold"),url(https://fonts.gstatic.com/s/rubik/v7/YPNAXz8Lvdc_aVM_nwpD7RkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:Rubik;font-style:normal;font-weight:700;src:local("Rubik Bold"),local("Rubik-Bold"),url(https://fonts.gstatic.com/s/rubik/v7/qM4Xdpgnd4UROLJsnasqaBkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");unicode-range:U+0590-05FF,U+20AA,U+25CC,U+FB1D-FB4F}@font-face{font-family:Rubik;font-style:normal;font-weight:700;src:local("Rubik Bold"),local("Rubik-Bold"),url(https://fonts.gstatic.com/s/rubik/v7/u7X1qIRpQ-sYqacI4EpdYxkAz4rYn47Zy2rvigWQf6w.woff2) format("woff2");unicode-range:U+0100-024F,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Rubik;font-style:normal;font-weight:700;src:local("Rubik Bold"),local("Rubik-Bold"),url(https://fonts.gstatic.com/s/rubik/v7/0hS39AKxpJlEXQF3mVPgrnYhjbSpvc47ee6xR_80Hnw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2212,U+2215}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:400;src:local("Playfair Display Regular"),local("PlayfairDisplay-Regular"),url(https://fonts.gstatic.com/s/playfairdisplay/v13/2NBgzUtEeyB-Xtpr9bm1CRw5vVFbIG7DatP53f3SWfE.woff2) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:400;src:local("Playfair Display Regular"),local("PlayfairDisplay-Regular"),url(https://fonts.gstatic.com/s/playfairdisplay/v13/2NBgzUtEeyB-Xtpr9bm1CaH_fTF-WHdxjXJZkfhNjc4.woff2) format("woff2");unicode-range:U+0102-0103,U+1EA0-1EF9,U+20AB}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:400;src:local("Playfair Display Regular"),local("PlayfairDisplay-Regular"),url(https://fonts.gstatic.com/s/playfairdisplay/v13/2NBgzUtEeyB-Xtpr9bm1CSVudZg2I_9CBJalMPResNk.woff2) format("woff2");unicode-range:U+0100-024F,U+1E00-1EFF,U+20A0-20AB,U+20AD-20CF,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:400;src:local("Playfair Display Regular"),local("PlayfairDisplay-Regular"),url(https://fonts.gstatic.com/s/playfairdisplay/v13/2NBgzUtEeyB-Xtpr9bm1CRD8Ne_KjP89kA3_zOrHj8E.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2212,U+2215}a{text-decoration:none;color:#222;-webkit-transition:.5s;transition:.5s}a:active,a:focus,a:hover{color:#b70038;text-decoration:none}img{display:block;max-width:100%;font-style:italic}hr{height:1px;margin:32px 0;border:0;background-color:#ecf0f1}h1,h2,h3,h4,h5,h6{font-weight:inherit;line-height:initial}h1{font-size:32px}h2{font-size:28px}h3{font-size:24px}h4{font-size:20px}h5{font-size:18px}h6{font-size:16px}b,strong{font-weight:600}blockquote{padding-left:16px;margin:24px 0;border-left:4px solid #b70038;font-family:Georgia,serif;font-size:20px}pre{padding:32px}code,pre{overflow:auto;white-space:pre-wrap;word-wrap:break-word;word-break:break-all;font-family:Courier,monospace;font-size:18px;background-color:#f4f6f8}li code,p code{padding:4px 7px}pre[class*=language-]{padding:32px;margin:16px 0}code[class*=language-],pre[class*=language-]{white-space:pre-wrap;word-break:break-all;line-height:inherit}input[type=color],input[type=date],input[type=datetime-local],input[type=datetime],input[type=email],input[type=month],input[type=number],input[type=password],input[type=search],input[type=tel],input[type=text],input[type=time],input[type=url],input[type=week],select,textarea{width:100%;display:block;padding:16px;margin-bottom:16px;border:1px solid #dfe3e9;border-radius:0;outline:0;line-height:initial;background-color:#fff;font-size:18px;font-family:Rubik,Helvetica,Arial,sans-serif;-webkit-transition:.5s;transition:.5s}input[type=color]:focus,input[type=date]:focus,input[type=datetime-local]:focus,input[type=datetime]:focus,input[type=email]:focus,input[type=month]:focus,input[type=number]:focus,input[type=password]:focus,input[type=search]:focus,input[type=tel]:focus,input[type=text]:focus,input[type=time]:focus,input[type=url]:focus,input[type=week]:focus,select:focus,textarea:focus{border-color:#b70038}table{width:100%;max-width:100%}table td,table th{padding:16px;text-align:left;vertical-align:top;border-top:1px solid #ecf0f1;font-weight:400}table thead th{font-weight:500;text-transform:uppercase;font-size:16px;vertical-align:bottom;border-bottom:2px solid #ecf0f1}table tbody+tbody{border-top:2px solid #ecf0f1}.o-grid{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;margin:0 auto;max-width:1200px}.o-grid:after{content:'';display:table;clear:both}.o-grid .o-grid{margin-right:-16px;margin-left:-16px;padding:0}.o-grid--full{max-width:100vw}.o-grid__col{padding-right:16px;padding-left:16px}@media (min-width:40em){.o-grid__col{-webkit-box-flex:unset;-ms-flex-positive:unset;flex-grow:unset}}.o-grid__col--1-3-s{width:33.33333%}.o-grid__col--2-3-s{width:66.66667%}.o-grid__col--1-4-s{width:25%}.o-grid__col--2-4-s{width:50%}.o-grid__col--3-4-s{width:75%}.o-grid__col--4-4-s{width:100%}@media (min-width:40em){.o-grid__col--1-3-m{width:33.33333%}.o-grid__col--2-3-m{width:66.66667%}.o-grid__col--1-4-m{width:25%}.o-grid__col--2-4-m{width:50%}.o-grid__col--3-4-m{width:75%}.o-grid__col--4-4-m{width:100%}}@media (min-width:64em){.o-grid__col--1-3-l{width:33.33333%}.o-grid__col--2-3-l{width:66.66667%}.o-grid__col--1-4-l{width:25%}.o-grid__col--2-4-l{width:50%}.o-grid__col--3-4-l{width:75%}.o-grid__col--4-4-l{width:100%}}.o-grid__col--full{width:100%}.o-grid__col--center{margin:0 auto;-webkit-box-flex:initial;-ms-flex-positive:initial;flex-grow:initial}.o-grid__col--end{margin-left:auto}.c-off-canvas-container{display:-webkit-box;display:-ms-flexbox;display:flex;min-height:100vh;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.c-off-canvas-container .o-wrapper{-webkit-box-flex:1;-ms-flex:1 0 auto;flex:1 0 auto}.o-plain-list{margin:0;padding:0;list-style:none}.c-header{padding:32px 0}@media (min-width:40em){.c-header{padding:48px 0}}@media (min-width:64em){.c-header{padding:64px 0}}@media (min-width:40em){.c-logo{margin:0 auto;text-align:center;margin-bottom:32px}}.c-logo h1{margin-bottom:0}.c-logo__link{display:block;color:#b70038;font-family:Georgia,serif;font-size:28px;-webkit-transition:color .5s ease-in-out;transition:color .5s ease-in-out}@media (min-width:40em){.c-logo__link{font-size:38px}}.c-logo__link:active,.c-logo__link:focus,.c-logo__link:hover{color:#000}.c-logo__img{max-height:32px}@media (min-width:40em){.c-logo__img{margin:0 auto;max-height:96px}}@media (min-width:64em){.c-logo__img{max-height:128px}}@media (min-width:40em){.c-nav{position:relative;z-index:1;display:inline-block;line-height:1;background-color:#fff;padding:0 32px}.c-nav-wrap{text-align:center}.c-nav-wrap:after{content:'';position:absolute;height:1px;background-color:#ecf0f1;width:100%;top:50%;left:0}}.c-nav__item{display:block;font-size:16px;letter-spacing:2px;text-transform:uppercase}@media (min-width:40em){.c-nav__item:not(:last-child){margin-right:8px}}@media (min-width:64em){.c-nav__item:not(:last-child){margin-right:16px}}@media (min-width:40em){.c-nav__item{display:inline-block}}.c-nav__link{display:block;-webkit-transition:.5s;transition:.5s}@media (max-width:39.99em){.c-nav__link{padding:4px 0}}.c-nav__link--current{color:#b70038}.home-template .c-nav__link--current:not(:hover){color:#222}.c-nav__link:active,.c-nav__link:focus,.c-nav__link:hover{color:#b70038}.c-nav__icon{vertical-align:middle}.c-search{position:fixed;top:0;right:0;bottom:0;left:0;padding-top:32px;background:#fff;z-index:-1;opacity:0;-webkit-transform:scale(.96);transform:scale(.96);-webkit-transition:opacity 250ms cubic-bezier(.8,0,.55,.94),z-index 250ms step-end,-webkit-transform 250ms cubic-bezier(.694,0,.335,1);transition:opacity 250ms cubic-bezier(.8,0,.55,.94),z-index 250ms step-end,-webkit-transform 250ms cubic-bezier(.694,0,.335,1);transition:transform 250ms cubic-bezier(.694,0,.335,1),opacity 250ms cubic-bezier(.8,0,.55,.94),z-index 250ms step-end;transition:transform 250ms cubic-bezier(.694,0,.335,1),opacity 250ms cubic-bezier(.8,0,.55,.94),z-index 250ms step-end,-webkit-transform 250ms cubic-bezier(.694,0,.335,1)}@media (min-width:40em){.c-search{padding-top:64px}}.c-search.is-active{z-index:10;opacity:1;-webkit-transform:scale(1);transform:scale(1);-webkit-transition:opacity 250ms cubic-bezier(.8,0,.55,.94),z-index 250ms step-start,-webkit-transform 250ms cubic-bezier(.8,0,.55,.94);transition:opacity 250ms cubic-bezier(.8,0,.55,.94),z-index 250ms step-start,-webkit-transform 250ms cubic-bezier(.8,0,.55,.94);transition:transform 250ms cubic-bezier(.8,0,.55,.94),opacity 250ms cubic-bezier(.8,0,.55,.94),z-index 250ms step-start;transition:transform 250ms cubic-bezier(.8,0,.55,.94),opacity 250ms cubic-bezier(.8,0,.55,.94),z-index 250ms step-start,-webkit-transform 250ms cubic-bezier(.8,0,.55,.94)}.c-search__form{position:relative}.c-search__icon{position:absolute;left:-8px;fill:#5d738d}@media (max-width:39.99em){.c-search__icon{width:32px}}@media (min-width:40em){.c-search__icon{top:8px}}.c-search__input[type=search]{padding:0;width:100%;outline:0;padding-left:32px;margin-bottom:16px;font-weight:300;font-size:32px;line-height:50px;border:0;border-bottom:1px solid #ecf0f1}.c-search__input[type=search]:focus{border-bottom-color:#ecf0f1}@media (min-width:40em){.c-search__input[type=search]{font-size:38px;line-height:64px;padding-left:48px}}.c-search__close{position:absolute;top:16px;right:16px;cursor:pointer;fill:#222;-webkit-transition:.5s;transition:.5s}@media (min-width:40em){.c-search__close{top:32px;right:32px}}.c-search__close:hover{fill:#5d738d;-webkit-transform:rotate(90deg);transform:rotate(90deg)}.c-search-result{display:none;height:80vh;overflow:auto;white-space:normal;padding-right:32px}.c-search-result__head{padding-bottom:16px;margin-bottom:16px;color:#5d738d;font-size:19px;border-bottom:1px solid #ecf0f1}.c-search-result__item{padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #ecf0f1}.c-search-result__title{display:block;line-height:28px}.c-search-result__date{color:#5d738d;font-size:14px;text-transform:uppercase;line-height:25px;letter-spacing:1px}.c-off-canvas-toggle{position:absolute;top:40px;right:16px;z-index:10;height:24px;width:24px;cursor:pointer}@media (min-width:40em){.c-off-canvas-toggle{display:none}}.c-off-canvas-toggle__icon{position:absolute;left:0;height:1px;width:25px;background:#000;cursor:pointer}.c-off-canvas-toggle__icon:after,.c-off-canvas-toggle__icon:before{content:'';display:block;height:100%;background-color:inherit;-webkit-transition:.5s;transition:.5s}.c-off-canvas-toggle__icon:before{-webkit-transform:translateY(16px);transform:translateY(16px)}.c-off-canvas-toggle__icon:after{-webkit-transform:translateY(7px);transform:translateY(7px)}.c-off-canvas-toggle--close .c-off-canvas-toggle__icon{height:2px;background-color:transparent}.c-off-canvas-toggle--close .c-off-canvas-toggle__icon:after,.c-off-canvas-toggle--close .c-off-canvas-toggle__icon:before{position:relative;visibility:visible;background:#000}.c-off-canvas-toggle--close .c-off-canvas-toggle__icon:before{top:11px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.c-off-canvas-toggle--close .c-off-canvas-toggle__icon:after{top:9px;-webkit-transform:rotate(45deg);transform:rotate(45deg)}@media (max-width:39.99em){.c-off-canvas-toggle--close{top:32px}}body,html{overflow-x:hidden}@media (min-width:40em){.c-off-canvas-content{position:relative}}@media (max-width:39.99em){.c-off-canvas-content{position:fixed;top:0;right:0;z-index:1;width:300px;height:100vh;overflow-y:auto;padding:32px 40px;background-color:#fff;-webkit-transform:translate3d(300px,0,0);transform:translate3d(300px,0,0)}}@media screen and (max-width:39.99em) and (-ms-high-contrast:active),(max-width:39.99em) and (-ms-high-contrast:none){.c-off-canvas-content.is-active{right:308px}}@media (max-width:39.99em){.c-off-canvas-container{-webkit-perspective:1000;-webkit-transition:-webkit-transform .5s cubic-bezier(.565,1.65,.765,.88);transition:-webkit-transform .5s cubic-bezier(.565,1.65,.765,.88);transition:transform .5s cubic-bezier(.565,1.65,.765,.88);transition:transform .5s cubic-bezier(.565,1.65,.765,.88),-webkit-transform .5s cubic-bezier(.565,1.65,.765,.88)}.c-off-canvas-container.is-active{-webkit-transform:translate3d(-304px,0,0);transform:translate3d(-304px,0,0)}.c-off-canvas-container.is-active:after{position:fixed;top:0;right:0;bottom:0;left:0;content:'';background-color:rgba(0,0,0,.2)}}.c-archive{padding:32px;margin-bottom:32px;background-color:#f4f6f8;border:1px solid #ecf0f1}.c-archive__title{margin-bottom:0;font-size:19px}.c-archive__description{margin-top:8px;margin-bottom:0;font-size:16px;line-height:25px}.c-post-card{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;width:100%;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;margin-bottom:32px}.c-post-card-wrap{display:-webkit-box;display:-ms-flexbox;display:flex}.c-post-card__media{overflow:hidden;background-color:#f4f6f8}.c-post-card__image{display:block;position:relative;background-repeat:no-repeat;background-position:center;background-size:cover;-webkit-transition:all .5s ease-in-out;transition:all .5s ease-in-out}.c-post-card__image.js-fadein{opacity:0}.c-post-card__image.is-inview{opacity:1}.c-post-card__image:before{-webkit-transition:.5s;transition:.5s;position:absolute;top:0;height:100%;width:100%;content:'';background-color:#000;opacity:0}.c-post-card__image:after{display:block;content:'';width:100%;padding-bottom:75%}.c-post-card__content{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}.c-post-card__tags{float:left;padding-left:8px;margin-top:20px;margin-bottom:14px;border-left:2px solid #b70038;line-height:1;font-size:14px;color:#5d738d;text-transform:uppercase;letter-spacing:1px}.c-post-card__tags a{text-transform:uppercase;color:#5d738d;margin-right:4px;margin-left:4px}.c-post-card__tags a:first-child{margin-left:0}.c-post-card__tags a:active,.c-post-card__tags a:focus,.c-post-card__tags a:hover{color:#222}.c-post-card__share{float:right;position:relative;top:14px;right:-4px;opacity:0;-webkit-transition:all .5s ease-in-out;transition:all .5s ease-in-out}.c-post-card__share-icon{width:20px;height:20px;vertical-align:top}.c-post-card__title-link{border-bottom:1px solid transparent;-webkit-transition:border-bottom .5s ease-in-out;transition:border-bottom .5s ease-in-out}.c-post-card__title{clear:both;margin-bottom:14px;font-size:22px;font-weight:500;-webkit-transition:.5s;transition:.5s}.c-post-card__excerpt{display:none;margin-bottom:0;color:#5d738d;font-size:16px;line-height:25px}.c-post-card__meta{line-height:1;font-size:14px;color:#5d738d;text-transform:uppercase;letter-spacing:1px}.c-post-card__author{display:inline-block}.c-post-card__author a{color:#5d738d}.c-post-card__author a:active,.c-post-card__author a:focus,.c-post-card__author a:hover{color:#222}.c-post-card__author:before{content:'/';display:inline-block;padding-left:4px;margin-right:8px}.c-post-card--featured__icon{position:absolute;bottom:16px;left:16px;fill:#fff;background-color:rgba(0,0,0,.05)}.c-post-card:active .c-post-card__image,.c-post-card:focus .c-post-card__image,.c-post-card:hover .c-post-card__image{-webkit-transform:scale(1.01);transform:scale(1.01)}.c-post-card:active .c-post-card__image:before,.c-post-card:focus .c-post-card__image:before,.c-post-card:hover .c-post-card__image:before{opacity:.1}.c-post-card:active .c-post-card__share,.c-post-card:focus .c-post-card__share,.c-post-card:hover .c-post-card__share{opacity:1}.c-post-card:active .c-post-card__title-link,.c-post-card:focus .c-post-card__title-link,.c-post-card:hover .c-post-card__title-link{color:#222;border-bottom:1px solid #b70038}@media (min-width:64em){.c-post-card--half .c-post-card__image:after{padding-bottom:118%}}@media (min-width:64em){.c-post-card--first .c-post-card__image:after{padding-bottom:56.25%}}.c-teaser{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding-left:16px}@media (min-width:40em) and (max-width:63.99em){.c-teaser{display:block;padding-left:0}}.c-teaser:not(:last-child){padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid #ecf0f1}@media (min-width:40em) and (max-width:63.99em){.c-teaser:not(:last-child){padding-bottom:24px;margin-bottom:12px}}.c-teaser:before{counter-increment:widget;content:counter(widget) ". ";position:relative;left:-16px;font-size:19px;font-style:italic;font-family:Georgia,serif;color:#b70038}@media (min-width:40em) and (max-width:63.99em){.c-teaser:before{left:0}}.c-teaser__media{margin-left:16px;background-color:#f4f6f8}@media (min-width:40em) and (max-width:63.99em){.c-teaser__media{margin-left:0}}.c-teaser__content{-webkit-box-flex:1;-ms-flex:1;flex:1}.c-teaser__image{display:block;width:64px;height:48px;background-repeat:no-repeat;background-position:center;background-size:cover;background-color:#f4f6f8;-webkit-transition:all .5s ease-in-out;transition:all .5s ease-in-out}.c-teaser__image.js-fadein{opacity:0}.c-teaser__image.is-inview{opacity:1}@media (min-width:40em) and (max-width:63.99em){.c-teaser__image{width:100%;height:100%}.c-teaser__image:after{display:block;content:'';width:100%;padding-bottom:75%}}.c-teaser__title{margin-bottom:0;font-size:16px;font-weight:500}@media (min-width:40em) and (max-width:63.99em){.c-teaser__title{margin-bottom:8px}}.c-author-card{width:100%;padding:32px;margin-bottom:32px;background-color:#f4f6f8;border:1px solid #ecf0f1}.c-author-card-wrap{display:-webkit-box;display:-ms-flexbox;display:flex}@media (max-width:39.99em){.c-author-card{text-align:center}}@media (min-width:40em){.c-author-card{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}}@media (max-width:39.99em){.c-author-card__media{margin-bottom:16px}}@media (min-width:40em){.c-author-card__media{margin-right:32px}}@media (min-width:40em){.c-author-card__content{-webkit-box-flex:1;-ms-flex:1;flex:1}}.c-author-card__image{display:block;width:96px;height:96px;border-radius:100%}@media (max-width:39.99em){.c-author-card__image{margin:0 auto}}.c-author-card__title{margin-bottom:8px;font-size:19px}.c-author-card__bio{font-size:16px;line-height:25px}@media (min-width:40em){.c-author-card__bio{margin-bottom:0}}.c-author-card-links{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin:0;list-style:none}@media (max-width:39.99em){.c-author-card-links{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}}.c-author-card-links-item{font-size:14px;text-transform:uppercase;letter-spacing:1px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.c-author-card-links-item:not(:last-child){margin-right:4px}.c-author-card-links-icon{vertical-align:middle;-webkit-transition:.5s;transition:.5s}.c-author-card-links-icon:active,.c-author-card-links-icon:focus,.c-author-card-links-icon:hover{fill:#b70038}.c-pagination{margin-top:32px;margin-bottom:32px}.c-post-hero__media{background-color:#f4f6f8}@media (min-width:64em){.c-post-hero__media{margin-right:-32px}}.c-post-hero__image{position:relative;background-size:cover;background-position:center;background-repeat:no-repeat;background-color:#f4f6f8;-webkit-transition:all .5s ease-in-out;transition:all .5s ease-in-out}.c-post-hero__image.js-fadein{opacity:0}.c-post-hero__image.is-inview{opacity:1}.c-post-hero__image:before{content:'';display:block;padding-bottom:56.25%}.c-post-hero__content{background-color:#f4f6f8;border-style:solid;border-width:0 1px 1px 1px;border-color:#ecf0f1;padding:32px}@media (min-width:64em){.c-post-hero__content{padding:32px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:end;height:100%;border-width:1px;border-color:#ecf0f1 #ecf0f1 #ecf0f1 #fff}}.c-post-hero__date{font-size:14px;color:#5d738d;text-transform:uppercase;letter-spacing:1px}.c-post-hero__title{margin-bottom:0;font-family:Georgia,serif;font-size:24px}@media (min-width:40em){.c-post-hero__title{font-size:28px}}@media (min-width:64em){.c-post-hero__title{font-size:32px;margin-top:auto}}.c-post{padding-top:32px;margin-bottom:32px}@media (max-width:39.99em){.c-content img{position:relative;left:50%;max-width:115%;-webkit-transform:translate(-50%);transform:translate(-50%)}}.c-content a:not(.c-btn){text-decoration:underline;-webkit-text-decoration-skip:ink;text-decoration-skip:ink}.c-content a:not(.c-btn):active,.c-content a:not(.c-btn):focus,.c-content a:not(.c-btn):hover{color:#b70038}.c-content h1,.c-content h2,.c-content h3,.c-content h4,.c-content h5,.c-content h6{font-family:Georgia,serif;font-weight:500}.c-content dd:not(:root:root),.c-content ol:not(:root:root),.c-content ul:not(:root:root){-webkit-padding-start:8px}.c-dropcap{margin-right:8px;color:#b70038}.c-share{display:-webkit-box;display:-ms-flexbox;display:flex}.c-share__item{-webkit-box-flex:1;-ms-flex:1;flex:1;text-align:center}.c-share__item:not(:last-child){border-right:4px solid #fff}.c-share__link{display:block;padding:4px;background-color:#fff;-webkit-transition:.5s;transition:.5s}.c-share__link:active,.c-share__link:focus,.c-share__link:hover{opacity:.8}.c-share__link--twitter{background-color:#1da1f2}.c-share__link--facebook{background-color:#3b5998}.c-share__link--pinterest{background-color:#bd081c}.c-share__icon{vertical-align:middle;fill:#fff}.c-author{width:100%;padding:32px;margin-bottom:32px;background-color:#f4f6f8;border:1px solid #ecf0f1}@media (max-width:39.99em){.c-author{text-align:center}}@media (min-width:40em){.c-author{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}}@media (max-width:39.99em){.c-author__media{margin-bottom:16px}}@media (min-width:40em){.c-author__media{margin-right:32px}}@media (min-width:40em){.c-author__content{-webkit-box-flex:3;-ms-flex:3;flex:3;padding-right:32px;margin-right:32px;border-right:1px solid #fff}}.c-author__image{display:block;width:96px;height:96px;border-radius:100%}@media (max-width:39.99em){.c-author__image{margin:0 auto}}.c-author__title{margin-bottom:8px;font-size:19px}.c-author__bio{font-size:16px;line-height:25px}@media (min-width:40em){.c-author__bio{margin-bottom:0}}@media (min-width:40em){.c-author__links{-webkit-box-flex:1;-ms-flex:1;flex:1}}.c-author__links-item{display:inline-block;font-size:14px;text-transform:uppercase;letter-spacing:1px;line-height:25px}.c-author__links-icon{vertical-align:bottom;-webkit-transition:.5s;transition:.5s}.c-author__links-icon:active,.c-author__links-icon:focus,.c-author__links-icon:hover{fill:#b70038}.fluid-width-video-wrapper,.twitter-tweet{margin-bottom:16px!important}.c-tags a{display:inline-block;padding:8px 20px;margin:0 8px 8px 0;font-size:16px;font-weight:400;font-family:Rubik,Helvetica,Arial,sans-serif;line-height:25px;color:#5d738d;background-color:#f4f6f8;-webkit-transition:.5s;transition:.5s}@media (max-width:39.99em){.c-tags a{margin-bottom:14px}}.c-tags a:active,.c-tags a:focus,.c-tags a:hover{color:#000;text-decoration:none}.c-tag-card{position:relative;margin-bottom:32px;background-color:#f4f6f8}.c-tag-card__image{display:block;background-position:50%;background-repeat:no-repeat;background-size:cover;-webkit-transition:all .5s ease-in-out;transition:all .5s ease-in-out}.c-tag-card__image.js-fadein{opacity:0}.c-tag-card__image.is-inview{opacity:1}.c-tag-card__image:before{position:absolute;top:0;bottom:0;left:0;right:0;content:'';-webkit-transition:.5s;transition:.5s;background:-webkit-gradient(linear,left bottom,left top,color-stop(0,rgba(0,0,0,.4)),color-stop(32%,transparent));background:linear-gradient(0deg,rgba(0,0,0,.4) 0,transparent 32%)}.c-tag-card__image:after{display:block;content:'';width:100%;padding-bottom:75%}.c-tag-card__title{position:absolute;bottom:0;left:0;right:0;margin-bottom:0;padding:16px;font-size:19px;font-weight:400;color:#fff}.c-tag-card:active .c-tag-card__image:before,.c-tag-card:focus .c-tag-card__image:before,.c-tag-card:hover .c-tag-card__image:before{background-color:rgba(0,0,0,.1)}.c-btn{display:inline-block;padding:16px 32px;border-radius:0;cursor:pointer;-webkit-transition:250ms;transition:250ms;text-align:center;vertical-align:middle;white-space:nowrap;outline:0;line-height:initial;border:none;background-color:#fff;font-size:18px;font-family:Rubik,Helvetica,Arial,sans-serif;border:1px solid #000;font-size:16px;letter-spacing:1px}.c-btn:active,.c-btn:focus,.c-btn:hover{color:#fff;border-color:#b70038;text-decoration:none;background-color:#b70038;border-color:#b70038}.c-btn--active{color:#fff;border-color:#b70038;text-decoration:none;background-color:#b70038;border-color:#b70038}.c-btn--active:active,.c-btn--active:focus,.c-btn--active:hover{opacity:.9}.c-btn--disabled{opacity:.5;cursor:not-allowed}.c-btn--full{width:100%}.c-btn--small{padding:12px 24px}.c-btn--loading{position:relative;padding-right:48px}.c-btn--loading:after{position:absolute;top:16px;right:16px;content:'';display:block;height:16px;width:16px;border:2px solid #fff;border-radius:100%;border-right-color:transparent;border-top-color:transparent;-webkit-animation:spinAround .5s infinite linear;animation:spinAround .5s infinite linear}.c-subscribe-form{padding:32px;background-color:#fff;border:1px solid #ecf0f1}@media (min-width:64em){.c-subscribe-form{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap}.c-subscribe-form .form-group{-webkit-box-flex:8;-ms-flex:8;flex:8;margin-right:16px}.c-subscribe-form__btn{-webkit-box-flex:2;-ms-flex:2;flex:2}}.c-subscribe-form__input[type=email]{padding-left:0;border:0;border-bottom:1px solid #ecf0f1}@media (min-width:64em){.c-subscribe-form__input[type=email]{margin:0}}.c-sidebar{margin-bottom:32px}.c-widget{padding:32px;border-left:1px solid #ecf0f1;border-right:1px solid #ecf0f1;border-bottom:1px solid #ecf0f1;counter-reset:widget}@media (max-width:39.99em){.c-widget{padding:32px;border-right:1px solid #ecf0f1}}@media (max-width:39.99em){.c-widget:first-child{border-top:1px solid #ecf0f1}}.c-widget__title{padding-left:8px;margin-bottom:28px;line-height:1;letter-spacing:2px;border-left:2px solid #b70038;font-size:16px;text-transform:uppercase}.c-widget-author{text-align:center}.c-widget-author__media{margin-bottom:16px}.c-widget-author__image{margin:0 auto;display:block;width:64px;height:64px;border-radius:100%}.c-widget-author__title{margin-bottom:8px;font-size:19px}.c-widget-author__bio{margin-bottom:0;font-size:16px;line-height:25px}.c-widget-instagram{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap}.c-widget-instagram__item{-webkit-box-flex:1;-ms-flex:1 33%;flex:1 33%;border:1px solid #fff}.c-related{padding:32px 0 0;background-color:#f4f6f8;margin-bottom:-32px}@media (min-width:64em){.c-related{padding:48px 0 32px 0}}.c-related__title{padding-bottom:0;margin-bottom:32px;text-align:center;font-size:19px;font-family:Georgia,serif}@media (min-width:64em){.c-related__title{margin-bottom:48px;font-size:24px}}.c-related .c-post-card{padding:16px;background-color:#fff;border:1px solid #ecf0f1}.c-social-icons{text-align:center}@media (min-width:40em){.c-social-icons{text-align:right}}.c-social-icons li{display:inline-block}.c-social-icons a{display:-webkit-box;display:-ms-flexbox;display:flex}.c-footer{margin-top:32px;padding:32px 0 32px 0;border-top:2px solid #fff;background-color:#f4f6f8}@media (min-width:64em){.c-footer{padding:80px 0 16px 0}}.c-footer__bottom{margin-top:16px;padding-top:32px;border-top:1px solid #ecf0f1}.c-footer__copyright{color:#5d738d}.c-footer__copyright a{color:#5d738d}.c-footer__copyright a:active,.c-footer__copyright a:focus,.c-footer__copyright a:hover{color:#b70038}@media (max-width:39.99em){.c-footer__copyright{text-align:center;margin-bottom:8px}}.c-footer-list{margin-bottom:16px}.c-footer-list li{display:block;margin:0;letter-spacing:0;text-transform:capitalize}.c-footer-list a{display:block;padding:0;font-size:16px}.c-footer-list a:active,.c-footer-list a:focus,.c-footer-list a:hover{color:#b70038}.c-footer-list a:active .icon,.c-footer-list a:focus .icon,.c-footer-list a:hover .icon{fill:#b70038}.c-footer-list .icon{fill:#5d738d;vertical-align:middle;-webkit-transition:.5s;transition:.5s}.u-hidden{display:none}.u-hidden-visually{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.u-font-serif{font-family:Georgia,serif}.u-font-sans-serif{font-family:Rubik,Helvetica,Arial,sans-serif}.u-font-medium{font-size:18px;line-height:28px}.u-font-small{font-size:16px;line-height:25px}.u-font-tiny{font-size:14px;line-height:22px}.u-font-light{font-weight:300}.u-font-regular{font-weight:400}.u-font-medium{font-weight:500}.u-font-bold{font-weight:600}.u-text-left{text-align:left}.u-text-right{text-align:right}.u-text-center{text-align:center}.u-text-justify{text-align:justify}.u-inline{display:inline}.u-block{display:block}.u-inline-block{display:inline-block}.u-left{float:left}.u-right{float:right}.u-clearfix:after{content:'';display:table;clear:both}
+</style>
+  <script>
+    var pagination_next_page_number       = '',
+        pagination_available_pages_number = '';
+  </script>
+
+  <meta name="description" content="Does Reinforcement Learning Actually Make Sense? - A simple allegory motivates questioning a foundational pillar of AI research">
+    <link rel="shortcut icon" href="../favicon.png" type="image/png">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="The Gradient">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Reinforcement Learning Is Dead, Long Live Meta-Reinforcement Learning">
+    <meta property="og:description" content="A simple allegory motivates questioning a foundational pillar of AI research">
+    <meta property="og:url" content="http://localhost:2368/does-reinforcement-learning-actually-make-sense/">
+    <meta property="og:image" content="http://localhost:2368/content/images/2018/03/human-priors.png">
+    <meta property="article:published_time" content="2018-03-17T01:17:07.000Z">
+    <meta property="article:modified_time" content="2018-04-13T23:10:53.000Z">
+    <meta property="article:tag" content="Perspectives">
+    
+    <meta property="article:publisher" content="https://www.facebook.com/gradientml/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Reinforcement Learning Is Dead, Long Live Meta-Reinforcement Learning">
+    <meta name="twitter:description" content="A simple allegory motivates questioning a foundational pillar of AI research">
+    <meta name="twitter:url" content="http://localhost:2368/does-reinforcement-learning-actually-make-sense/">
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2018/03/human-priors.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Andrey Kurenkov">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Perspectives">
+    <meta name="twitter:site" content="@gradientml">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "The Gradient",
+        "logo": "http://localhost:2368/content/images/2018/04/logo3.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Andrey Kurenkov",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/content/images/2018/04/vface.jpg",
+            "width": 917,
+            "height": 891
+        },
+        "url": "http://localhost:2368/author/andrey/",
+        "sameAs": []
+    },
+    "headline": "Does Reinforcement Learning Actually Make Sense?",
+    "url": "http://localhost:2368/does-reinforcement-learning-actually-make-sense/",
+    "datePublished": "2018-03-17T01:17:07.000Z",
+    "dateModified": "2018-04-13T23:10:53.000Z",
+    "image": "http://localhost:2368/content/images/2018/03/human-priors.png",
+    "keywords": "Perspectives",
+    "description": "A simple allegory motivates questioning a foundational pillar of AI research",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <script type="text/javascript" src="../public/ghost-sdk.js?v=5c22314c9a"></script>
+<script type="text/javascript">
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "3bcd42be60d8"
+});
+</script>
+    <meta name="generator" content="Ghost 1.22">
+    <link rel="alternate" type="application/rss+xml" title="The Gradient" href="../rss/index.html">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115283063-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115283063-1');
+</script>
+    <style>
+      img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+      figure {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        vertical-align: top;
+        width: 50%;
+      }
+
+
+      figcaption {
+        margin-left: -25%;
+        width: 150%;
+      	font-size: 12px;
+        line-height: 21px;
+      }
+</style>
+</head>
+<body class="post-template tag-perspectives">
+
+  <div class="js-off-canvas-container c-off-canvas-container">
+    <header class="c-header">
+
+  <div class="o-grid">
+
+    <div class="o-grid__col o-grid__col--3-4-s o-grid__col--4-4-m">
+      <div class="c-logo">
+          <a href="../">
+            <img class="c-logo__img" src="../content/images/2018/04/logo3.png" alt="The Gradient">
+          </a>
+      </div>
+    </div>
+
+    <div class="o-grid__col o-grid__col--1-4-s o-grid__col--3-4-l o-grid__col--full">
+      <div class="c-off-canvas-content js-off-canvas-content">
+        <div class="js-off-canvas-toggle c-off-canvas-toggle c-off-canvas-toggle--close">
+          <span class="c-off-canvas-toggle__icon"></span>
+        </div>
+
+        <div class="o-grid">
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--3-4-l o-grid__col--full">
+            <nav class="c-nav-wrap">
+              <ul class="c-nav o-plain-list">
+                  <li class="c-nav__item">
+    <a href="../" class="c-nav__link ">Home</a>
+  </li>
+  <li class="c-nav__item">
+    <a href="../tag/perspectives.1" class="c-nav__link ">Perspectives</a>
+  </li>
+  <li class="c-nav__item">
+    <a href="../tag/overviews.1" class="c-nav__link ">Overviews</a>
+  </li>
+  <li class="c-nav__item">
+    <a href="../about/" class="c-nav__link ">About</a>
+  </li>
+
+                <li class="c-nav__item">
+                  <a class="toggle-search-button js-search-toggle" href="index.html#" aria-label="Search">
+                    <span class="c-nav__icon" data-icon="ei-search" data-size="s"></span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="js-off-canvas-toggle c-off-canvas-toggle" aria-label="Toggle navigation">
+        <span class="c-off-canvas-toggle__icon"></span>
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+<div class="c-search js-search">
+
+  <div class="o-grid">
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--3-4-m o-grid__col--2-4-l o-grid__col--center">
+      <form class="c-search__form">
+        <span class="c-search__icon" data-icon="ei-search" data-size="m"></span>
+        <input type="search" aria-label="Search The Gradient" class="c-search__input js-search-input" placeholder="Type to Search">
+      </form>
+    </div>
+  </div>
+
+  <div class="o-grid">
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--3-4-m o-grid__col--2-4-l o-grid__col--center">
+      <div class="c-search-result js-search-result"></div>
+    </div>
+  </div>
+
+  <div data-icon="ei-close" data-size="s" class="c-search__close js-search-close"></div>
+</div>
+    
+
+<div class="c-post-hero">
+  <div class="o-grid _o-grid--full">
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--4-4-m o-grid__col--2-3-l">
+      <div class="c-post-hero__media">
+        <div class="c-post-hero__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/human-priors.png)"></div>
+      </div>
+    </div>
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--1-3-m">
+      <div class="c-post-hero__content">
+        <h1 class="c-post-hero__title">Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!</h1>
+          <time class="c-post-hero__date" datetime="2018-03-16">16.Mar.2018</time>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="o-wrapper">
+  <div class="o-grid">
+    <div class="o-grid__col o-grid__col--2-3-m">
+      <article class="c-post tag-perspectives featured">
+
+        <div class="c-content">
+          <div class="kg-card-markdown"><h2 id="theresaprobleminthefoundationsofreinforcementlearninghereswhatwecandoaboutit">There's a problem in the foundations of reinforcement learning. Here's what we can do about it</h2>
+<p>Steel yourself, dear reader, for this is a long essay but one well worth reading. If you stick with it, you will be rewarded with a fun allegory, radical questioning of the basis of one of AI's core fields, a critical take on AlphaGo Zero, a rebuke of false assumptions held by many, an enumeration of various methods of incorporating prior knowledge and instruction into Deep Learning, and a radical conclusion.</p>
+<p><em>An expanded extract from this article, titled 'AlphaGo Zero Is Not A Sign of Imminent Human-Level AI' can be read on <a href="http://www.skynettoday.com/content/editorials/is-alphago-zero-overrated/">Skynet Today</a>.</em></p>
+<h3 id="theallegoryoftheboardgame">The Allegory of the Board Game</h3>
+<p>Imagine: a friend of yours invites you to play a board game you have never played. In fact, you have never played any board games, nor indeed any kind of game. Your friend tells you what the valid moves are, but not what they mean or how the game is scored.  So, you start playing — no more questions, no more explanations. And you lose. And lose. And lose. And... lose some more. After all, you don't know the rules or the objective of the game, and have no prior experience to draw on.  Slowly you figure out some patterns in your losses. You’re still losing, but not as quickly anymore. After a few weeks of consecutive play and many thousands of games, you even manage to just barely win.</p>
+<p>Silly, right? Why didn't you just ask what the goal of the game is and how it is supposed to be played? Yet the above paragraph is how the majority of <a href="http://theai.wiki/Reinforcement%20Learning">Reinforcement Learning (RL)</a> methods still work today.</p>
+<figure>
+      <img src="https://draftin.com:443/images/56452?token=x-CH-CY5uyLtTMOZZi1QenH_byGZFUyKx0s_dP6gvbb_XSMeUjNc6AMXAhm99dEm2ouHhnfHjaBVMLRcFG_iUwo" alt="AI">
+     <figcaption>RL is one of the major branches of AI. So questioning its basic formulation is a pretty big deal...<a href="https://steemit.com/ai/@sykochica/artificial-intelligence-part-2-artificial-general-intelligence-and-artificial-consciousness"><b>(source)</b></a></figcaption>
+</figure>
+<p>Some context for those who have not studied the dark arts of AI: RL is one of the few basic subfields within AI. Its aim to have an 'agent' (you, in the board game allegory) interact with an 'environment' (the board) to learn what 'actions' (board game moves) it needs to take in any given environment 'state' (board game configuration) to maximize its 'long term reward' (the final board game score). Typically, this setup is used to learn a 'skill' (playing a board game).</p>
+<p>In the typical model of reinforcement learning, the agent begins only with knowledge of which actions are possible; it knows nothing else about the world, and it's expected to learn the skill solely by interacting with the environment and receiving rewards after every action it takes. In other words, the agent learns 'from scratch'. This sort of learning has notably been used to tackle games like <a href="http://theai.wiki/TD-Gammon">backgammon</a> and more recently Go, as well as various problems in robotics and elsewhere. Let's call this learning-from-scratch approach 'pure RL'.</p>
+<figure>
+      <img src="https://draftin.com:443/images/56340?token=E0_De8QweCDLkpmSQMU3gigFg56wdbx5Ugu5paki2Ew8QOFXno5yyZxJh5_3i9skeDXoy8bIXovT-Wvkxh1aMGg" alt="RL slide">
+     <figcaption>RL visualized as a gif. In the board game story, an 'episode' would be one full game. In this example, and in many RL problems, only the last state has a non-zero reward which is why it only changes after the last action. <a href="https://mpatacchiola.github.io/blog/2017/01/15/dissecting-reinforcement-learning-2.html"><b>(source)</b></a></figcaption>
+</figure>
+<p>Research in RL has recently been reinvigorated by <a href="http://theai.wiki/Deep%20Learning">Deep Learning</a>, but the basic model hasn't changed much — fundamentally, much if not most modern RL research, deep or otherwise, is based on pure RL. This learning-from-scratch approach (having an agent learning what actions to take based only on rewards it gets from the environment after each action taken) goes back to the very creation of RL as a research field and is encoded in the formulation of its most fundamental equations. There is also research on 'model-based' methods, in which the agent has a model of the environment (knows how each move changes the state of the board), but beyond that still needs to learn purely from the reward signal. For brevity, let's include model-based RL under the umbrella term pure RL.</p>
+<p>So here’s the basic question: <strong>how reasonable it is to design pure RL AI models if it makes so little intuitive sense?</strong></p>
+<p>If it's so absurd to conceive of a human learning a new board game through pure RL, should we not wonder if pure RL is a flawed framework for how AI agents should learn? And more generally, does it really make sense to start learning a new skill with neither prior experience nor any higher-level instruction beyond this low level 'this is a good/bad move' reward signal?</p>
+<p>This is a Big Question in the field - a question about the basic formulation of one of the core areas of research within AI. It’s a question about whether we should provide AI agents with some form of prior experience or high-level explanation — not just in board games, but also in potentially all applications of RL, ranging from teaching robots to execute particular physical manipulation to optimizing energy consumption in data warehouses. As stated - a Big Question. So, we will explore the answer to this question carefully and methodically, as follows:</p>
+<ol>
+<li>We'll begin by showing the major accomplishments of pure RL are not as impressive as they may seem.</li>
+<li>We'll go further by enumerating the precise limitations pure RL imposes on AI agents.</li>
+<li>Then we'll overview the different established approaches within AI to address those limitations (chiefly, <strong>meta-learning</strong> and <strong>zero-shot learning</strong>). After all, I'm not going to offer complaints without solutions.</li>
+<li>And finally, get to a survey of monumentally exciting work based on these approaches, and conclude with what that work implies for the future of RL and AI as a whole</li>
+</ol>
+<p>So, without further ado, let's get going.</p>
+<figure>
+      <img src="https://draftin.com:443/images/56145?token=d8aM-GVFQh9hRwS5TPjXRglcVNPa4FnMr2g-gWFA68i74HWsrKHeZpgFrW31FpT1o0w4AnGqPRJ2V3jUNvuXeHA" alt="RL slide">
+     <figcaption>The RL slide seen in a thousand slide decks, the formulation that everyone agrees on. But should they?</figcaption>
+</figure>
+<h3 id="doespurerlactuallymakesense">Does Pure RL Actually Make Sense?</h3>
+<p>Many people’s immediate response goes something like the following:</p>
+<blockquote>
+<p>Sure, it makes sense to use pure RL — AI agents are not humans and do not have to learn like us, and pure RL has already been shown to solve all sorts of complex problems.</p>
+</blockquote>
+<p>I disagree. By definition, AI research involves the ambition to enable machines to do things they are incapable of but humans and animals are capable of. Therefore, inspiration from (or, at the very least, comparison to) human intelligence is inherently appropriate. And as for pure RL’s supposed “effectiveness,” I'll go further: pure RL has not been used to solve any truly complex problems.</p>
+<p>But what about AlphaGo Zero, the pure RL model that learned to play Go? Indeed, AlphaGo Zero is arguably the most impressive and definitely the most praised accomplishment of pure RL. It is therefore also a good exemplar to represent all the various accomplishments of pure RL. So let’s take a closer look at AlphaGo Zero and see what makes it so great – and why that’s not enough.</p>
+<h4 id="whyalphagozeroisgreat">Why AlphaGo Zero Is Great</h4>
+<p>For those unaware, AlphaGo Zero is DeepMind's recent successor to AlphaGo (the program that first beat humanity's best at Go). Unlike the original AlphaGo, which learned through a combination of supervised learning and reinforcement learning, AlphaGo Zero learns purely through reinforcement learning and <a href="https://blog.openai.com/competitive-self-play/">"self-play."</a>  Thus, it follows the overall methodology of pure RL quite closely (with the agent starting with zero knowledge and learning from a reward signal just as in the board game analogy), though it also uses a provided model (the rules of the game) and self-play to reliably and continuously get better. Because it was no longer learning its success from humans, AlphaGo Zero was seen by many as even more of a game changer than AlphaGo:</p>
+<ul>
+<li><a href="http://fortune.com/2017/10/19/google-alphago-zero-deepmind-artificial-intelligence/">"Google's New AlphaGo Breakthrough Could Take Algorithms Where No Humans Have Gone"</a>:</li>
+</ul>
+<blockquote>
+<p>"While it sounds like some sort of soda, AlphaGo Zero may represent as much of a breakthrough as its predecessor, since it could presage the development of algorithms with skills that humans do not have. ... AlphaGo Zero ... trained itself entirely through reinforcement learning. And, despite starting with no tactical guidance or information beyond the rules of the game, the newer algorithm managed to beat the older AlphaGo by 100 games to zero."</p>
+</blockquote>
+<ul>
+<li><a href="https://www.theguardian.com/science/2017/oct/18/its-able-to-create-knowledge-itself-google-unveils-ai-learns-all-on-its-own">"'It's able to create knowledge itself': Google unveils AI that learns on its own"</a>:</li>
+</ul>
+<blockquote>
+<p>"In a major breakthrough for artificial intelligence, [AG0] took just three days to master the ancient Chinese board game of Go ... with no human help"</p>
+</blockquote>
+<ul>
+<li><a href="https://www.inc.com/lisa-calhoun/google-artificial-intelligence-alpha-go-zero-just-pressed-reset-on-how-we-learn.html">" Google Artificial Intelligence 'Alpha Go Zero' Just Pressed Reset On How To Learn"</a>:</li>
+</ul>
+<blockquote>
+<p>"Alpha Go Zero is changing the game for how we solve big problems."</p>
+</blockquote>
+<ul>
+<li><a href="https://www.theguardian.com/science/2017/oct/18/its-able-to-create-knowledge-itself-google-unveils-ai-learns-all-on-its-own">"'It's able to create knowledge itself': Google unveils AI that learns on its own"</a>:</li>
+</ul>
+<blockquote>
+<p>"In a major breakthrough for artificial intelligence, [AG0] took just three days to master the ancient Chinese board game of Go ... with no human help"</p>
+</blockquote>
+<ul>
+<li><a href="https://www.inc.com/lisa-calhoun/google-artificial-intelligence-alpha-go-zero-just-pressed-reset-on-how-we-learn.html">" Google Artificial Intelligence 'Alpha Go Zero' Just Pressed Reset On How To Learn"</a>:</li>
+</ul>
+<blockquote>
+<p>"Alpha Go Zero is changing the game for how we solve big problems."</p>
+</blockquote>
+<figure>
+     <iframe width="560" height="315" src="https://www.youtube.com/embed/tXlM99xPQC8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+     <figcaption>DeepMind's own explanation of why AlphaGo Zero is so exciting. 
+</figcaption>
+</figure>
+<p>AlphaGo Zero seems like a perfect testament to the usefulness of pure RL for solving complex problems. It has taken the field decades to get here, and, like all those slides in presentations about AI point out, the <a href="http://theai.wiki/Branching%20Factor">branching factor</a> of Go does indeed make it a challenging board game. This was also the first time a single algorithm was used to crack both Chess and Go, and was not specifically tailored for either game like <a href="https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)">Deep Blue</a> and the original AlphaGo were. Don’t get me wrong – AlphaGo Zero is certainly monumental and exciting work (and great PR).</p>
+<figure>
+      <img src="https://draftin.com:443/images/56473?token=3G6YQX_K8LNCSvkf-fxVAxQMIhG2_8ZOd3uGpjtGKF-myi9JaeEyNf4-cb_r3pynXoHYJr8_n2TPZvaY4OedIjA" alt="Game History">
+     <figcaption>AlphaGo is an inarguably historic achievement.<b><a href="http://www.andreykurenkov.com/writing/ai/a-brief-history-of-game-ai/">(source)</a></b></figcaption>
+</figure>
+<h4 id="whyalphagozeroisnotabouttosolveallofai">Why AlphaGo Zero Is Not About To Solve All of AI</h4>
+<p>With those positive things having been said, some perspective: AlphaGo Zero is not really a testament to the usefulness of such techniques for solving the hard problems of AI. You see, Go is only hard within the context of the simplest category of AI problems. That is, it is in the category of problems with every property that makes a learning task easy: it is <a href="https://en.wikibooks.org/wiki/Artificial_Intelligence/AI_Agents_and_their_Environments">deterministic, discrete, static, fully observable, fully-known, single-agent, episodic</a>, cheap and easy to simulate, easy to score...</p>
+<p>Literally the only challenging aspect of Go is its huge branching factor. Predictions that <a href="http://theai.wiki/AGI">AGI (Artificial General Intelligence)</a> is imminent based only on AlphaGo's success can be safely dismissed — <a href="https://medium.com/@karpathy/alphago-in-context-c47718cb95a5">the real world is vastly more complex than a simple game like Go</a>. Even fairly similar problems that have most but not all of the properties that make a learning task easy, <a href="http://localhost:2368/content/news/openai-dota-ii/">such as the strategic video game DotA II</a>, are far beyond our grasp right now.</p>
+<figure>
+     <img src="https://draftin.com:443/images/56318?token=MjHXMguA3ItT0gpWGe7oTsXUaCiQD6zqiltIdZ898zov75aC1sUXDxqwb4DdG5ERU8USDWQSP-r_X57wSHGb1G0" alt="Venn">
+     <figcaption>A (rough) diagram of AI problem complexity. Note that Go and (most) Atari games are in the same league as chess; just about the only distinction is branching factor. Pure RL may solve games like Go and Pong, but as <a href="http://www.skynettoday.com/news/alphago/"> argued elsewhere in more detail</a> most AI problems are vastly more difficult — categorically different.
+    </figcaption>
+</figure>
+<p>Another important thing to understand beyond the categorical simplicity of Go is its narrowness. Alpha Gi is an example of a <a href="http://theai.wiki/Weak%20AI">Weak AI</a>, an agent characterized by only being able to perform one 'narrow' task such as playing a 19 by 19 game of Go. Though AlphaGo has the impressive ability to learn 3 different board games, it learns them separately (that is, there is not a single trained neural net that can play the 3 games, but 3 separate neural nets with one for each game). Even then it can only learn a very narrow range of games: 2-player grid-based board games without any necessary memorization of prior positions or moves (that is, on any given move the board contains all the necessary information to decide on the next move; no memory of the past required).</p>
+<figure>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">"Generalized AI is worth thinking about because it stretches our imaginations and it gets us to think about our core values and issues of choice and free will that actually do have significant applications for specialized AI." - <a href="https://twitter.com/BarackObama?ref_src=twsrc%5Etfw">@BarackObama</a> <a href="https://t.co/VFhJsMXuIq">pic.twitter.com/VFhJsMXuIq</a></p>— Lex Fridman (@lexfridman) <a href="https://twitter.com/lexfridman/status/976461233443561477?ref_src=twsrc%5Etfw">March 21, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+     <figcaption>In a <a href="https://www.wired.com/2016/10/president-obama-mit-joi-ito-interview/">lengthy interview with Wired</a>, then-president Obama displayed an impressively nuanced understanding of the state of AI. If only some unnamed billionaires would communicate to the public similarly...
+     </figcaption>
+</figure>
+<p>So, while AlphaGo Zero works and its achievement is impressive, it is fundamentally similar to Deep Blue in being an expensive system, engineered over many years, with millions of dollars of investment, purely for the task of playing a game — and nothing else. Though Deep Blue was great PR for IBM, all that work and investment is not usually seen as having contributed much to the progress of broader AI research, having been ultra-specific to solving the problem of playing Chess. Just as with the algorithms that power AlphaGo Zero, human-tweaked heuristics and sheer computational brute force can definitely be used to solve some challenging problems — but they ultimately did not get us far beyond Chess, not even to Go.</p>
+<figure>
+     <img src="https://draftin.com:443/images/56472?token=PT3XzKUl83mv1Ugo4meVAuSbd2yZt4O7yC0w8taldm0ESr3XQv9it5dvEk71YqQ4zAXgL9RCyOJIgiy-q9IsRvU" alt="PR">
+     <figcaption>"One day after its chess computer defeated Garry Kasparov, the world chess champion, I.B.M. stock surged to a 10-year high and was only a bit shy of its record." <b><a href="http://www.nytimes.com/1997/05/13/business/ibm-s-stock-surges-by-3.6.html">(source)</a></b>
+    </figcaption>
+</figure>
+<p>I write this not to be controversial or take away from DeepMind's fantastic work, but rather to push back against all the unwarranted hype AlphaGo Zero's success has generated and encourage more conversation about the limitations of pure RL. And all that aside, it should still be asked:  might there be a better way for AI agents to learn to play Go? The very name “AlphaGo Zero” is a reference to the idea that the model learns to play Go <a href="https://deepmind.com/blog/alphago-zero-learning-scratch/">"from scratch"</a>.</p>
+<p>But let's recall that board game allegory. Trying to learn the board game 'from scratch' without any explanation from your friend was absurd, right? So why is it a goal to strive towards with AI?</p>
+<p>In fact, what if the board game you were trying to learn was Go — how would <em>you</em> start learning it? You would read the rules, learn some high-level strategies, recall how you played similar games in the past, get some advice... right? Indeed, it's at least partially because of the 'learning from scratch' <strong>limitation</strong> of AlphaGo Zero that it is not truly impressive compared to human learning: like Deep Blue, it still relies on seeing orders of magnitude more Go games and planning for orders of magnitude more scenarios in any given game than any human ever does.</p>
+<figure>
+     <img src="https://draftin.com:443/images/56301?token=pVbCvo4eZCulh3YQIgOjTGJKbwpF2BfMCUCWkytrr5-hsHVx-DJPE_uZcieYvsfJ5C07opZpqHb7-azGziKT-1k" alt="Paper img">
+     <figcaption>The progression of AlphaGo Zero's skill. It is certainly impressive that it takes 'just' 3 days of non-stop computation to surpass the best humans in the world. But perhaps we should also note it takes a whole day and orders of magnitude more games than humans get to experience in their lifetimes to get to an ELO score of 0 (which even the weakest human can do easily)...? From <a href="https://deepmind.com/blog/alphago-zero-learning-scratch/"><b>"DeepMind's AlphaGo Zero Blog Post"</b></a>
+     </figcaption>
+</figure>
+<p>To be fair, model-based pure RL techniques (including AlphaGo Zero) can be legitimately useful for 'narrow' constrained tasks. So, to be clear: yes, pure RL methods are reliably successful at many narrow tasks. However, with the success of Deep Learning the AI research community as a whole is now trying to tackle ever more complex tasks, ranging from driving cars to holding conversations. It is for these less narrow tasks (that is, the majority of problems AI needs to tackle), and for the long term future of AI as a whole, that the limitations of pure RL may not 'make sense'.</p>
+<p>So let's move on to tackling our revised question: is pure RL, and the idea of learning from scratch in general, the right approach for non-narrow/complex tasks?</p>
+<h3 id="ispurerltherightideaforproblemsbeyondgames">Is Pure RL The Right Idea for Problems Beyond Games?</h3>
+<p>Okay – so it is valid to compare AI algorithms to human learning, and question whether learning 'from scratch' as pure RL does is the right idea to explore. One answer to our next question might be:</p>
+<blockquote>
+<p>Yes, pure RL is the right approach to problems beyond those like Go. Though it makes no sense in the context of board games, it does make sense generally to learn things 'from scratch'. And inspiration from humans aside, it makes sense to start from scratch so the agent has no preconceptions and can be better than us (as with AlphaGo Zero). In fact, this is how babies learn everything at first: before we have any understanding of the world or ability to communicate, our parents' encouragement or concern acts as a direct reward signal.</p>
+</blockquote>
+<p>Of course, as with the board game allegory, this hypothetical answer is not a real claim about how babies learn, but rather an informal analogy between an AI technique and human learning. And, as with the previous answer, it is unsatisfactory.</p>
+<h4 id="islearningfromscratchreallytherightidea">Is Learning From Scratch Really The Right Idea?</h4>
+<p>Let's start with that last bit, ignoring human inspiration and considering the merits of learning from scratch in the context of AI in general. The typical justification of doing things “from scratch” is that the presumed alternative – hard-coding human intuitions into the model – might limit the model’s accuracy through unnecessary restrictions, or even worsen its performance with incorrect intuitions. This perspective has become mainstream with the success of deep learning methods, which learn 'end-to-end' models with millions of parameters, trained on staggering amounts of data and having only <a href="http://www.abigailsee.com/2018/02/21/deep-learning-structure-and-innate-priors.html">a few innate priors</a>. And it has limited research into alternatives to starting from scratch, such as incorporating prior knowledge or extra instruction during learning.</p>
+<figure>
+     <img src="https://draftin.com:443/images/56523?token=UB20Rx2Q_SoqSJ1woI7iVoaEg3OG5Uc6F04UYRW8pDGIRbVW_P55ElnkYPTVskdY-UdtaDmZBxVFnc1nSAeKMvQ" alt="end to end">
+     <figcaption>An illustration of both older non-traditional speech recognition and end-to-end Deep learning methods. The latter works much better and is the basis for modern state of the art speech recognition.  <a href="http://blog.easysol.net/building-ai-applications/"><b>(source)</b></a>
+     </figcaption>
+</figure>
+<p>Here's the thing: incorporating prior knowledge or instructions doesn't necessitate imposing a lot of limiting structure based on human intuition on the learning agent. In other words, it is possible to inform a learning agent or model about the task at hand without limiting its ability to learn in the Deep Learning style (that is, informed primarily by a lot of data, unlike Deep Blue and before that <a href="https://en.wikipedia.org/wiki/Expert_system">expert systems</a>). For most AI problems, not starting from scratch would not necessarily limit what the agent can learn in any way; at the very least Deep Learning models seem pretty adept at escaping <a href="http://theai.wiki/Local%20Maxima">local maxima</a> (which is presumably what some sort of initialization would result in). So, there is no clear reason for AlphaGo Zero to emphasize starting from scratch so much - it can likely be bootstrapped with human knowledge (as was done with the original AlphaGo) or from learning other board games beforehand and still converge to the same superhuman level of skill. Don't believe me? Just wait for the next section.</p>
+<figure>
+     <img src="https://draftin.com:443/images/56521?token=ACWFP3PjlRfKcOHNGGc_y0dMI3hYVjFkjwSkOp14-QO_fVtZeQELyYqPZD0k5z7dceD3GnEGiGnmqxKXtNMiFkQ" alt="saddle gif">
+     <figcaption>A Gif illustration of different optimization methods on an optimization landscape. Deep Learning methods have been surprisingly good at not getting trapped in situations like this despite having incredibly complex optimization landscapes. <a href="http://www.denizyuret.com/2015/03/alec-radfords-animations-for.html"><b>(source)</b></a>
+     </figcaption>
+</figure>
+<p>And <strong>all that aside</strong>, even if you care about none of this and just want to start from scratch - is pure RL the only way to do so? The answer used to be a no-brainer; in the domain of <a href="http://theai.wiki/Derivative-Free%20Optimization">gradient-free optimization</a>, pure RL was the most principled and trusted approach you could pick. But multiple recent papers have seriously questioned that stance by showing that the relatively simpler and broadly less respected <a href="http://theai.wiki/Evolution%20Strategy">Evolution Strategy</a>-based methods seem to do just about as well on the same sorts of benchmarks pure RL has been routinely evaluated on:</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1803.07055">"Simple random search provides a competitive approach to reinforcement learning"</a>: "A common belief in model-free reinforcement learning is that methods based on random search in the parameter space of policies exhibit significantly worse sample complexity than those that explore the space of actions. We dispel such beliefs by introducing a random search method for training static, linear policies for continuous control problems, matching state-of-the-art sample efficiency on the benchmark MuJoCo locomotion tasks. "</li>
+<li><a href="https://arxiv.org/abs/1712.06567">"Deep Neuroevolution: Genetic Algorithms Are a Competitive Alternative for Training Deep Neural Networks for Reinforcement Learning"</a>: "We explore the use of Evolution Strategies (ES), a class of black box optimization algorithms, as an alternative to popular MDP-based RL techniques such as Q-learning and Policy Gradients. Experiments on MuJoCo and Atari show that ES is a viable solution strategy that scales extremely well with the number of CPUs available: By using a novel communication strategy based on common random numbers, our ES implementation only needs to communicate scalars, making it possible to scale to over a thousand parallel workers. "</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56524?token=bu5ANzJ6z-BJR9qcvXyTBu8MdgOosn9SL0x0lWhW_WthnfmCXxwCVtbKE2yrf1-nDnTfNXzGM5z_B4aczDHyq24" alt="saddle gif">
+     <figcaption>From <a href="https://arxiv.org/abs/1712.06567"><b>Deep Neuroevolution: Genetic Algorithms Are a Competitive Alternative for Training Deep Neural Networks for Reinforcement Learning</b></a>
+     </figcaption>
+</figure>
+<ul>
+<li><a href="https://arxiv.org/abs/1703.03864">"Evolution Strategies as a Scalable Alternative to Reinforcement Learning"</a>: "Deep artificial neural networks (DNNs) are typically trained via gradient-based learning algorithms, namely backpropagation. Evolution strategies (ES) can rival backprop-based algorithms such as Q-learning and policy gradients on challenging deep reinforcement learning (RL) problems. However, ES can be considered a gradient-based algorithm because it performs stochastic gradient descent via an operation similar to a finite-difference approximation of the gradient. That raises the question of whether non-gradient-based evolutionary algorithms can work at DNN scales. Here we demonstrate they can: we evolve the weights of a DNN with a simple, gradient-free, population-based genetic algorithm (GA) and it performs well on hard deep RL problems, including Atari and humanoid locomotion."</li>
+<li><a href="https://arxiv.org/abs/1703.02660">"Towards Generalization and Simplicity in Continuous Control"</a>: "This work shows that policies with simple linear and RBF parameterizations can be trained to solve a variety of continuous control tasks, including the OpenAI gym benchmarks. The performance of these trained policies are competitive with state of the art results, obtained with more elaborate parameterizations such as fully connected neural networks. Furthermore, existing training and testing scenarios are shown to be very limited and prone to over-fitting, thus giving rise to only trajectory-centric policies."</li>
+</ul>
+<figure>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">You may not like it, but this is what peak performance looks like. <a href="https://t.co/QfjOIRjqMW">pic.twitter.com/QfjOIRjqMW</a></p>— hardmaru (@hardmaru) <a href="https://twitter.com/hardmaru/status/976160956064587776?ref_src=twsrc%5Etfw">March 20, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+     <figcaption><a href="http://people.eecs.berkeley.edu/~brecht/">Ben Recht</a>, a leading researcher on the theory and practice optimization algorithms and one of the authors of the "Simple random search provides a competitive approach to reinforcement learning" paper, has <a href="http://www.argmin.net/2018/03/20/mujocoloco/%0A">recently written a blog post discussing these recent works</a>: <b>We have seen that random search works well on simple linear problems and appears better than some RL methods like policy gradient. But does random search break down as we move to harder problems? Spoiler Alert: No. But keep reading!</b> 
+     </figcaption>
+</figure>
+<p><a href="http://people.eecs.berkeley.edu/~brecht/">Ben Recht</a>, a leading researcher on the theory and practice optimization algorithms and one of the authors of the "Simple random search provides a competitive approach to reinforcement learning" paper, has <a href="http://www.argmin.net/2018/03/20/mujocoloco/%0A">nicely summarized all the above points</a> :</p>
+<blockquote>
+<p>We have seen that random search works well on simple linear problems and appears better than some RL methods like policy gradient. But does random search break down as we move to harder problems? Spoiler Alert: No.</p>
+</blockquote>
+<h4 id="theproblemswithlearningfromscratch">The Problems With Learning from Scratch</h4>
+<p>Now, to the idea of babies learning sort of by RL - since all of us start by 'learning from scratch', shouldn’t it be a good idea in general? Maybe... but probably not. For one, it is important to note that babies do much more than just pure RL; there is undeniably also some sort of unsupervised learning and non-pure RL in the vague notions of curiosity and intrinsic motivation. But even ignoring that, we must ask: for most problems we may want to leverage AI to solve, does it make sense to have the learning agents learn like babies? That is, do people ever start learning a complex new skill (such as putting together new IKEA furniture or even driving a car) given no information (no information at all, not even prior experience) except for what possible actions they have as part of that skill? No, right?</p>
+<p>Maybe for some very fundamental and general problems (such as locomotion or navigation) it makes sense to 'start from scratch' and do pure RL just as human babies do, since these problems ar so broad it's hard to do anything else. But the vast majority of problems AI can be used to tackle are far more specific (and far beyond the grasp of babies): board games, video games, and complex physical manipulations all require some prior understanding. For this vast majority of problems in AI, there is no clear benefit in starting from scratch. Just the opposite: starting from scratch is the primary reason for many of the <a href="https://www.wired.com/story/greedy-brittle-opaque-and-shallow-the-downsides-to-deep-learning/">widely</a>  [agreed]9http://www.wired.co.uk/article/deep-learning-automl-cloud-gary-marcus?utm_campaign=Revue%20newsletter&amp;utm_medium=Newsletter&amp;utm_source=The%20Wild%20Week%20in%20AI) <a href="https://blog.keras.io/the-limitations-of-deep-learning.html">upon</a> limitations of current AI and RL:</p>
+<ul>
+<li>Current AI is <strong>data-hungry</strong> (or in jargon, <a href="https://en.wikipedia.org/wiki/Efficiency_(statistics)">sample-inefficient</a> – in most cases, massive amounts of data are needed for state of the art AI methods to be useful.  This is particularly bad for pure RL techniques; recall how AlphaGo Zero needed millions of games of Go to get to an ELO score of 0, which most people would manage after right away. Learning from scratch is inherently just about the least sample efficient approach to learning there can be.</li>
+<li>Current AI is <strong>opaque</strong> – in most cases, we have nothing but high-level intuitions about what an AI algorithm learns and how it works. For most AI problems, we want the algorithms to be predictable and explainable; a big neural net that just learns whatever it wants from scratch given just the low level reward signal and maybe an environment model (just how AlphaGo Zero works) is just about the least explainable and predictable approach to learning there can be.</li>
+<li>Current AI is <strong>narrow</strong> – in most cases, the AI models we build can only do one very narrow task and can easily be broken. Learning every single skill from scratch limits the ability to learn anything but one specific thing.</li>
+<li>Current AI is <strong>brittle</strong> – in most cases, our AI models generalize well to unseen inputs but are also surprisingly easy to trick or fool in ways that would never work on a human.</li>
+</ul>
+<p>For most AI problems, there is just no point to learning from scratch. We know what we want the AI agent to learn. If the AI agent were a person, we could explain the task and probably provide some tips. So why don't we try to do just that?</p>
+<h3 id="whydontwemovebeyondpurerl">Why Don't We Move Beyond Pure RL?</h3>
+<p>Okay then, so we should draw inspiration from how adult humans learn and try to do better than learning from scratch. Now, you might be thinking something like this:</p>
+<blockquote>
+<p>We cannot just move beyond pure RL to emulate human learning — pure RL is rigorously formulated, and our algorithms for training AI agents are proven based on that formulation. Though it might be nice to have a formulation that aligns more closely with how human adults learn, we just don't have one.</p>
+</blockquote>
+<p>Well... maybe we do have such a formulation. Let's start by spelling in what ways the way we would learn is different from pure RL. When starting to learn a new skill, we basically do one of two things: guess at what the instructions might be (recall our prior experience with board games), or read/listen to some instructions (check the board game's rules). We always know or can at least guess the goal and broad approach for a particular skill from the get-go, and never reverse-engineer these things from a low-level reward signal.</p>
+<figure>
+     <img src="https://draftin.com:443/images/56296?token=z3zdGkZCJZrS5ULzTyDJBC6Q37UfuZ1IwKFtdJXuvuTv_K6KrXn5JC7S3ejaH5C0053uy2A7nzTmNp87SVA3eug" alt="Prior">
+     <figcaption>Researchers at UC Berkeley have recently demonstrated that humans learn much faster than pure RL in part due to making use of prior experience.
+     From <a href="https://arxiv.org/abs/1802.10217"><b>Investigating Human Priors for Playing Video Games</b></a>
+     </figcaption>
+</figure>
+<h4 id="themanyknownapproachestoleveragingpriorexperienceandinstruction">The Many Known Approaches to Leveraging Prior Experience and Instruction</h4>
+<p>The ideas of leveraging prior experience and getting instructions have very direct analogues in AI research. Let's break those down:</p>
+<ul>
+<li><strong>Meta-learning</strong>: tackles the problem of 'learning how to learn': making RL agents pick up new skills faster having already learned similar skills. Related is the idea of <strong>curriculum learning</strong> which is roughly a type of meta-learning that specifically works by learning a sequence of progressively harder skills.</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56149?token=-yVdLTalC1wPc_DSySA-CNY9dtMx7CjkyZ5C_R5RTFEeUgIVh9j4SwYZ0p77lZ5ZsqBaQZoLqvagvZb6yRcTzzU" alt="Prior">
+     <figcaption>A cutting-edge meta-learning algorithm, MAML. The agent is able to learn both backward and forward running with very few iterations by leveraging meta-learning.
+     From <a href="http://bair.berkeley.edu/blog/2017/07/18/learning-to-learn/"><b>"Learning to Learn"</b></a>
+     </figcaption>
+</figure>
+<ul>
+<li>Related to this is the notion of <strong>transfer learning</strong>, which roughly speaking corresponds to 'transferring' skills attained in one problem to another potentially different problem.</li>
+</ul>
+<figure>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">"I think transfer learning is the key to general intelligence. And I think the key to doing transfer learning will be the acquisition of conceptual knowledge that is abstracted away from perceptual details of where you learned it from." - Demis Hassabis <a href="https://twitter.com/demishassabis?ref_src=twsrc%5Etfw">@demishassabis</a> <a href="https://t.co/oDQjvx4TLa">pic.twitter.com/oDQjvx4TLa</a></p>— Lex Fridman (@lexfridman) <a href="https://twitter.com/lexfridman/status/975018912483020800?ref_src=twsrc%5Etfw">March 17, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+     <figcaption>Demis Hassabis, a co-founder and the most visible public voice for DeepMind, discussing Transfer Learning. "And I think that [Transfer Learning] is the key to actually general intelligence, and that's the thing we as humans do amazingly well. <b>For example, I played so many board games now, if someone were to teach me a new board game I would not be coming to that fresh anymore, straight away I could apply all these different heuristics that I learned from all these other games to this new one even if I've never seen this one before, and currently machines cannot do that... so I think that's actually one of the big challenges to be tackled towards general AI.</b> 
+     </figcaption>
+</figure>
+<ul>
+<li>
+<p><strong>Zero-shot learning</strong> is in a sense similar in that the idea is to learn new skills fast, but takes it further by not leveraging <strong>any</strong> attempts at the new skill; the learning agent just receives 'instructions' for the new task, and is supposed to be able to perform well without any experience of the new task.</p>
+</li>
+<li>
+<p><strong>One-shot</strong> and <strong>few-shot</strong> learning are also active areas of research, and differ from zero-shot learning in that they get demonstrations of the skill to be learned, or just a few iterations of experience, rather than indirect 'instructions' that do not involve the skill actually being executed.</p>
+</li>
+<li>
+<p><strong>Life Long Learning</strong> and <strong>Self Supervised Learning</strong> are yet more examples of learning, in this case roughly being defined by long-term continuous learning without human guidance.</p>
+</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56739?token=xG1woy3IrowMxwTVPqxpbjpnCs0cKSSoM464wCPnCv-Ywzzg-d2ndBsYdFg29BwOwtD_jzPFONZr4JBUsg4O_4c" alt="">
+     <figcaption>From <a href="https://hackernoon.com/effective-learning-the-near-future-of-ai-9bb671211d96"><b>Effective Learning: The Near Future of AI
+</b></a>
+     </figcaption>
+</figure>
+<p>So then, these are all methodologies that go beyond learning from scratch. In particular, meta-learning and zero-shot learning capture different elements of how a human adult would actually approach that new board game situation. A meta-learning agent would leverage experience with prior board games to learn faster, though it would not not ask for the rules of the game. Complementarily, a zero-shot learning agent would ask for the instructions, but then not try to do any learning to get better beyond its initial guess of how to play the game well. One and few-shot learning in some sense do both, but are limited by only getting demonstrations of how the skill can be done — that is, the agent would observe others playing the board game, but not request for any of what is going on to be explained or to be told the rules of the game.</p>
+<figure>
+     <img src="https://draftin.com:443/images/56248?token=_CoKO8B3fwXJJu-raMFVF8yqMZdHiLuq_XH8EmrE4ZyG5pvH9uNlsfj1Mv77Pps-1NXIo-U-2eHx_ri1FDAAqFg" alt="Prior">
+     <figcaption>A recent 'hybrid' approach that combines one-shot and meta-learning. From <a href="https://arxiv.org/abs/1802.01557"><b>"One-Shot Imitation from Observing Humans via Domain-Adaptive Meta-Learning".</b></a>
+     </figcaption>
+</figure>
+<p>Intuitively, the broad notions of meta-learning and zero-shot learning are what 'make sense' in the context of the board game allegory. Better yet, hybrids of zero-shot, few-shot and meta learning come close to representing what people actually do: use prior experience as well as instructions to form an initial hypothesis of how the skill should be done, observe a few example executions, and then actually try doing the skill themselves, and then rely on the reward signal to test and fine-tune their ability to do the task beyond this initial hypothesis.</p>
+<p>It is therefore surprising that 'pure RL' approaches are still so common and research on meta-learning and zero-shot learning is still not as prevalent. But we can go further: it is surprising that the basic formulation of RL has not been questioned more, and that the notions of meta-learning and zero-shot learning have not been popularly encoded into its basic equations. Among research that has in fact suggested alternative formulations of RL, perhaps the most relevant piece is DeepMind's 2015 paper <a href="https://deepmind.com/research/publications/universal-value-function-approximators/">"Universal Value Function Approximators"</a>, which generalized the idea of 'General value functions' introduced by Richard Sutton (by far the most influential researcher in RL) and collaborators in 2011. DeepMind's abstract summarizes the idea well:</p>
+<blockquote>
+<p>"Value functions are a core component of [RL] systems. The main idea is<br>
+to to construct a single function approximator V(s; θ) that estimates the long-term reward from any state s, using parameters θ. In this paper we introduce universal value function approximators (UVFAs) V(s, g; θ) that generalise not just over states s but also over goals g."</p>
+</blockquote>
+<figure>
+     <img src="https://draftin.com:443/images/56244?token=Qu_QgAaeVEJ7ZRayEdu_W8Ob8J56ct7fHuzi_SABK0U-98ER98Yfm8tJSy3yTrDIpRcIyKp467cg0BEfcxnJ0eo" alt="UVFA">
+     <figcaption>This UVFA idea put to practice. From <a href="https://deepmind.com/research/publications/universal-value-function-approximators/"><b>"Universal Value Function Approximators".</b></a>
+     </figcaption>
+</figure>
+<p>So, here is a rigorous, mathematical formulation of RL that treats goals (the high-level objective of the skill to be learned, which should yield good rewards) as a fundamental and necessary input rather than something to be discovered from just the reward signal. This places meta-learning and zero-shot learning in the core of the formulation of RL. It has been 3 years since this was published, and how many papers have cited it since? <strong>56</strong>. A tiny fraction of all papers published in RL; for context,  DeepMind's  "Human-level control through deep RL" was also published in 2015 and as of now has <strong>2319</strong> citations, and their 2016 "Mastering the game of Go with deep neural networks and tree search" has <strong>2286</strong> citations according to Google Scholar.</p>
+<p>So, work is definitely being done towards this notion of incorporating meta learning and zero-shot learning with RL. But as shown by the aforementioned citation counts, this research direction is still relatively obscure. Here is the key question here: <strong>why is RL that incorporates meta-learning and/or zero-shot learning, as was formalized by DeepMind's work, not the default? Why is there so little work being done in this direction, and why is there not more excitement about the work that is being done?</strong></p>
+<p>Well, to some extent the answer is obvious: it's hard. AI research tends to tackle isolated, well defined problems in order to make progress on them, and there is less work on learning that strays from pure RL precisely because it is harder to define. But, this answer is not satisfactory: deep learning has enabled researchers to create more and more hybrid approaches, such as models that contain <a href="https://cs.stanford.edu/people/karpathy/deepimagesent/">both Natural Language Processing and Computer Vision</a> or for that matter <a href="https://www.alphagomovie.com/">the original AlphaGo's approach of combining both classic techniques and Deep-Learning for playing Go extremely well</a>.</p>
+<h3 id="recentworkonmetalearningzeroshotlearningandrl">Recent Work On Meta-Learning/Zero-Shot Learning and RL</h3>
+<p>So we return to our original question: does pure RL make sense? And here, based on all that buildup, we get out answer:</p>
+<blockquote>
+<p>No, pure RL does not make sense; motivated by the board game allegory, we should reconsider the basic formulation of RL along the lines of DeepMind's Universal Value Function idea and double down on the already ongoing research that is implicitly doing just that through meta-learning, zero-shot learning, and more.</p>
+</blockquote>
+<p>Much, if not most, of modern RL research still builds on pure RL approaches that leverage only the reward signal or model-based pure RL that only leverage an environment model and the reward signal. Not only that, but the majority of attention is still given to such work, with the already discussed <a href="https://deepmind.com/blog/alphago-zero-learning-scratch/">AlphaGo Zero</a> receiving more attention and praise than most recent AI work. The paper in which it was introduced <a href="https://www.nature.com/articles/nature24270?sf123103138=1">"Mastering the game of Go without human knowledge"</a>, was published just last year and already has <strong>144</strong> citations; DeepMind's Universal Value Function paper has been published for thrice longer and has about a third of the citations with just <strong>56</strong>. But among those 56 citations is some <strong>very</strong> exciting work:</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1707.01495">"Hindsight Experience Replay"</a> - "Dealing with sparse rewards is one of the biggest challenges in Reinforcement Learning (RL). We present a novel technique called Hindsight Experience Replay which allows sample-efficient learning from rewards which are sparse and binary and therefore avoid the need for complicated reward engineering. It can be combined with an arbitrary off-policy RL algorithm and may be seen as a form of implicit curriculum. "</li>
+<li><a href="https://arxiv.org/pdf/1706.05064">"Zero-Shot Task Generalization with Multi-Task Deep Reinforcement Learning"</a> - "As a step towards developing zero-shot task generalization capabilities in RL, we introduce a new RL problem where the<br>
+agent should learn to execute sequences of instructions after learning useful skills that solve subtasks. "</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56150?token=DwYtnyKpnMfTCj9-O7JWfTHcBxxVE4rHnLGxM4icju8hG24FKc0psXheMgkos09wKWxs1br2-MWd6CYqRpfeAqQ" alt="Paper img">
+     <figcaption>From <a href="https://arxiv.org/pdf/1706.05064"><b>"Zero-Shot Task Generalization with Multi-Task Deep Reinforcement Learning".</b></a>
+     </figcaption>
+</figure>
+<ul>
+<li><a href="https://arxiv.org/abs/1707.03938">"Representation Learning for Grounded Spatial Reasoning"</a>  - "We consider the task of spatial reasoning in a simulated environment, where an agent can act and receive rewards. The proposed model learns a representation of the world steered by<br>
+instruction text."</li>
+<li><a href="https://arxiv.org/abs/1708.00133">"Deep Transfer in Reinforcement Learning by Language Grounding"</a> - "In this paper, we explore the utilization of natural language to drive transfer for reinforcement learning (RL). Despite the wide-spread application of deep RL techniques, learning generalized policy representations that work across domains remains a challenging problem. We demonstrate that textual descriptions of environments provide a compact intermediate channel to facilitate effective policy transfer. "</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56278?token=UIvgiiOu2jZrVIaGhSpbtIs2pWC0U5H_Z0kjR9UZybKW3YY5wsgc2hK340br9mrmjnQ45AAfYUFR6UHLkXqo1jU" alt="Paper img">
+     <figcaption>From <a href="https://arxiv.org/abs/1708.00133"><b>"Deep Transfer in Reinforcement Learning by Language Grounding".</b></a>
+     </figcaption>
+</figure>
+<ul>
+<li><a href="https://arxiv.org/abs/1705.09045">"Cross-Domain Perceptual Reward Functions"</a> - "In reinforcement learning, we often define goals by specifying rewards within desirable states. One problem with this approach is that we typically need to redefine the rewards each time the goal changes, which often requires some understanding of the solution in the agents environment. When humans are learning to complete tasks, we regularly utilize alternative sources that guide our understanding of the problem. Such task representations allow one to specify goals on their own terms, thus providing specifications that can be appropriately interpreted across various environments. This motivates our own work, in which we represent goals in environments that are different from the agents."</li>
+<li><a href="http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1136420&amp;dswid=-7446">"Learning Goal-Directed Behaviour"</a> - "Two of the core challenges in Reinforcement Learning are the correct assignment of credits over long periods of time and dealing with sparse rewards. In this thesis we propose a framework based on the notions of goals to tackle these problems. "</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56283?token=TX_GZue3Yb992mLpJzoEM_TK-jqAStj80SxJcwyPxTTMh5peDZkSpnOW-Voxbh_dSXsD8lpTHEJgqa0-fBkxZ7c" alt="Paper img">
+     <figcaption>From <a href="http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1136420&amp;dswid=-7446"><b>"Learning Goal-Directed Behaviour"</b></a>
+     </figcaption>
+</figure>
+<p>Now that's exciting! And, all these goal-specification/hybrid meta/zero/one shot approaches are arguably just the most obvious of directions to pursue for more human-inspired AI methods. Possibly even more exciting is the recent swell of work exploring intrinsic motivation and curiosity-driven exploration for learning (often motivated, I should mention, by the way babies learn):</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1803.03835">"Kickstarting Deep Reinforcement Learning"</a>: "We present a method for using previously-trained 'teacher' agents to kickstart the training of a new 'student' agent. To this end, we leverage ideas from policy distillation and population based training. Our method places no constraints on the architecture of the teacher or student agents, and it regulates itself to allow the students to surpass their teachers in performance."</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56572?token=h_ym1nKlFVT0Q_7JqFQTt3ITFALXYqje8Mkgwu33P70Mgu1u8J8KZAPP5IVgcSt6OCImD_jAcRhVEvaqriQK778" alt="Paper img">
+     <figcaption>From <a href="https://arxiv.org/abs/1803.03835"><b>"Kickstarting Deep Reinforcement Learning"</b></a>
+     </figcaption>
+</figure>
+<ul>
+<li><a href="https://arxiv.org/abs/1703.01732">"Surprise-Based Intrinsic Motivation for Deep Reinforcement Learning"</a> - "One of our approximations results in using surprisal as intrinsic motivation, while the other gives the k-step learning progress. We show that our incentives enable agents to succeed in a wide range of environments with high-dimensional state spaces and very sparse rewards, including continuous control tasks and games in the Atari RAM domain, outperforming several other heuristic exploration techniques."</li>
+<li><a href="https://arxiv.org/abs/1802.07245">"Meta-Reinforcement Learning of Structured Exploration Strategies"</a>: "Exploration is a fundamental challenge in reinforcement learning (RL). Many of the current exploration methods for deep RL use task-agnostic objectives, such as information gain or bonuses based on state visitation. However, many practical applications of RL involve learning more than a single task, and prior tasks can be used to inform how exploration should be performed in new tasks. In this work, we explore how prior tasks can inform an agent about how to explore effectively in new situations. "</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56508?token=jxHaa7w8b3oaXZEIvusOaQhygW3_5_paFWeSctB5UxCyHoiaHltu2haGfwRvst30cLg6e-X7zm5PwhZgYLmK3gE" alt="Paper img">
+     <figcaption>From <a href="https://arxiv.org/abs/1802.07245"><b>"Meta-Reinforcement Learning of Structured Exploration Strategies"</b></a>
+     </figcaption>
+</figure>
+<ul>
+<li><a href="https://sites.google.com/view/adversarial-irl">"Learning Robust Rewards with Adversarial Inverse Reinforcement Learning"</a> : " Reinforcement learning provides a powerful and general framework for decision making and control, but its application in practice is often hindered by the need for extensive feature and reward engineering. Deep reinforcement learning methods can remove the need for explicit engineering of policy or value features, but still require a manually specified reward function. Inverse reinforcement learning holds the promise of automatic reward acquisition, but has proven exceptionally difficult to apply to large, high-dimensional problems with unknown dynamics. In this work, we propose AIRL, a practical and scalable inverse reinforcement learning algorithm based on an adversarial reward learning formulation. "</li>
+<li><a href="https://pathak22.github.io/noreward-rl/">"Curiosity-driven Exploration by Self-supervised Prediction"</a> - "In many real-world scenarios, rewards extrinsic to the agent are extremely sparse, or absent altogether. In such cases, curiosity can serve as an intrinsic reward signal to enable the agent to explore its environment and learn skills that might be useful later in its life. We formulate curiosity as the error in an agent's ability to predict the consequence of its own actions in a visual feature space learned by a self-supervised inverse dynamics model. "</li>
+<li><a href="https://arxiv.org/abs/1802.10567">"Learning by Playing - Solving Sparse Reward Tasks from Scratch"</a> - "We propose Scheduled Auxiliary Control (SAC-X), a new learning paradigm in the context of RL. SAC-X enables learning of complex behaviors - from scratch - in the presence of multiple sparse reward signals. To this end, the agent is equipped with a set of general auxiliary tasks, that it attempts to learn simultaneously via off-policy RL. The key idea behind our method is that active (learned) scheduling and execution of auxiliary policies allows the agent to efficiently explore its environment - enabling it to excel at sparse reward RL."</li>
+<li><a href="https://arxiv.org/abs/1802.07442">"Learning to Play with Intrinsically-Motivated Self-Aware Agents"</a> - "Infants are experts at playing, with an amazing ability to generate novel structured behaviors in unstructured environments that lack clear extrinsic reward signals. We seek to mathematically formalize these abilities using a neural network that implements curiosity-driven intrinsic motivation. Using a simple but ecologically naturalistic simulated environment in which an agent can move and interact with objects it sees, we propose a "world-model" network that learns to predict the dynamic consequences of the agent's actions. Simultaneously, we train a separate explicit "self-model" that allows the agent to track the error map of its own world-model, and then uses the self-model to adversarially challenge the developing world-model. We demonstrate that this policy causes the agent to explore novel and informative interactions with its environment, leading to the generation of a spectrum of complex behaviors, including ego-motion prediction, object attention, and object gathering."</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56311?token=F4H1auPTss8GS57EFjIEEptsxqwZuM2qdsJaY5d0S4kZ77mv4L9syy4vSC1Jimld8eyZ2QYbois3-8p_WzEXuHU" alt="Paper img">
+     <figcaption>From <a href="https://arxiv.org/abs/1802.07442"><b>"Learning to Play with Intrinsically-Motivated Self-Aware Agents"</b></a>
+     </figcaption>
+</figure>
+<ul>
+<li>
+<p><a href="https://arxiv.org/abs/1803.10760">"Unsupervised Predictive Memory in a Goal-Directed Agent"</a>: "Animals execute goal-directed behaviours despite the limited range and scope of their sensors. To cope, they explore environments and store memories maintaining estimates of important information that is not presently available. Recently, progress has been made with artificial intelligence (AI) agents that learn to perform tasks from sensory input, even at a human level, by merging reinforcement learning (RL) algorithms with deep neural networks, and the excitement surrounding these results has led to the pursuit of related ideas as explanations of non-human animal learning. However, we demonstrate that contemporary RL algorithms struggle to solve simple tasks when enough information is concealed from the sensors of the agent, a property called "partial observability". An obvious requirement for handling partially observed tasks is access to extensive memory, but we show memory is not enough; it is critical that the right information be stored in the right format. We develop a model, the Memory, RL, and Inference Network (MERLIN), in which memory formation is guided by a process of predictive modeling."</p>
+</li>
+<li>
+<p><a href="https://arxiv.org/abs/1803.10122">"World Models"</a>: "We explore building generative neural network models of popular reinforcement learning environments. Our world model can be trained quickly in an unsupervised manner to learn a compressed spatial and temporal representation of the environment. By using features extracted from the world model as inputs to an agent, we can train a very compact and simple policy that can solve the required task. We can even train our agent entirely inside of its own hallucinated dream generated by its world model, and transfer this policy back into the actual environment. "</p>
+</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56665?token=tsKO2gG3lajMDKwGOSspNeA0i5RvITiwsehy8HQFOAY5IkCDPPhblxJFS2651BxeUNflIftRKgrpYV0_EEzVCJ8" alt="Paper img">
+     <figcaption>From <a href="https://arxiv.org/abs/1803.10122"><b>"World Models"</b></a>
+     </figcaption>
+</figure>
+<p>And we can even go beyond taking inspiration from human learning: we can directly study it. In fact, both older and cutting edge neuroscience research directly suggest human and animal learning can be modeled as reinforcement learning mixed with meta-learning:</p>
+<ul>
+<li><a href="https://pdfs.semanticscholar.org/6b3f/41d409d7e2031ce55b2a7e85a9a621ae39fa.pdf">"Meta-learning in Reinforcement Learning"</a>: "Meta-parameters in reinforcement learning should be tuned to the environmental dynamics and the animal performance. Here, we propose<br>
+a biologically plausible meta-reinforcement learning algorithm for tuning these meta-parameters in a dynamic, adaptive manner. We tested our algorithm in both a simulation of a Markov decision task and in a non-linear control task. Our results show that the algorithm robustly finds appropriate meta-parameter values, and controls the meta-parameter time course, in both static and dynamic environments. We suggest that the phasic and tonic components of dopamine neuron firing can encode the signal required for meta-learning of reinforcement learning"</li>
+<li><a href="https://www.biorxiv.org/content/early/2018/04/06/295964">"Prefrontal cortex as a meta-reinforcement learning system"</a>:<br>
+"Specifically, by adjusting the connection weights within the prefrontal network, DA-based RL creates a second RL algorithm, implemented entirely in the prefrontal network’s activation dynamics. This new learning algorithm is independent of the original one, and differs in ways that are suited to the task environment. Crucially, the emergent algorithm is a full-fledged RL procedure: It copes with the exploration-exploitation tradeoff, maintains a representation of the value function, and progressively adjusts the action policy. In view of this point, and in recognition of some precursor research, we refer to the overall effect as <strong>meta-reinforcement learning</strong>."</li>
+</ul>
+<figure>
+     <img src="https://draftin.com:443/images/56806?token=AYG-Yr1QKjcyh-SIjV105NYNur_RABpHqQpHopnNAn7GF8vCPYZ0Ds7_25YsIc_55JN2ksDreSB5hrdRWdKOc3Q">
+     <figcaption>From <a href="https://www.biorxiv.org/content/early/2018/04/06/295964"><b>"Prefrontal cortex as a meta-reinforcement learning system
+"</b></a></figcaption>
+</figure>
+<p>Incredible!</p>
+<p>Now, let us finally get to a summary and the conclusion of this very long essay:</p>
+<blockquote>
+<p>The fundamental formulation of Reinforcement Learning seems to not make sense for many AI problems, chiefly due to its implied assumptions of 'starting from scratch' and learning driven only by a low-level reward signal and potentially a model. As shown by the many papers cited here, going beyond 'starting from scratch' does not necessiate Deep Blue style hand coded heuristics and expert-system style rigid rules. Therefore, the AI research community should broadly double down on such research and 'meta-reinforcement learning' methods. That is, methods to empower AI agents to learn better through high level instructions, accumulated experience, examples of what it should learn to do, learning a model of the world intrinsic motivation, and more. Perhaps, even a fundamental reconsideration of the basic formulation of RL (as with DeepMind's UVFA RL abstraction) is worth considering.</p>
+</blockquote>
+<p>So, let's end on this positive and optimistic note: the time is ripe for the AI community to embrace work such as the above and move beyond pure RL with more human-inspired learning approaches. It's possible the community is actually already doing this, actually; if so, I am merely making an explicit case in support of the trend. Based on the board-game allegory alone, it seems reasonable to claim that AI techniques must move towards this and away from pure RL in the long term. Which not to say that work on pure RL techniques and applications should immediately stop, but rather that the work should be seen as useful insofar as it is complementary to non pure RL methods and as long as we remain cognizant of pure RL's inherent limitations. If nothing else, methods based on meta learning, zero/few shot learning, transfer learning, and in particular hybrids of all of these should become the default rather than the exception. It just... makes sense. And as a young researcher about to embark on my PhD, I know I for one am willing to bet my most precious resource — my time — on it.</p>
+<figure>
+     <img src="https://draftin.com:443/images/56291?token=M_Ka-zJ4QACiB-oPM8iq2n7CV6-MyfgmgatOtyviXdvSXUmxgRuhUpgd-tcIZX73G_ma3jtDNNzpJjv_K49HJoo" alt="Future?">
+     <figcaption>The future of RL? </figcaption>
+</figure>
+<p><em>Andrey Kurenkov is a graduate student affiliated with the Stanford Vision Lab, and lead editor of <a href="http://www.skynettoday.com/">Skynet Today</a>. These opinions are solely his.</em></p>
+</div>
+        </div>
+
+        <div class="o-grid">
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--3-4-l">
+            <div class="c-tags">
+              <a href="../tag/perspectives.1">Perspectives</a>
+            </div>
+          </div>
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--1-4-m o-grid__col--1-4-l">
+            <ul class="c-share o-plain-list">
+  <li class="c-share__item">
+    <a class="c-share__link c-share__link--twitter" title="Share on Twitter" aria-label="Share on Twitter" href="https://twitter.com/share?text=Reinforcement%20Learning%20is%20Dead%2C%20Long%20Live%20Meta-Reinforcement%20Learning!&amp;url=http://localhost:2368/does-reinforcement-learning-actually-make-sense/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
+      <div data-icon="ei-sc-twitter" data-size="s" class="c-share__icon c-share__icon--twitter"></div>
+    </a>
+  </li>
+
+  <li class="c-share__item">
+    <a class="c-share__link c-share__link--facebook" title="Share on Facebook" aria-label="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/does-reinforcement-learning-actually-make-sense/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
+      <div data-icon="ei-sc-facebook" data-size="s" class="c-share__icon c-share__icon--facebook"></div>
+    </a>
+  </li>
+</ul>          </div>
+        </div>
+
+        <hr>
+
+        <div class="o-grid__col o-grid__col--center o-grid__col--4-4-s o-grid__col--1-3-l">
+  <button class="c-btn c-btn--full js-load-disqus">Comments</button>
+</div>
+
+<hr>
+
+<div class="disqus u-hidden js-disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'www-gradientml-org'; // required: replace example with your forum shortname
+    var disqus_identifier = 'ghost-5aab3cd347a3aa0022755290';
+
+    // DON'T EDIT BELOW THIS LINE
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+      </article>
+
+    </div>
+
+
+    <div class="o-grid__col o-grid__col--1-3-m">
+      <div class="c-sidebar">
+
+      <div class="c-widget c-widget-author">
+
+        <div class="c-widget-author__media">
+          <a href="../author/andrey/" aria-hidden="true" role="presentation" tabindex="-1">
+            <img src="../content/images/2018/04/vface.jpg" alt="Andrey Kurenkov" class="c-widget-author__image" role="presentation">
+          </a>
+        </div>
+
+      <div class="c-widget-author__content">
+        <h3 class="c-widget-author__title">
+          <a href="../author/andrey/">Andrey Kurenkov</a>
+        </h3>
+      </div>
+
+    </div>
+
+      <div class="c-widget">
+      <h3 class="c-widget__title">Recent Stories</h3>
+
+        <a href="../learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Learning From Humans: Inverse RL &amp; Apprenticeship Learning</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/DSC_0709.jpg)" aria-label="Learning From Humans: Inverse RL &amp; Apprenticeship Learning"></div>
+            </div>
+        </a>
+
+        <a href="../what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">What does it actually mean for AI to be racist?</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg)" aria-label="What does it actually mean for AI to be racist?"></div>
+            </div>
+        </a>
+
+        <a href="../exploiting-structured-data-with-neural-networks/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Exploiting Structured Data with Neural Networks</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=c7f31a8c5fd0fea1620b5595ce12eb73)" aria-label="Exploiting Structured Data with Neural Networks"></div>
+            </div>
+        </a>
+
+        <a href="../software-that-writes-software-on-program-learning-2/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Software that writes software: the state of program induction</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/th--1-.jpeg)" aria-label="Software that writes software: the state of program induction"></div>
+            </div>
+        </a>
+
+        <a href="../can-machine-learning-algorithms-be-used-to-create-art/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Is deep art real art?</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/1.png)" aria-label="Is deep art real art?"></div>
+            </div>
+        </a>
+
+    </div>
+
+  <div class="c-widget">
+  <h3 class="c-widget__title">Tags</h3>
+
+  <div class="c-tags">
+        <a href="../tag/getting-started">Getting Started</a>
+        <a href="../tag/perspectives.1">Perspectives</a>
+        <a href="../tag/overviews.1">Overviews</a>
+  </div>
+</div>
+</div>
+    </div>
+  </div>
+
+</div>
+
+<!--
+  Get related posts based on tags
+  https://themes.ghost.org/docs/recent-featured-sidebar#extra-special-sauce-related-posts
+ -->
+
+    <div class="c-related">
+      <div class="o-grid">
+        <div class="o-grid__col o-grid__col--full">
+          <h3 class="c-related__title">More in this category</h3>
+        </div>
+        
+  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
+
+  <div class="c-post-card">
+    <div class="c-post-card__media">
+      <a href="../what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg)" aria-label="What does it actually mean for AI to be racist?" aria-hidden="true" role="presentation" tabindex="-1">
+      </a>
+    </div>
+
+    <div class="c-post-card__content">
+        <div class="c-post-card__tags">
+          <a href="../tag/perspectives.1">Perspectives</a>
+        </div>
+
+      <div class="c-post-card__share">
+        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=What%20does%20it%20actually%20mean%20for%20AI%20to%20be%20racist%3F&amp;url=http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
+          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
+            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
+          </div>
+        </a>
+        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
+          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
+            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
+          </div>
+        </a>
+      </div>
+
+      <h2 class="c-post-card__title">
+        <a href="../what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-post-card__title-link">
+          What does it actually mean for AI to be racist?
+        </a>
+      </h2>
+
+      <div class="c-post-card__meta">
+        <time class="c-post-card__date" datetime="2018-03-09" title="09 March 2018">09.Mar.2018</time>
+        <div class="c-post-card__author"><a href="../author/gary/">Gary Gradient</a></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
+
+  <div class="c-post-card">
+    <div class="c-post-card__media">
+      <a href="../can-machine-learning-algorithms-be-used-to-create-art/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/1.png)" aria-label="Is deep art real art?" aria-hidden="true" role="presentation" tabindex="-1">
+      </a>
+    </div>
+
+    <div class="c-post-card__content">
+        <div class="c-post-card__tags">
+          <a href="../tag/perspectives.1">Perspectives</a>
+        </div>
+
+      <div class="c-post-card__share">
+        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Is%20deep%20art%20real%20art%3F&amp;url=http://localhost:2368/can-machine-learning-algorithms-be-used-to-create-art/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
+          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
+            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
+          </div>
+        </a>
+        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/can-machine-learning-algorithms-be-used-to-create-art/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
+          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
+            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
+          </div>
+        </a>
+      </div>
+
+      <h2 class="c-post-card__title">
+        <a href="../can-machine-learning-algorithms-be-used-to-create-art/" class="c-post-card__title-link">
+          Is deep art real art?
+        </a>
+      </h2>
+
+      <div class="c-post-card__meta">
+        <time class="c-post-card__date" datetime="2018-02-24" title="24 February 2018">24.Feb.2018</time>
+        <div class="c-post-card__author"><a href="../author/gary/">Gary Gradient</a></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+      </div>
+    </div>
+
+
+    <footer class="c-footer">
+  <div class="o-grid">
+
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m  o-grid__col--2-4-l  ">
+      <p class="u-font-medium">Tags</p>
+
+        <ul class="c-footer-list o-plain-list">
+            <li><a href="../tag/getting-started">Getting Started</a></li>
+            <li><a href="../tag/perspectives.1">Perspectives</a></li>
+            <li><a href="../tag/overviews.1">Overviews</a></li>
+        </ul>
+    </div>
+
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m  o-grid__col--2-4-l  ">
+      <p class="u-font-medium">Navigation</p>
+
+      <ul class="c-footer-list o-plain-list">
+          <li class="c-nav__item">
+    <a href="../" class="c-nav__link ">Home</a>
+  </li>
+  <li class="c-nav__item">
+    <a href="../tag/perspectives.1" class="c-nav__link ">Perspectives</a>
+  </li>
+  <li class="c-nav__item">
+    <a href="../tag/overviews.1" class="c-nav__link ">Overviews</a>
+  </li>
+  <li class="c-nav__item">
+    <a href="../about/" class="c-nav__link ">About</a>
+  </li>
+
+      </ul>
+    </div>
+
+
+    <div class="o-grid__col o-grid__col--full">
+      <div class="c-footer__bottom">
+        <div class="o-grid">
+
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m">
+            <div class="u-font-tiny c-footer__copyright">
+
+              © 2018 The Gradient - Published with <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+            </div>
+          </div>
+
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m">
+            <ul class="c-social-icons o-plain-list">
+                <li>
+                  <a href="https://twitter.com/gradientml" aria-label="Twitter" target="_blank" rel="noopener">
+                    <span data-icon="ei-sc-twitter" data-size="s"></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.facebook.com/gradientml/" aria-label="Facebook" target="_blank" rel="noopener">
+                    <span data-icon="ei-sc-facebook" data-size="s"></span>
+                  </a>
+                </li>
+              <li>
+                <a href="index.html#" aria-label="Instagram" target="_blank" rel="noopener">
+                  <span data-icon="ei-sc-instagram" data-size="s"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+    <script type="text/javascript" async src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        processEscapes: true
+    }
+});
+</script>
+  </div>
+
+  <script src="../assets/js/app.min.js?v=5c22314c9a"></script>
+  <script src="../assets/js/instagram.js?v=5c22314c9a"></script>
+</body>

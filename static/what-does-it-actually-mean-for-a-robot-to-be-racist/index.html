@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>The Gradient</title>
+  <title>What does it actually mean for AI to be racist?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -11,45 +11,66 @@ html{-webkit-box-sizing:border-box;box-sizing:border-box}*,:after,:before{-webki
 </style>
   <script>
     var pagination_next_page_number       = '',
-        pagination_available_pages_number = '1';
+        pagination_available_pages_number = '';
   </script>
 
-  <meta name="description" content="Democratizing AI Through Discussion and Distillation">
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <link rel="shortcut icon" href="../favicon.png" type="image/png">
     <link rel="canonical" href="index.html">
     <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
     
     <meta property="og:site_name" content="The Gradient">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="The Gradient">
-    <meta property="og:description" content="Democratizing AI Through Discussion and Distillation">
-    <meta property="og:url" content="http://localhost:2368/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="What does it actually mean for AI to be racist?">
+    <meta property="og:description" content="Once you try to understand bias mathematically, you start noticing that very few people actually can actually tell you what it is.">
+    <meta property="og:url" content="http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/">
+    <meta property="og:image" content="http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg">
+    <meta property="article:published_time" content="2018-03-09T19:15:00.000Z">
+    <meta property="article:modified_time" content="2018-04-09T17:53:05.000Z">
+    <meta property="article:tag" content="Perspectives">
+    
     <meta property="article:publisher" content="https://www.facebook.com/gradientml/">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="The Gradient">
-    <meta name="twitter:description" content="Democratizing AI Through Discussion and Distillation">
-    <meta name="twitter:url" content="http://localhost:2368/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="What does it actually mean for AI to be racist?">
+    <meta name="twitter:description" content="Once you try to understand bias mathematically, you start noticing that very few people actually can actually tell you what it is.">
+    <meta name="twitter:url" content="http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/">
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Gary Gradient">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Perspectives">
     <meta name="twitter:site" content="@gradientml">
     
     <script type="application/ld+json">
 {
     "@context": "https://schema.org",
-    "@type": "WebSite",
+    "@type": "Article",
     "publisher": {
         "@type": "Organization",
         "name": "The Gradient",
         "logo": "http://localhost:2368/content/images/2018/04/logo3.png"
     },
-    "url": "http://localhost:2368/",
+    "author": {
+        "@type": "Person",
+        "name": "Gary Gradient",
+        "url": "http://localhost:2368/author/gary/",
+        "sameAs": []
+    },
+    "headline": "What does it actually mean for AI to be racist?",
+    "url": "http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/",
+    "datePublished": "2018-03-09T19:15:00.000Z",
+    "dateModified": "2018-04-09T17:53:05.000Z",
+    "image": "http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg",
+    "keywords": "Perspectives",
+    "description": "Once you try to understand bias mathematically, you start noticing that very few people actually can actually tell you what it is.",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "http://localhost:2368/"
-    },
-    "description": "Democratizing AI Through Discussion and Distillation"
+    }
 }
     </script>
 
-    <script type="text/javascript" src="public/ghost-sdk.js?v=5c22314c9a"></script>
+    <script type="text/javascript" src="../public/ghost-sdk.js?v=5c22314c9a"></script>
 <script type="text/javascript">
 ghost.init({
 	clientId: "ghost-frontend",
@@ -57,7 +78,7 @@ ghost.init({
 });
 </script>
     <meta name="generator" content="Ghost 1.22">
-    <link rel="alternate" type="application/rss+xml" title="The Gradient" href="rss/index.html">
+    <link rel="alternate" type="application/rss+xml" title="The Gradient" href="../rss/index.html">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115283063-1"></script>
 <script>
@@ -68,7 +89,7 @@ ghost.init({
   gtag('config', 'UA-115283063-1');
 </script>
 </head>
-<body class="home-template">
+<body class="post-template tag-perspectives">
 
   <div class="js-off-canvas-container c-off-canvas-container">
     <header class="c-header">
@@ -77,8 +98,8 @@ ghost.init({
 
     <div class="o-grid__col o-grid__col--3-4-s o-grid__col--4-4-m">
       <div class="c-logo">
-          <a href="index.html">
-            <img class="c-logo__img" src="content/images/2018/04/logo3.png" alt="The Gradient">
+          <a href="../">
+            <img class="c-logo__img" src="../content/images/2018/04/logo3.png" alt="The Gradient">
           </a>
       </div>
     </div>
@@ -94,16 +115,16 @@ ghost.init({
             <nav class="c-nav-wrap">
               <ul class="c-nav o-plain-list">
                   <li class="c-nav__item">
-    <a href="index.html" class="c-nav__link  c-nav__link--current ">Home</a>
+    <a href="../" class="c-nav__link ">Home</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/perspectives.1" class="c-nav__link ">Perspectives</a>
+    <a href="../tag/perspectives.1" class="c-nav__link ">Perspectives</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/overviews.1" class="c-nav__link ">Overviews</a>
+    <a href="../tag/overviews.1" class="c-nav__link ">Overviews</a>
   </li>
   <li class="c-nav__item">
-    <a href="about/" class="c-nav__link ">About</a>
+    <a href="../about/" class="c-nav__link ">About</a>
   </li>
 
                 <li class="c-nav__item">
@@ -146,14 +167,302 @@ ghost.init({
   <div data-icon="ei-close" data-size="s" class="c-search__close js-search-close"></div>
 </div>
     
+
+<div class="c-post-hero">
+  <div class="o-grid _o-grid--full">
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--4-4-m o-grid__col--2-3-l">
+      <div class="c-post-hero__media">
+        <div class="c-post-hero__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg)"></div>
+      </div>
+    </div>
+    <div class="o-grid__col o-grid__col--4-4-s o-grid__col--1-3-m">
+      <div class="c-post-hero__content">
+        <h1 class="c-post-hero__title">What does it actually mean for AI to be racist?</h1>
+          <time class="c-post-hero__date" datetime="2018-03-09">09.Mar.2018</time>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="o-wrapper">
-  <div class="o-grid js-grid">
-    
+  <div class="o-grid">
+    <div class="o-grid__col o-grid__col--2-3-m">
+      <article class="c-post tag-perspectives">
+
+        <div class="c-content">
+          <div class="kg-card-markdown"><ul>
+<li>Aylin Caliskan, Joanna J. Bryson, Arvind Naranayan:<br>
+<em>Semantics derived automatically from language corpora contain human-like biases.</em></li>
+<li>Sam Corbett-Davies, Emma Pierson, Avi Feller, Sharad Goel, Aziz Huq:<br>
+<em>Algorithmic decision making and the cost of fairness.</em></li>
+</ul>
+<h1 id="ourproblemwithprediction">Our problem with prediction</h1>
+<p>In 2011, researchers working with the LA Police Department's Foothill Division used statistical algorithms to reduce the area's property crime rates by <a href="http://leb.fbi.gov/articles/featured-articles/predictive-policing-using-technology-to-reduce-crime">a staggering 12 percent</a>. The crime prediction model they provided was twice as accurate as the LAPD's crime analysts, and it had previously been tested—with similar success—in the smaller city of Santa  Cruz. It was the result of a years-long effort by LAPD police chief William Bratton, who had long advocated for the use of large datasets and predictive analytics in policing.</p>
+<p>By 2012, <a href="http://www.policeforum.org/assets/docs/Free_Online_Documents/Leadership/future%20trends%20in%20policing%202014.pdf">70 percent</a> of US police departments were ready to follow the LAPD's lead. It was clear to everyone that the future of law enforcement was data-driven: by predicting sites of criminal activity, machine learning really could stop crimes before they happened. TIME magazine even named predictive policing one of the "best inventions of the year".</p>
+<p>But thing have changed in the last seven years. <em>Predictive policing</em> has become a dirty word, and the authors of an <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1740-9713.2016.00960.x/pdf">influential study on the topic</a> tell us why:</p>
+<blockquote>
+<p>Predictive policing software is designed to learn and reproduce patterns in data, but if biased data is used to train these predictive models, the models will reproduce and in some cases amplify those same biases. <em>At best, this renders the predictive models ineffective. At worst, it results in discriminatory policing.</em></p>
+</blockquote>
+<p>Of course, this is an academic study. You'll get a much better sense of the general attitude toward predictive policing if you look at the words of Black Lives Matter activist <a href="http://www.nydailynews.com/new-york/king-predictive-policing-technological-racism-article-1.2425028">Shaun King</a>,</p>
+<blockquote>
+<p>In essence, it's not predicting who will sell drugs and where they will sell it, as much as it is actually predicting where a certain race of people may sell or purchase drugs. <em>It's technological racism at its finest.</em></p>
+</blockquote>
+<p>Or, for that matter, blogger-journalist <a href="https://boingboing.net/2016/08/18/predictive-policing-predicts-p.html">Cory Doctorow</a>:</p>
+<blockquote>
+<p>Moreover...<em>racist training data produces racist predictive models</em>, which allow racist institutions to claim to be undertaking objective and neutral measures while continuing to be totally racist.</p>
+</blockquote>
+<p>So much for utopia. Something's gone horribly wrong, and it's not just predictive policing: across the board, our perception of algorithms has changed. The public, along with large parts of the technical community, has come to see them as tools of oppression, rather than objective arbiters of the truth. Resigned to the "fact" that robots are incorrigibly racist, classist, and sexist, we have become skeptical of applying machine learning to any domain more important than targeting ads, recommending movies, or laying off radiologists.</p>
+<p>But how productive is this cynicism, really? If humans are the source of our biased data, why should they be trusted more than algorithms? And if humans have the potential to be unbiased, why can't algorithms? Remember that the LAPD's algorithm was twice as accurate as human analysts. However biased they may be right now, statistical models are still our most powerful tools for understanding the world. We can't just give them up for some vague misgivings.</p>
+<p>This article aims to deeply examine the issue of bias in algorithms: where it comes from, how we might define it, and what we can do about it.  I want to ground the topic in a clear understanding of both its moral and the technical aspects. In the process, we'll confront a number of misconceptions about bias, all of which stem from the use of sensationalist snarl words like "racist" to describe algorithms and statistical models. My goal is to convince you that this usage...</p>
+<ul>
+<li>discourages nuanced moral reasoning by sloppily, often incorrectly, <a href="https://en.wikipedia.org/wiki/Pathetic_fallacy">projecting human values onto statistical estimators</a> and judging them through appeals to outrage,</li>
+<li>obscures the critical distinction between two very different kinds of "bias" with radically different causes and solutions, and</li>
+<li>erroneously implies that all of the bias in algorithms can be explained by the biases of individuals.</li>
+</ul>
+<p>Bias is a serious problem. In some ways, it is even more serious than the media makes it out to be. But once you approach it as a technological problem to be solved rather than an unavoidable flaw of algorithmic reasoning, you start to notice something suspicious: not many people can give you a strict definition of what a biased algorithm is. And there's a reason for that.</p>
+<h1 id="algorithmsarenthumans">Algorithms aren't humans</h1>
+<p>There has been no shortage of popular media coverage on the subject of biased algorithms. Commentators have blasted Google Images for being <a href="https://www.washingtonpost.com/news/morning-mix/wp/2016/06/10/google-faulted-for-racial-bias-in-image-search-results-for-black-teenagers/">racist</a>, Google Translate for being <a href="http://www.dailymail.co.uk/sciencetech/article-5136607/Is-Google-Translate-SEXIST.html">sexist</a>, and Microsoft’s Twitter chatbot, Tay, for being a <a href="https://www.washingtonpost.com/news/the-intersect/wp/2016/03/24/the-internet-turned-tay-microsofts-fun-millennial-ai-bot-into-a-genocidal-maniac/?utm_term=.6b0cd8d953ad">genocidal maniac</a>.</p>
+<p>The articles are obviously correct that Google Images shouldn't return mug shots on searches for black teenagers, and that Microsoft's Tay shouldn't spout hate speech. In the case of Google Images, this behavior can reinforce racist beliefs; in the case of Tay, it can can cause significant emotional harm. But <em>none of the articles actually provides this justification</em>. They focus instead on how algorithms can be just as bigoted as humans, glossing over the question of what exactly makes this behavior bigoted.</p>
+<p>There's nothing obviously wrong with this omission. By and large, we feel like we don't need an explicit justification for why certain things are reprehensible when we know what reprehensibility looks like. <em>We can recognize bias in humans; surely we can generalize this to algorithms.</em> Spewing hate speech is what a genocidal maniac would do, so the Microsoft chatbot is clearly a genocidal maniac. Associating black teenagers with criminality is what an actual racist would do, so Google Images is clearly a racist.</p>
+<p>This is the reasoning behind much of the coverage on algorithmic bias: using rough analogies to project human feelings and motivations onto the algorithm, then judging it by those feelings and motivations as if it were really human. When we see Tay the chatbot learning to produce text strings calling for unspeakable atrocities, our initial impression is that the chatbot actually "wants" those atrocities to happen—that it really is a dangerous "genocidal maniac" and not a generative text model. By interpreting algorithmic outputs as human emotions, journalists sidestep the difficult moral question of actually defining algorithmic fairness, replacing it with the easier question of "is a person who does something roughly analogous to this a bigot?".</p>
+<p>While this reframing of the question works fairly well in the cases of Google Images and Tay, there are serious problems with it. For example, consider the controversy about <a href="https://www.engadget.com/2017/10/25/googles-sentiment-analysis-api-is-just-as-biased-as-humans/">supposed</a> <a href="https://motherboard.vice.com/en_us/article/j5jmj8/google-artificial-intelligence-bias">homophobia</a> in Google’s sentiment analysis API.</p>
+<p>The story goes like this: according to the API, the single word <em>gay</em> expresses a mildly negative attitude, while the single word <em>straight</em> expresses a neutral attitude. Because of this difference, the authors of the articles conclude, the algorithm "thinks being gay is bad".</p>
+<p>You might point out here that the sentiment analysis algorithm was built to handle paragraphs and passages, not individual words. You might also point out that sentences like “I’m proud to be gay” map to a “strongly positive” score of 0.7. Damning as these weaknesses might be, the article's real flaw might be that it completely ignores the fact that the algorithm is correct.</p>
+<p>The word <em>gay</em> is regularly used by some as a pejorative. The word <em>straight</em> suffers from no such usage. With the highly limited information in a single word, the algorithm can only guess at its connotation. All things considered, at least in the context of our current society, someone who leaves the laconic single-word comment "gay" on a YouTube video probably didn't like it very much. (Someone who leaves the single-word review "straight," on the other hand, is just being confusing.)</p>
+<p>At first glance, this fits perfectly into the classic narrative that machines learn bias from biased humans. Our society has a history of thinking that being gay is bad. Our algorithm has captured this historical bias in its predictions. Therefore, our first instinct is that we need to correct this "biased" algorithm that has learned from humans that being gay is bad.</p>
+<p>But this instinct—and, in fact, the entire controversy—is based on a fundamentally flawed analogy between humans and algorithms. There is a world of difference between an actual homophobe and an algorithm that notices the word <em>gay</em> being used with a negative connotation. The mistake of the two articles is assuming that Google's sentiment analysis API outputs repugnant value judgments, rather than likelihood estimates for the one specific task of understanding one specific feature of one specific kind of text. It is hard to imagine a legitimate use case of the sentiment analysis algorithm that would actually affect straight and gay people differently.</p>
+<p>Making the claim that the algorithm "thinks being gay is bad" blurs this difference between algorithms and people, encouraging us to haphazardly hallucinate human motivations and value judgments where there are none. This sloppy, muddleheaded thinking, ubiquitous in discussions of biased algorithms, plays on the anxieties of a public deeply distrustful of Silicon Valley’s motives and of impenetrable “black box” machine learning in general. It opens the door to accusations of bias in virtually any situation where an algorithm produces two unequal numbers vaguely related to some hot-button social issue. And it drowns reasonable discussion in a torrent of vapid, rabble-rousing takes that contribute nothing but outrage to the discourse.</p>
+<p>We can do better. If we're actually to solve the problem of biased algorithms, we need to be able to understand bias not as a vague sense of injustice but as a concrete problem with concrete solutions.</p>
+<h1 id="twobiasesisandought">Two biases: <em>is</em> and <em>ought</em></h1>
+<p><img src="http://localhost:2368/content/images/2018/03/p01h2tss.jpg" alt="David Hume"><br>
+<em>David Hume, known for stating the is-ought problem</em></p>
+<p>Virtually every decision-making system that uses machine learning can be separated fairly cleanly into two parts, which I'll call <em>predictive</em> and <em>prescriptive</em> <sup>1</sup>.</p>
+<ul>
+<li>The <em><strong>predictive</strong></em> component is concerned with accurately modeling the way the world <em>is</em>. It’s all about training computers to predict a certain ground truth, $y$, based on the observations $x$, and its goal is to model $y$ as well as possible. For instance, I might build a predictive model that takes in data about a neighborhood ($x$) and tries to predict the likelihood ($y$) of crime taking place in that area. The central question of prediction is: <em>what is the state of the world?</em></li>
+<li>The <em><strong>prescriptive</strong></em> component is concerned with choosing what action <em>ought</em> to be taken. As Hume <a href="https://plato.stanford.edu/entries/hume-moral/#io">observed</a>, it's impossible to directly convert empirical predictions into an understanding of the way the world ought to be. Continuing the example from above, maybe my algorithm automatically recommends that police officers go to the areas with predicted likelihoods $\hat{y}$ above a certain threshold. The algorithm, or its users, often need to be able to answer the question: <em>given the predicted state of the world, what ought to be done?</em></li>
+</ul>
+<p>This distinction is apparently trivial. But it illuminates the question of bias in a very important way. If you buy "Hume's Guillotine," the philosophical argument that you can't derive an <em>ought</em> from an <em>is</em>, then these two parts of a coherent algorithm will always be cleanly separate, and any instance of "bias," whatever it is, must occur in one of these two parts.</p>
+<p>Therefore, all algorithmic bias is either of the <em>is</em> variety (biased belief) or the <em>ought</em> variety (biased action).</p>
+<p>In fact, the problem of algorithmic bias is in fact two completely different, almost unrelated problems:</p>
+<ul>
+<li>"Biased belief" is better known as <em>statistical bias</em>, and it's fundamentally a statistical problem.</li>
+<li>"Biased action" is what we might call <em>algorithmic unfairness</em>, and it's fundamentally an ethical problem.</li>
+</ul>
+<p>In the rest of this section, I'll discuss both types of bias in more detail, and make the case that people have focused far too much on statistical bias when the real culprit is algorithmic unfairness.</p>
+<p>But first, why is this distinction rarely made (especially if the problems are so different)? It's the same deal: treating algorithms as humans. In humans, biased belief and biased action go hand in hand. We don't need separate words for them; both are coextensive within the monolithic concepts of "racism," "sexism," and the lot. As long as we keep thinking of algorithms in terms of this monolithic bigotry, we won't be able to tease out even the most basic distinctions between these completely different issues, and we won't be able to get a proper intellectual foothold on “biased” algorithms.</p>
+<h3 id="statisticalbias">Statistical bias</h3>
+<p><em>Statistical bias</em> is the average difference between a technique’s approximation of reality and the ground truth. Roughly speaking, it’s the tendency of an algorithm to be <em>consistently factually incorrect in one direction</em>. Any data scientist worth their salt is acutely aware of the various sources of statistical bias, because it is their responsibility to model the world as well as possible.</p>
+<p>For example, <em>sampling bias</em> is the source of the statistical bias that is accused of affecting predictive policing algorithms. Suppose I wanted to dispatch police officers to the places where crime was most likely to take place. If my dataset only contains <em>reported</em> crimes, and if crimes committed by white people are more likely to be reported than crimes committed by black people, my crime estimates for white neighborhoods will be consistently lower than reality.</p>
+<p>Truth be told, statistical bias is not that tricky to solve. It’s often possible to check if your model exhibits statistical bias using real data. <em>Calibration,</em> for instance, is a typical (although insufficient<sup>2</sup>) test for statistical bias in which the algorithm ensures that predictions “mean the same thing” for each subgroup. More concretely, if my algorithm marks certain neighborhoods of a city as “rather likely to experience violent crime”, I could experimentally verify that the violent crime rate in white neighborhoods with that label should be similar to the percentage of black neighborhoods with the label. (And violent crime is reported essentially uniformly between races.)</p>
+<p>The real problem in these situations is rarely statistical bias. Not only are data scientists well-equipped to deal with it, they also almost always have strong incentives to eliminate it. For corporations, accurate predictions means a tighter grip on the market and protection from being undercut by a more accurate competitor. For governments, accurate predictions mean more efficient and effective deployment of personnel and resources.</p>
+<h3 id="whenisbiasnotstatisticalbias">When is "bias" not statistical bias?</h3>
+<p>One of the commonly cited examples of algorithmic bias is <a href="http://science.sciencemag.org/content/356/6334/183">this paper by Caliskan et al. in Science</a>. The article is an examination of the social biases implicit in <a href="https://en.wikipedia.org/wiki/Word_embedding"><em>word embeddings</em></a>, which map English words into a 300-dimensional vector space representing their semantic content. The closer two words are in this space, the closer their estimated meanings.</p>
+<p>Word embeddings are generated by reading millions of texts, so it's unsurprising that the researchers found that the embeddings reflected a huge number of common social biases. Just one of the many examples: male names and pronouns were much closer to concepts like “career” than female ones, which were closer to concepts like "homemaking" and "family". Sparkling in all of its 300-dimensional glory, this cornucopic display of virtually every social bias imaginable put the paltry sentiment analysis kerfluffle to shame.</p>
+<p>But are these examples of statistical bias? Not really. In both cases, there is a ground truth that both algorithms measure better than an “unbiased” algorithm would.</p>
+<p>The more detailed analysis of word embeddings shows just how “accurate” these algorithms are to reality. As the Caliskan paper notes, the algorithm reproduces certain social inequalities, but in a perversely accurate way. For instance, the paper finds a strong correlation ($r = 0.90$) between the strength of a profession’s linguistic association with the female gender and the percentage of workers in that profession who are women. And the strength of the model’s prejudices are also closely tied to the strength of human social biases experimentally observed using <a href="https://implicit.harvard.edu/implicit/">implicit association tests</a> (IATs).</p>
+<p><img src="http://localhost:2368/content/images/2018/03/F1.large.jpg" alt="F1.large"><br>
+<em>Photo from <a href="http://science.sciencemag.org/content/356/6334/183">Caliskan et al.</a></em></p>
+<p>We cannot say these predictive models are flawed because they fail to align with our ideals of equality. On the contrary, they are powerful and accurate enough to detect the structural inequalities in our society--inequalities we try to pretend don't exist.</p>
+<p>There are some <a href="https://arxiv.org/pdf/1607.06520.pdf">rather clever methods</a> for removing social bias of different kinds from word embeddings by projecting the vector representations onto "unbiased" subspaces. But Princeton’s Arvind Naranayan, one of the Caliskan paper’s authors, <a href="https://www.technologyreview.com/s/602950/how-to-fix-silicon-valleys-sexist-algorithms/">argues against</a> blindly and unconditionally adjusting the predictive model simply because it contains bias:</p>
+<blockquote>
+<p>We should think of these not as a bug but a feature... What constitutes a terrible bias or prejudice in one application might actually end up being exactly the meaning you want to get out of the data in another application.</p>
+</blockquote>
+<p>Given such an impressively accurate model for mapping the meanings and connotations of words, the automatic removal of social bias will necessarily increase statistical bias, distorting a predictive algorithm’s perception of the real world. We should not do this without good reason.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/word_embed.png" alt="word_embed"><br>
+<em>A projection of word embeddings. The x-axis is parallel to $v(he) - v(she)$; the y-axis measures the strength of the gender association. Photo from <a href="https://arxiv.org/pdf/1607.06520.pdf">Man is to Computer Programmer as Woman is to Homemaker?</a>.</em></p>
+<p>Still, the alarmists have a point. It's a bad idea to naively apply an algorithm based on word embeddings to tasks like screening resumes to only hire "career-minded" individual. Such an algorithm, even if it were statistically accurate, really <em>would</em> be unfair. Faced with the juxtaposition between factual correctness and moral incorrectness, the authors of the Caliskan paper recognize that there is something dangerous about predictive algorithms that deal with situations of inequality. But the danger lies in the careless way we've applied the algorithm’s results, not in the results themselves. And that's the domain of algorithmic injustice.</p>
+<h1 id="theinjusticeofunconstrainedoptimization">The injustice of unconstrained optimization</h1>
+<p>To understand the second kind of bias, let me you a story about how you can do everything right and still be wrong.</p>
+<p>Suppose I am starting a banking system that services universities in the San Francisco Bay Area. It just so happens in this scenario that Stanford students are, on average, less likely to default on their loans than UC Berkeley students. With machine learning, I decide to estimate someone's future financial solvency through factors including income, credit scores, and GPA. Although my algorithm doesn’t ask loan applicants where they went to school, it does ask for these other observations.</p>
+<p>Now, being a rather skilled data scientist, I make sure that my prediction algorithm is as statistically unbiased as possible (i.e. that it provides the best possible estimate of the risk of default, regardless of which school one went to). It certainly does appear that it is <em>calibrated</em>: Stanford and Berkeley students with the same income, credit score, and GPA have about the same probability of defaulting.</p>
+<p>And my decision algorithm is simple! I’ll automatically approve loans to people who fall below a certain risk score, and deny all the others.</p>
+<p>Unsurprisingly, it turns out that my bank generally gives loans to Stanford students a little more often than to Berkeley students because of this pre-existing variation. I rest easy, however, knowing that my algorithm doesn’t actually discriminate on the basis of whether the applicant is a Bear or a Tree. Plenty of Berkeley students are still getting loans, and plenty of Stanford students are still being rejected.</p>
+<p>Thanks to my data science skills, my bank does well. So well, in fact, that other banks by the Bay begin adopting similar statistical algorithms to avoid being outcompeted by me. None of them are explicitly considering school either (perhaps this is even illegal), but they do use the same observations as I do. And their algorithms are statistically unbiased as well--they have to be, because a bank that can’t accurately estimate the risk of default will do worse than one that can.</p>
+<p>Things go on like this for a while. Suddenly, I wake up one day to find hundreds of Berkeley students protesting outside my window.</p>
+<p>As it turns out, something terrible has happened. Once all the other banks adopted my statistical techniques, more Stanford students were provided with social mobility through the loans than Berkeley students. The algorithms ended up translating an inequality of income into an inequality of social mobility, which further exacerbated the original inequality of income. Over time, the wealth distribution of Berkeley students fell further and further behind that of Stanford students because of my unequal actions, until the Berkeley students eventually took to the streets in righteous anger.</p>
+<p>Our prediction algorithm was unbiased. We didn't take the students' alma mater into account. Nobody in the Bay Area harbors any kind of bias against Cal students. So what went wrong?</p>
+<p>This about as appropriate a place as any to observe that this thought experiment is absolutely ridiculous. But the underlying dynamics of it are real. We've noted before that prediction algorithms will inevitably learn real-world inequalities. If we're careless with the prescriptive actions we take based on those predictions, we could inadverdently reproduce and worsen those inequalities. Even if we could predict the number of crimes in each neighborhood with perfect accuracy,  more policing in that neighborhood may lead to <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1740-9713.2016.00960.x/pdf">"worsening mental and physical health"</a>. Even if we knew that an individual defendant was likely to reoffend, imprisoning them could destabilize their family. Supposedly "rational" predictive policing measures could theoretically cause more crime than they prevent.</p>
+<p>But I want to be a good person instead of simply maximizing short-term utility. Somehow, I need to take the consequences of broader social inequality into account. The way I map predictions to decisions needs to satisfy some additional definition of <em>algorithmic fairness</em>.</p>
+<p>For this reason, Corbett-Davies et al. interpret algorithmic fairness as a kind of <em>constrained optimization</em> in their landmark paper <a href="https://arxiv.org/pdf/1701.08230.pdf"><em>Algorithmic Decision Making and the Cost of Fairness</em></a>. Here's what that means.</p>
+<p>My loan-granting algorithm starts with a predictive machine-learning algorithm that determines the likelihood of a default. But, based on this likelihood, the algorithm still must decide whether or not to grant the loan. An unconstrained algorithm, like my own, simply maximizes my expected return. However, I might realize that unconstrained optimization has a worsening effect on group inequality. To remedy this, I’d add one of several proposed (incompatible) “fairness” constraints to their optimization:</p>
+<ul>
+<li><em>Statistical parity:</em> the average outcome for each group is the same. As director of the bank, I decree that we will give out loans to the same proportion of Stanford students and Berkeley students.</li>
+<li><em>Conditional statistical parity:</em> controlling for a select few “legitimate” observations, the average outcome for each group is the same. I institute a policy that a Stanford student and a Berkeley student who have the same credit score will have the same chance of getting a loan.</li>
+<li><em>Predictive equality:</em> the "false positive rate" for each group is the same. Nevertheless, I guarantee that is equally likely for a financially solvent Stanford student to be wrongly denied a loan as it is for a financially solvent Berkeley student to be wrongly denied one.</li>
+</ul>
+<p>The paper goes on to formulate each of these definitions as formal constraints on the decision algorithm, and proves two striking results:</p>
+<ol>
+<li>I cannot implement any of the proposed fairness policies optimally without having different standards for each group.</li>
+<li>If I didn't have fairness policies and my prediction data was unbiased, the optimum decision rule for an unconstrained algorithm is to judge each group similarly.</li>
+</ol>
+<p>The first result's imlications are clear. If I wanted to ameliorate or avoid worsening the Stanford-Cal inequality, I’d have to be willing to accept more risk from Cal students than from Stanford students.</p>
+<p>That's an unsettling tradeoff: in situations like these, anyone wanting to guarantee equal outcomes between groups must, paradoxically, consider which group someone belongs to when making decisions. Thus is often called “fairness through awareness,” although some would certainly disagree that such a system is fair. For instance, this is bound to upset the Stanford students who are denied loans when comparable Berkeley students would be granted them. And as the authors point out, this may even run afoul of federal discrimination legislation in some cases.</p>
+<p>With the second result, the authors identify another tradeoff: between fairness and the value being optimized. They examine the problem of a hypothetical algorithm that determines whether a criminal defendant should be sentenced to prison based on their COMPAS score (a calibrated estimator of the likelihood that a criminal defendant will commit another crime). When the authors try to implement the proposed fairness constraints above, we find 9%, 4%, and 7% increases in projected violent crime by released defendants. Similarly, if I tried to give more loans to Cal students, my bank wouldn’t be as profitable as my competitors. Fairness always comes at a cost.</p>
+<p><img src="http://localhost:2368/content/images/2018/03/cof.png" alt="cof"></p>
+<p>[<em>The impact of a uniform risk score threshold on different fairness measures. We see that statistical parity (equal detention rate), predictive parity (equal false positive rate), and conditional statistical parity (equal detention rate given legitimate priors) are all unsatisfied. Diagrams from Corbett-Davies et al.</em>]</p>
+<p>Thus, we must sacrifice some degree of effectiveness to achieve algorithmic fairness. This can be problematic, especially in competitive market economies where a high premium is placed on the ability to maximize short-term profit and on gaining an edge over competitors. In the end, the problem may even require a legislative solution.</p>
+<p>As the paper argues, policymakers need to be aware of these two tradeoffs (the legal and moral questions of “fairness through awareness” and the practical question of the “cost of fairness”) to make informed decisions about algorithmic fairness. We can’t simply ignore the second-order social consequences of unconstrained optimization, but a number of obstacles stand in the path of a decision-making process that is truly "fair."</p>
+<p>All of this goes to show that algorithmic unfairness is much, much more complicated—and certainly more relevant—than statistical bias. It doesn't just come from biased individuals—it comes from inequalities in society. That's the real problem with prediction: not that it's imprecise enough to learn false beliefs from humans, bue because it's precise enough to make unconstrained optimization dangerous.</p>
+<h1 id="whatshouldwedoaboutthis">What should we do about this?</h1>
+<p>A good first step would be to stop calling most algorithms racist. The word has connotations that don't exactly hold when its meaning is expanded to include algorithms, and it covers up the serious issues that are unique to algorithmic decision-making.</p>
+<p>Another step would be to interrogate the concept of <em>fairness</em>. When it comes to algorithms, fairness can mean completely different things, from equal treatment (unconstrained optimization) to preventing inequality (algorithmic fairness). It's time to stop framing the issue as a Manichean battle between discrimination and justice, and understand the various incompatible ideas of justice whose contradictions we're witnessing now.</p>
+<p>Why am I focusing so much on how we should talk about the issue, rather than activism and agitation? Because at the end of the day, <em>this is really not our fight to fight</em>. By and large, machine learning researchers and practitioners are responsible only for predictions. As long as we can eliminate statistical bias—that is, factual inaccuracy—from our models, we've done all we can do in our capacity to remove bias.</p>
+<p>It's the managers, the product designers, and the policymakers who decide how our models affect the world. And it's everyone's duty to think deeply about the issues of fairness and debate about what we really mean when we say we want a just society.</p>
+<p>No, we can't abandon statistical modeling. But we need to have a conversation about how we interpret its results, and it hasn't been happening.</p>
+<nbsp>
+<p>[<em>Title image: a screenshot of Hitachi Visualization Suite's Predictive Crime Analytics feature</em>]</p>
+<p><sup>1</sup> Reinforcement learning is an exception, although not often used in industry.</p>
+<p><sup>2</sup> See Corbett-Davies et al.</p>
+</nbsp></div>
+        </div>
+
+        <div class="o-grid">
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--3-4-l">
+            <div class="c-tags">
+              <a href="../tag/perspectives.1">Perspectives</a>
+            </div>
+          </div>
+          <div class="o-grid__col o-grid__col--4-4-s o-grid__col--1-4-m o-grid__col--1-4-l">
+            <ul class="c-share o-plain-list">
+  <li class="c-share__item">
+    <a class="c-share__link c-share__link--twitter" title="Share on Twitter" aria-label="Share on Twitter" href="https://twitter.com/share?text=What%20does%20it%20actually%20mean%20for%20AI%20to%20be%20racist%3F&amp;url=http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
+      <div data-icon="ei-sc-twitter" data-size="s" class="c-share__icon c-share__icon--twitter"></div>
+    </a>
+  </li>
+
+  <li class="c-share__item">
+    <a class="c-share__link c-share__link--facebook" title="Share on Facebook" aria-label="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
+      <div data-icon="ei-sc-facebook" data-size="s" class="c-share__icon c-share__icon--facebook"></div>
+    </a>
+  </li>
+</ul>          </div>
+        </div>
+
+        <hr>
+
+        <div class="o-grid__col o-grid__col--center o-grid__col--4-4-s o-grid__col--1-3-l">
+  <button class="c-btn c-btn--full js-load-disqus">Comments</button>
+</div>
+
+<hr>
+
+<div class="disqus u-hidden js-disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'www-gradientml-org'; // required: replace example with your forum shortname
+    var disqus_identifier = 'ghost-5a8d320eac93e900227dbfcd';
+
+    // DON'T EDIT BELOW THIS LINE
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+      </article>
+
+    </div>
+
+
+    <div class="o-grid__col o-grid__col--1-3-m">
+      <div class="c-sidebar">
+
+      <div class="c-widget c-widget-author">
+
+
+      <div class="c-widget-author__content">
+        <h3 class="c-widget-author__title">
+          <a href="../author/gary/">Gary Gradient</a>
+        </h3>
+          <p class="c-widget-author__bio">Gradient Institute of Differentiable Technology</p>
+      </div>
+
+    </div>
+
+      <div class="c-widget">
+      <h3 class="c-widget__title">Recent Stories</h3>
+
+        <a href="../does-reinforcement-learning-actually-make-sense/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/human-priors.png)" aria-label="Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!"></div>
+            </div>
+        </a>
+
+        <a href="../learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Learning From Humans: Inverse RL &amp; Apprenticeship Learning</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/DSC_0709.jpg)" aria-label="Learning From Humans: Inverse RL &amp; Apprenticeship Learning"></div>
+            </div>
+        </a>
+
+        <a href="../exploiting-structured-data-with-neural-networks/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Exploiting Structured Data with Neural Networks</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=c7f31a8c5fd0fea1620b5595ce12eb73)" aria-label="Exploiting Structured Data with Neural Networks"></div>
+            </div>
+        </a>
+
+        <a href="../software-that-writes-software-on-program-learning-2/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Software that writes software: the state of program induction</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/th--1-.jpeg)" aria-label="Software that writes software: the state of program induction"></div>
+            </div>
+        </a>
+
+        <a href="../can-machine-learning-algorithms-be-used-to-create-art/" class="c-teaser">
+          <div class="c-teaser__content">
+            <h3 class="c-teaser__title">Is deep art real art?</h3>
+          </div>
+            <div class="c-teaser__media">
+              <div class="c-teaser__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/1.png)" aria-label="Is deep art real art?"></div>
+            </div>
+        </a>
+
+    </div>
+
+  <div class="c-widget">
+  <h3 class="c-widget__title">Tags</h3>
+
+  <div class="c-tags">
+        <a href="../tag/getting-started">Getting Started</a>
+        <a href="../tag/perspectives.1">Perspectives</a>
+        <a href="../tag/overviews.1">Overviews</a>
+  </div>
+</div>
+</div>
+    </div>
+  </div>
+
+</div>
+
+<!--
+  Get related posts based on tags
+  https://themes.ghost.org/docs/recent-featured-sidebar#extra-special-sauce-related-posts
+ -->
+
+    <div class="c-related">
+      <div class="o-grid">
+        <div class="o-grid__col o-grid__col--full">
+          <h3 class="c-related__title">More in this category</h3>
+        </div>
+        
   <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
 
   <div class="c-post-card">
     <div class="c-post-card__media">
-      <a href="does-reinforcement-learning-actually-make-sense/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/human-priors.png)" aria-label="Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!" aria-hidden="true" role="presentation" tabindex="-1">
+      <a href="../does-reinforcement-learning-actually-make-sense/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/human-priors.png)" aria-label="Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!" aria-hidden="true" role="presentation" tabindex="-1">
           <span title="Featured Post">
             <span class="c-post-card--featured__icon" data-icon="ei-star" data-size="s"></span>
           </span>
@@ -162,7 +471,7 @@ ghost.init({
 
     <div class="c-post-card__content">
         <div class="c-post-card__tags">
-          <a href="tag/perspectives.1">Perspectives</a>
+          <a href="../tag/perspectives.1">Perspectives</a>
         </div>
 
       <div class="c-post-card__share">
@@ -179,14 +488,14 @@ ghost.init({
       </div>
 
       <h2 class="c-post-card__title">
-        <a href="does-reinforcement-learning-actually-make-sense/" class="c-post-card__title-link">
+        <a href="../does-reinforcement-learning-actually-make-sense/" class="c-post-card__title-link">
           Reinforcement Learning is Dead, Long Live Meta-Reinforcement Learning!
         </a>
       </h2>
 
       <div class="c-post-card__meta">
         <time class="c-post-card__date" datetime="2018-03-16" title="16 March 2018">16.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/andrey/">Andrey Kurenkov</a></div>
+        <div class="c-post-card__author"><a href="../author/andrey/">Andrey Kurenkov</a></div>
       </div>
     </div>
   </div>
@@ -198,181 +507,13 @@ ghost.init({
 
   <div class="c-post-card">
     <div class="c-post-card__media">
-      <a href="learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/DSC_0709.jpg)" aria-label="Learning From Humans: Inverse RL &amp; Apprenticeship Learning" aria-hidden="true" role="presentation" tabindex="-1">
+      <a href="../can-machine-learning-algorithms-be-used-to-create-art/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/1.png)" aria-label="Is deep art real art?" aria-hidden="true" role="presentation" tabindex="-1">
       </a>
     </div>
 
     <div class="c-post-card__content">
         <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Learning%20From%20Humans%3A%20Inverse%20RL%20%26%20Apprenticeship%20Learning&amp;url=http://localhost:2368/learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="learning-from-humans-part-1-inverse-rl-apprenticeship-learning/" class="c-post-card__title-link">
-          Learning From Humans: Inverse RL &amp; Apprenticeship Learning
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-03-16" title="16 March 2018">16.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/Redlining-map-all-Chicago-all-four-zones.jpg)" aria-label="What does it actually mean for AI to be racist?" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/perspectives.1">Perspectives</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=What%20does%20it%20actually%20mean%20for%20AI%20to%20be%20racist%3F&amp;url=http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/what-does-it-actually-mean-for-a-robot-to-be-racist/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="what-does-it-actually-mean-for-a-robot-to-be-racist/" class="c-post-card__title-link">
-          What does it actually mean for AI to be racist?
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-03-09" title="09 March 2018">09.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="exploiting-structured-data-with-neural-networks/" class="c-post-card__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=c7f31a8c5fd0fea1620b5595ce12eb73)" aria-label="Exploiting Structured Data with Neural Networks" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Exploiting%20Structured%20Data%20with%20Neural%20Networks&amp;url=http://localhost:2368/exploiting-structured-data-with-neural-networks/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/exploiting-structured-data-with-neural-networks/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="exploiting-structured-data-with-neural-networks/" class="c-post-card__title-link">
-          Exploiting Structured Data with Neural Networks
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-03-09" title="09 March 2018">09.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="software-that-writes-software-on-program-learning-2/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/th--1-.jpeg)" aria-label="Software that writes software: the state of program induction" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Software%20that%20writes%20software%3A%20the%20state%20of%20program%20induction&amp;url=http://localhost:2368/software-that-writes-software-on-program-learning-2/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/software-that-writes-software-on-program-learning-2/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="software-that-writes-software-on-program-learning-2/" class="c-post-card__title-link">
-          Software that writes software: the state of program induction
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-03-09" title="09 March 2018">09.Mar.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="can-machine-learning-algorithms-be-used-to-create-art/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/1.png)" aria-label="Is deep art real art?" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/perspectives.1">Perspectives</a>
+          <a href="../tag/perspectives.1">Perspectives</a>
         </div>
 
       <div class="c-post-card__share">
@@ -389,149 +530,23 @@ ghost.init({
       </div>
 
       <h2 class="c-post-card__title">
-        <a href="can-machine-learning-algorithms-be-used-to-create-art/" class="c-post-card__title-link">
+        <a href="../can-machine-learning-algorithms-be-used-to-create-art/" class="c-post-card__title-link">
           Is deep art real art?
         </a>
       </h2>
 
       <div class="c-post-card__meta">
         <time class="c-post-card__date" datetime="2018-02-24" title="24 February 2018">24.Feb.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
+        <div class="c-post-card__author"><a href="../author/gary/">Gary Gradient</a></div>
       </div>
     </div>
   </div>
 
 </div>
 
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="on-the-success-of-libratus-superhuman-poker-ai/" class="c-post-card__image js-fadein" style="background-image: url(https://images.unsplash.com/photo-1503482618211-c70b46ede8b0?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=a342e88a2f791f025c6a391ceb011472)" aria-label="Inside Libratus, the algorithm that beats world-class poker players" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Inside%20Libratus%2C%20the%20algorithm%20that%20beats%20world-class%20poker%20players&amp;url=http://localhost:2368/on-the-success-of-libratus-superhuman-poker-ai/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/on-the-success-of-libratus-superhuman-poker-ai/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="on-the-success-of-libratus-superhuman-poker-ai/" class="c-post-card__title-link">
-          Inside Libratus, the algorithm that beats world-class poker players
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-02-21" title="21 February 2018">21.Feb.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
       </div>
     </div>
-  </div>
 
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="deep-learning-for-semantic-segmentation/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/02/semseg.png)" aria-label="Deep Learning for Semantic Segmentation" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-        <div class="c-post-card__tags">
-          <a href="tag/overviews.1">Overviews</a>
-        </div>
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Deep%20Learning%20for%20Semantic%20Segmentation&amp;url=http://localhost:2368/deep-learning-for-semantic-segmentation/" onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/deep-learning-for-semantic-segmentation/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="deep-learning-for-semantic-segmentation/" class="c-post-card__title-link">
-          Deep Learning for Semantic Segmentation
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-02-21" title="21 February 2018">21.Feb.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-  <div class="o-grid__col o-grid__col--4-4-s o-grid__col--2-4-m o-grid__col--1-3-l c-post-card-wrap js-post-card-wrap">
-
-  <div class="c-post-card">
-    <div class="c-post-card__media">
-      <a href="editorsnote/" class="c-post-card__image js-fadein" style="background-image: url(http://localhost:2368/content/images/2018/03/fb-profile.png)" aria-label="Editor's Note" aria-hidden="true" role="presentation" tabindex="-1">
-      </a>
-    </div>
-
-    <div class="c-post-card__content">
-
-      <div class="c-post-card__share">
-        <a title="Share on Twitter" aria-label="Share on Twitter" tabindex="-1" href="https://twitter.com/share?text=Editor" s onclick="window.open(this.href, 'twitter-share', 'width=550, height=235'); return false;">
-          <div class="icon icon--ei-sc-twitter icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-twitter-icon"></use></svg>
-          </div>
-        </a>
-        <a title="Share on Facebook" aria-label="Share on Facebook" tabindex="-1" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/editorsnote/" onclick="window.open(this.href, 'facebook-share', 'width=580, height=296'); return false;">
-          <div class="icon icon--ei-sc-facebook icon--s c-post-card__share-icon">
-            <svg class="icon__cnt"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ei-sc-facebook-icon"></use></svg>
-          </div>
-        </a>
-      </div>
-
-      <h2 class="c-post-card__title">
-        <a href="editorsnote/" class="c-post-card__title-link">
-          Editor's Note
-        </a>
-      </h2>
-
-      <div class="c-post-card__meta">
-        <time class="c-post-card__date" datetime="2018-01-01" title="01 January 2018">01.Jan.2018</time>
-        <div class="c-post-card__author"><a href="author/gary/">Gary Gradient</a></div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-  </div>
-
-  <div class="o-grid">
-    
-  </div>
-</div>
 
     <footer class="c-footer">
   <div class="o-grid">
@@ -540,9 +555,9 @@ ghost.init({
       <p class="u-font-medium">Tags</p>
 
         <ul class="c-footer-list o-plain-list">
-            <li><a href="tag/getting-started">Getting Started</a></li>
-            <li><a href="tag/perspectives.1">Perspectives</a></li>
-            <li><a href="tag/overviews.1">Overviews</a></li>
+            <li><a href="../tag/getting-started">Getting Started</a></li>
+            <li><a href="../tag/perspectives.1">Perspectives</a></li>
+            <li><a href="../tag/overviews.1">Overviews</a></li>
         </ul>
     </div>
 
@@ -551,16 +566,16 @@ ghost.init({
 
       <ul class="c-footer-list o-plain-list">
           <li class="c-nav__item">
-    <a href="index.html" class="c-nav__link  c-nav__link--current ">Home</a>
+    <a href="../" class="c-nav__link ">Home</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/perspectives.1" class="c-nav__link ">Perspectives</a>
+    <a href="../tag/perspectives.1" class="c-nav__link ">Perspectives</a>
   </li>
   <li class="c-nav__item">
-    <a href="tag/overviews.1" class="c-nav__link ">Overviews</a>
+    <a href="../tag/overviews.1" class="c-nav__link ">Overviews</a>
   </li>
   <li class="c-nav__item">
-    <a href="about/" class="c-nav__link ">About</a>
+    <a href="../about/" class="c-nav__link ">About</a>
   </li>
 
       </ul>
@@ -615,6 +630,6 @@ MathJax.Hub.Config({
 </script>
   </div>
 
-  <script src="assets/js/app.min.js?v=5c22314c9a"></script>
-  
+  <script src="../assets/js/app.min.js?v=5c22314c9a"></script>
+  <script src="../assets/js/instagram.js?v=5c22314c9a"></script>
 </body>
